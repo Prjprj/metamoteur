@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+	<head>
+	
+	<title>Network Search</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Language" content="fr" />
+	
+	<link rel="stylesheet" href="style/default.css" type="text/css" />
+	
+	<script type="text/javascript" src="script/clicTous.js"></script>	
+
+		
+	</head>
+	<body>
+	
+		<div id="topOfPage">
+			<a name="Haut">&nbsp;</a>
+		</div>
+		<div id="conteiner">
+			<div id="header">
+				<div id="logo">
+					<a href="index.html"><img src="images/logo.png" alt="Network search logo" /></a>
+				</div>
+
+			</div>
+			<div id="bar">
+				<ul>
+					<li class="active">
+						Recherche
+					</li>
+					<li>
+						<a href="aide.html" accesskey="a"><span class="underline">A</span>ide</a>
+					</li>
+					<li>
+						<a href="apropos.html" accesskey="p">A <span class="underline">P</span>ropos</a>
+					</li>
+				</ul>
+			</div>
+			<div id="top">
+				<div id="search">
+
+
+
+
+		<form action="recherche.html" method="post">
+		
+
+		<p>
+		<input name="recherche" id="recherche" value="" tabindex="1" type="text" />
+
+		<input class="submit" value="Recherche" type="submit" /></p>
+
+			<div class="rechercheliste">
+		<p>Choix du moteur de recherche : </p>
+		<p><input id="moteurs" name="moteur1" value="0" type="checkbox" onclick="if (this.checked) { clicTous(this.form,true) } else { clicTous(this.form,false) };" />
+		<label class="inline" for="moteurs">Tous</label>
+
+		<input name="moteur2" value="1" type="checkbox" checked />
+		<label class="inline" for="moteurs">Google</label>
+
+		<input name="moteur3" value="2" type="checkbox" disabled />
+		<label class="inline" for="moteurs">Yahoo</label>
+
+		<input name="moteur4" value="3" type="checkbox" disabled />
+		<input name="bourage" value="0" type="hidden" />
+		<label class="inline" for="moteurs">AltaVista</label></p>
+			</div>
+		
+		</form>
+			</div>
+
+			</div>
+			<div id="body">
+				<h1>
+					Tentez une nouvelle expérience de recherche
+				</h1>
+				<div class="blockDistinct">
+						<h2>Un moteur de recherche Intelligent !</h2>
+							<p>
+							Ce moteur de recherche propulse automatiquement les liens pertinents suivant votre communauté.<br /> 
+							<span class="underline">Network search</span> : c'est à la fois facile, rapide et gratuit. L'essayer c'est l'adopter.<br/>
+							</p>
+				</div>
+			</div>
+			<div id="footer" title="Menu">
+				<ul>
+					<li>
+						<a href="index.html">Recherche</a>
+					</li>
+					<li>
+						<a href="apropos.html">A Propos</a>
+					</li>
+					<li>
+						<a href="aide.html">Aide</a>
+					</li>
+					<li>
+						<a href="stoppeAgent.html">Arrêt du serveur</a>
+					</li>
+				</ul>
+				<p>
+					<a href="licence.html">CopyLeft</a> &copy; Méta-moteur Staff 2006
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
