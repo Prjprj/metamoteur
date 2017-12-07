@@ -55,7 +55,7 @@ public class Agent {
 
 	public static String TableBDD;
 
-	public static String TypeBDD = "MySQL";
+	public static String TypeBDD;
 
 	public static int Sortie = 3;
 

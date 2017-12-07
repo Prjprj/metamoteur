@@ -1,4 +1,7 @@
 package bdd;
+
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Vector;
 import agent.*;
 
@@ -23,7 +26,7 @@ import agent.*;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
- /**
+/**
  * Classe de tests pour la gestion d'une base de donnees
  * 
  * @author Jeremy Frechard
@@ -33,19 +36,42 @@ import agent.*;
  * @version 1.0
  */
 public class TestBDD {
-	public static void main(String args[]){
-		/*Vector res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
+
+	// variables d'un agent et leur configuration par défaut
+
+	public static void main(String args[]) {
+		new Agent();
+		try {
+			// Test Connexion
+			Connection connection=GestionBDD.connectionBDD();
+			Statement statement=connection.createStatement();
+			statement.executeQuery("select * from BDD");
+		}catch(Exception e){
+			//Affichage d'un message d'erreur en cas de non possibilite de la connection a la base
+			System.out.println(e.getMessage());
+		}
+		
+		// Test Select
+		Vector res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","BDD"," "));
 		System.out.println(res);
-		GestionBDD.envoiRequete(GestionBDD.construitInsert("cles","\"AZERTY\",\"1\",\"2006-05-24\""));
-		res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
-		System.out.println(res);
-		GestionBDD.envoiRequete(GestionBDD.construitUpdate("cles","validite=6","cle=\"AZERTY\""));
-		res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
-		System.out.println(res);*/
-		//construction d'un lien pour test
-		Lien lien=new Lien("url&é\"àçèù^¨~","titre","desc",1,0);
-		//construction d'un vecteur de liens
-		Vector vecteur=new Vector();
+		
+		/*
+		 * Vector
+		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
+		 * System.out.println(res);
+		 * GestionBDD.envoiRequete(GestionBDD.construitInsert("cles",
+		 * "\"AZERTY\",\"1\",\"2006-05-24\""));
+		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
+		 * System.out.println(res);
+		 * GestionBDD.envoiRequete(GestionBDD.construitUpdate("cles","validite=6",
+		 * "cle=\"AZERTY\""));
+		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
+		 * System.out.println(res);
+		 */
+		// construction d'un lien pour test
+		Lien lien = new Lien("url&é\"àçèù^¨~", "titre", "desc", 1, 0);
+		// construction d'un vecteur de liens
+		Vector vecteur = new Vector();
 		vecteur.add(lien);
 		vecteur.add(lien);
 		vecteur.add(lien);
@@ -62,13 +88,14 @@ public class TestBDD {
 		vecteur.add(lien);
 		vecteur.add(lien);
 		vecteur.add(lien);
+		lien = new Lien("http://www.ilocis.org/fr/help.html", "titre", "desc", 1, 0);
 		vecteur.add(lien);
 		vecteur.add(lien);
 		vecteur.add(lien);
 		vecteur.add(lien);
-		//insertion de l'enregistement
-		GestionBDD.insertEnregistrement(new Enregistrement(-1,"mot cle",vecteur));
-		//tentative d'update
+		// insertion de l'enregistement
+		GestionBDD.insertEnregistrement(new Enregistrement(-1, "mot cle", vecteur));
+		// tentative d'update
 		GestionBDD.updateURL("http://www.ilocis.org/fr/help.html");
 	}
 }

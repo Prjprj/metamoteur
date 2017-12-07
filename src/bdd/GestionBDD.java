@@ -2,7 +2,6 @@ package bdd;
 import java.util.Vector;
 import java.sql.*;
 
-import com.mysql.jdbc.Driver;
 import agent.*;
 
 /*
@@ -56,6 +55,128 @@ public class GestionBDD {
 				GestionMessage.message(2,"GestionBDD","Erreur de connexion a la base de donnees");
 			}
 		}
+		if(Agent.TypeBDD.equals("HSQL")){
+			try{
+				//ouverture du pilote de connection avec la base
+				Class.forName("org.hsqldb.jdbc.JDBCDriver");
+				//connection a la base de donnees
+				connection = DriverManager.getConnection("jdbc:hsqldb:file:db/"+Agent.BaseBDD+";ifexists=false",Agent.UserBDD,Agent.PassBDD);
+				
+				String createStatement="CREATE TABLE IF NOT EXISTS BDD (\n" + 
+						"  UID INTEGER IDENTITY PRIMARY KEY,\n" + 
+						"  KEYWORDS VARCHAR(255),\n" + 
+						"  URL1 VARCHAR(255),\n" + 
+						"  TITLE1 VARCHAR(255),\n" + 
+						"  DESC1 VARCHAR(1000),\n" + 
+						"  RANK1 INTEGER,\n" + 
+						"  SELECT1 INTEGER,\n" + 
+						"  URL2 VARCHAR(255),\n" + 
+						"  TITLE2 VARCHAR(255),\n" + 
+						"  DESC2 VARCHAR(1000),\n" + 
+						"  RANK2 INTEGER,\n" + 
+						"  SELECT2 INTEGER,\n" + 
+						"  URL3 VARCHAR(255),\n" + 
+						"  TITLE3 VARCHAR(255),\n" + 
+						"  DESC3 VARCHAR(1000),\n" + 
+						"  RANK3 INTEGER,\n" + 
+						"  SELECT3 INTEGER,\n" + 
+						"  URL4 VARCHAR(255),\n" + 
+						"  TITLE4 VARCHAR(255),\n" + 
+						"  DESC4 VARCHAR(1000),\n" + 
+						"  RANK4 INTEGER,\n" + 
+						"  SELECT4 INTEGER,\n" + 
+						"  URL5 VARCHAR(255),\n" + 
+						"  TITLE5 VARCHAR(255),\n" + 
+						"  DESC5 VARCHAR(1000),\n" + 
+						"  RANK5 INTEGER,\n" + 
+						"  SELECT5 INTEGER,\n" + 
+						"  URL6 VARCHAR(255),\n" + 
+						"  TITLE6 VARCHAR(255),\n" + 
+						"  DESC6 VARCHAR(1000),\n" + 
+						"  RANK6 INTEGER,\n" + 
+						"  SELECT6 INTEGER,\n" + 
+						"  URL7 VARCHAR(255),\n" + 
+						"  TITLE7 VARCHAR(255),\n" + 
+						"  DESC7 VARCHAR(1000),\n" + 
+						"  RANK7 INTEGER,\n" + 
+						"  SELECT7 INTEGER,\n" + 
+						"  URL8 VARCHAR(255),\n" + 
+						"  TITLE8 VARCHAR(255),\n" + 
+						"  DESC8 VARCHAR(1000),\n" + 
+						"  RANK8 INTEGER,\n" + 
+						"  SELECT8 INTEGER,\n" + 
+						"  URL9 VARCHAR(255),\n" + 
+						"  TITLE9 VARCHAR(255),\n" + 
+						"  DESC9 VARCHAR(1000),\n" + 
+						"  RANK9 INTEGER,\n" + 
+						"  SELECT9 INTEGER,\n" + 
+						"  URL10 VARCHAR(255),\n" + 
+						"  TITLE10 VARCHAR(255),\n" + 
+						"  DESC10 VARCHAR(1000),\n" + 
+						"  RANK10 INTEGER,\n" + 
+						"  SELECT10 INTEGER,\n" + 
+						"  URL11 VARCHAR(255),\n" + 
+						"  TITLE11 VARCHAR(255),\n" + 
+						"  DESC11 VARCHAR(1000),\n" + 
+						"  RANK11 INTEGER,\n" + 
+						"  SELECT11 INTEGER,\n" + 
+						"  URL12 VARCHAR(255),\n" + 
+						"  TITLE12 VARCHAR(255),\n" + 
+						"  DESC12 VARCHAR(1000),\n" + 
+						"  RANK12 INTEGER,\n" + 
+						"  SELECT12 INTEGER,\n" + 
+						"  URL13 VARCHAR(255),\n" + 
+						"  TITLE13 VARCHAR(255),\n" + 
+						"  DESC13 VARCHAR(1000),\n" + 
+						"  RANK13 INTEGER,\n" + 
+						"  SELECT13 INTEGER,\n" + 
+						"  URL14 VARCHAR(255),\n" + 
+						"  TITLE14 VARCHAR(255),\n" + 
+						"  DESC14 VARCHAR(1000),\n" + 
+						"  RANK14 INTEGER,\n" + 
+						"  SELECT14 INTEGER,\n" + 
+						"  URL15 VARCHAR(255),\n" + 
+						"  TITLE15 VARCHAR(255),\n" + 
+						"  DESC15 VARCHAR(1000),\n" + 
+						"  RANK15 INTEGER,\n" + 
+						"  SELECT15 INTEGER,\n" + 
+						"  URL16 VARCHAR(255),\n" + 
+						"  TITLE16 VARCHAR(255),\n" + 
+						"  DESC16 VARCHAR(1000),\n" + 
+						"  RANK16 INTEGER,\n" + 
+						"  SELECT16 INTEGER,\n" + 
+						"  URL17 VARCHAR(255),\n" + 
+						"  TITLE17 VARCHAR(255),\n" + 
+						"  DESC17 VARCHAR(1000),\n" + 
+						"  RANK17 INTEGER,\n" + 
+						"  SELECT17 INTEGER,\n" + 
+						"  URL18 VARCHAR(255),\n" + 
+						"  TITLE18 VARCHAR(255),\n" + 
+						"  DESC18 VARCHAR(1000),\n" + 
+						"  RANK18 INTEGER,\n" + 
+						"  SELECT18 INTEGER,\n" + 
+						"  URL19 VARCHAR(255),\n" + 
+						"  TITLE19 VARCHAR(255),\n" + 
+						"  DESC19 VARCHAR(1000),\n" + 
+						"  RANK19 INTEGER,\n" + 
+						"  SELECT19 INTEGER,\n" + 
+						"  URL20 VARCHAR(255),\n" + 
+						"  TITLE20 VARCHAR(255),\n" + 
+						"  DESC20 VARCHAR(1000),\n" + 
+						"  RANK20 INTEGER,\n" + 
+						"  SELECT20 INTEGER,\n" + 
+						"  TIMEQUERY VARCHAR(20)\n" + 
+						")";
+						
+						Statement statement=connection.createStatement();
+						statement.execute(createStatement);
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+				System.out.println(e.getStackTrace());
+				//Affichage d'un message d'erreur en cas de non possibilite de la connection a la base
+				GestionMessage.message(2,"GestionBDD","Erreur de connexion a la base de donnees");
+			}
+		}
 		//renvoi de l'objet de connection a la base
 		return connection;
 	}
@@ -102,10 +223,14 @@ public class GestionBDD {
 			}
 			//liberation de la memoire utilisee pour la requete
 			statement.close();
+			if(Agent.TypeBDD.equals("HSQL")){
+				shutdownHSQL(connection);
+			}
 			connection.close();
 			//affichage d'un message d'information
 			GestionMessage.message(0,"GestionBDD","requete "+requete+" envoyee");
 		}catch(SQLException e){
+			System.out.println(e.getMessage());
 			//affichage d'un message en cas d'erreur
 			GestionMessage.message(2,"GestionBDD","Erreur d'envoi de la requete "+requete);
 		}
@@ -136,6 +261,10 @@ public class GestionBDD {
 	public static String construitInsert(String table,String valeurs){
 		Connection connection=connectionBDD();
 		Vector retour=new Vector();
+		int offset=1;
+		if(Agent.TypeBDD.equals("MySQL")){
+			offset=0;
+		}
 		try{
 			//recuperation d'un vecteur contenant le nom des colonnes de la table dans laquelle l'insertion doit etre operee
 			Statement statement=connection.createStatement();
@@ -145,7 +274,7 @@ public class GestionBDD {
 			ResultSetMetaData meta=resultats.getMetaData();
 			//recuperation du nombre de colonnes
 			int taille=meta.getColumnCount();
-			for(int i=1;i<=taille;i++)
+			for(int i=1+offset;i<=taille;i++)
 				//recuperation du nom des colonnes
 				retour.add(meta.getColumnName(i));
 			//liberation de la memoire necessaire a la requete
@@ -166,6 +295,7 @@ public class GestionBDD {
 			if(i<taille-1)
 				col+=",";
 		}
+		System.out.println("INSERT INTO "+table+" ("+col+") VALUES ("+valeurs+")");
 		return(new String ("INSERT INTO "+table+" ("+col+") VALUES ("+valeurs+")"));
 	}
 	/**
@@ -190,8 +320,11 @@ public class GestionBDD {
 	public static void insertEnregistrement(Enregistrement enr){
 		String val=new String("");
 		//construction de la chaine a ajouter a la requete
-		//le 0 permet de gerer l'auto increment
-		val+="'0','"+enr.getKeywords()+"'";
+		if(Agent.TypeBDD.equals("MySQL")){
+			//le 0 permet de gerer l'auto increment
+			val+="'0',";
+		}
+		val+="'"+enr.getKeywords()+"'";
 		val+=",";
 		Vector liens=enr.getLiens();
 		//ajout des valeurs a inserer dans la table
@@ -213,24 +346,29 @@ public class GestionBDD {
 	 */
 	public static void updateURL(String url){
 		String condition=new String();
+		String quote="";
+		if(Agent.TypeBDD.equals("MySQL")){
+			quote="`";
+		}
+		
 		//creation de la condition pour rechercher les url identiques
 		for(int i=1;i<20;i++){
-			condition+="`Url"+i+"`='"+url+"' OR";
+			condition+=quote+"URL"+i+quote+"='"+url+"' OR ";
 		}
-		condition+="`Url"+20+"`='"+url+"'";
+		condition+=quote+"URL"+20+quote+"='"+url+"'";
 		//construction de la requete pour selectionner les enregistrement contenant une url identique
-		String requete=GestionBDD.construitSelect("Uid",Agent.TableBDD,condition);
+		String requete=GestionBDD.construitSelect("UID",Agent.TableBDD,condition);
 		//envoi de la requete
 		Vector vect=GestionBDD.envoiRequete(requete);
 		if(vect.size()!=0){
 			//construction de la requete qui permettra de n'avoir que les entrees non fermees
 			condition="";
 			for(int i=0;i<vect.size()-1;i++){
-				condition+="`Uid`='"+((Integer)((Vector)(vect.get(i))).get(0)).intValue()+"' OR";
+				condition+=quote+"UID"+quote+"='"+((Integer)((Vector)(vect.get(i))).get(0)).intValue()+"' OR";
 			}
-			condition+="`Uid`='"+((Integer)((Vector)(vect.get(vect.size()-1))).get(0)).intValue()+"'";
+			condition+=quote+"UID"+quote+"='"+((Integer)((Vector)(vect.get(vect.size()-1))).get(0)).intValue()+"'";
 			//construction de la requete
-			requete=GestionBDD.construitSelect("Uid,Url1,Url2,Url3,Url4,Url5,Url6,Url7,Url8,Url9,Url10,Url11,Url12,Url13,Url14,Url15,Url16,Url17,Url18,Url19,Url20,TimeQuery",Agent.TableBDD,condition);
+			requete=GestionBDD.construitSelect("UID,URL1,URL2,URL3,URL4,URL5,URL6,URL7,URL8,URL9,URL10,URL11,URL12,URL13,URL14,URL15,URL16,URL17,URL18,URL19,URL20,TIMEQUERY",Agent.TableBDD,condition);
 			//envoi de la requete
 			vect=GestionBDD.envoiRequete(requete);
 			if(vect.size()!=0){
@@ -249,7 +387,7 @@ public class GestionBDD {
 							if(url2.equals(url)){
 								//construction de la requete d'update
 								int id=((Integer)(sousVect.get(0))).intValue();
-								requete=GestionBDD.construitUpdate(Agent.TableBDD,"Select"+(j+1)+"=Select"+(j+1)+"+1","`Uid`='"+id+"'");
+								requete=GestionBDD.construitUpdate(Agent.TableBDD,"Select"+(j+1)+"=Select"+(j+1)+"+1",""+quote+"UID"+quote+"='"+id+"'");
 								//envoi de la requete
 								GestionBDD.envoiRequete(requete);
 							}
@@ -257,6 +395,19 @@ public class GestionBDD {
 					}
 				}
 			}
+		}
+	}
+	
+	/**
+	 * Methode permettant d'arrêter la base HSQL
+	 */
+	public static void shutdownHSQL(Connection connection){
+		try{
+			Statement statement=connection.createStatement();
+			statement.execute("SHUTDOWN");
+		}
+		catch(Exception exception){
+			GestionMessage.message(2,"GestionBDD","Erreur lors de l'arret de la base de donnees");
 		}
 	}
 	/**
