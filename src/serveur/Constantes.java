@@ -21,7 +21,7 @@ package serveur;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
- /**
+/**
  * Interface contenant toutes les constantes utilisees par le serveur
  * 
  * @author Jeremy Frechard
@@ -31,14 +31,14 @@ package serveur;
  * @version 1.0
  */
 public interface Constantes {
-	public static final int GET=1;
-	public static final int POST=2;
-	public static final int INCONNU=0;
-	public static final int TEXTE=1;
-	public static final int IMAGE_JPG=2;
-	public static final int IMAGE_BMP=3;
-	public static final int IMAGE_GIF=4;
-	public static final int IMAGE_PNG=5;
-	public static final int TAILLE_BLOC=1024;
-	public static final String retourChariot="\r\n";
+	public static final int GET = 1;
+	public static final int POST = 2;
+	public static final int INCONNU = 0;
+	public static final int TEXTE = 1;
+	public static final int IMAGE_JPG = 2;
+	public static final int IMAGE_BMP = 3;
+	public static final int IMAGE_GIF = 4;
+	public static final int IMAGE_PNG = 5;
+	public static final int TAILLE_BLOC = 1024;
+	public static final String retourChariot = "\r\n";
 }

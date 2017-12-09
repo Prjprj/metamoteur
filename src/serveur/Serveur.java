@@ -29,8 +29,8 @@ import agent.GestionMessage;
  * --LICENSE NOTICE--
  */
 /**
- * Classe contenant la methode main permettant de lancer le serveur HTTP
- * cette classe contient les methodes de gestion des clients pour ce serveur
+ * Classe contenant la methode main permettant de lancer le serveur HTTP cette
+ * classe contient les methodes de gestion des clients pour ce serveur
  * 
  * @author Jeremy Frechard
  * @author Cecile Girard
@@ -39,117 +39,121 @@ import agent.GestionMessage;
  * @version 1.0
  */
 
-public class Serveur{
-    private static int port;
-    private static int clientsEnCours;
-    private static int maxClients;
-    private static boolean serveurON;
+public class Serveur {
+	private static int port;
+	private static int clientsEnCours;
+	private static int maxClients;
+	private static boolean serveurON;
 
-    /**
-     * Methode permettant de lancer le service.
-     * 
-     */
-    public static void service() {
-    	ServerSocket serveur=null;
+	/**
+	 * Methode permettant de lancer le service.
+	 * 
+	 */
+	public static void service() {
+		ServerSocket serveur = null;
 
-    	port=Agent.PortServeur;
-    	ouvertureService();
+		port = Agent.PortServeur;
+		ouvertureService();
 
-    	try {
-    		//ouverture du socket d'attente des clients
-	    	serveur=new ServerSocket(port);
-	    	GestionMessage.message(0,"Serveur","Ouverture du service sur le port : "+port);
-	    	while (etatService()) {	//boucle infinie permettant d'attendre
-	    								//la connexion d'un client
+		try {
+			// ouverture du socket d'attente des clients
+			serveur = new ServerSocket(port);
+			GestionMessage.message(0, "Serveur", "Ouverture du service sur le port : " + port);
+			while (etatService()) { // boucle infinie permettant d'attendre
+									// la connexion d'un client
 				ajoutClient(serveur);
-	    	} 
-		}catch (IOException e){
-			GestionMessage.message(1,"Serveur","Erreur lors de l'acceptation de la connexion : "+e);
-		}finally{
-			try{
-				//fermeture du socket
+			}
+		} catch (IOException e) {
+			GestionMessage.message(1, "Serveur", "Erreur lors de l'acceptation de la connexion : " + e);
+		} finally {
+			try {
+				// fermeture du socket
 				serveur.close();
-			}catch (IOException e){
-				GestionMessage.message(1,"Serveur","Erreur lors de la fermeture du socket d'ecoute : "+e);
+			} catch (IOException e) {
+				GestionMessage.message(1, "Serveur", "Erreur lors de la fermeture du socket d'ecoute : " + e);
 			}
 		}
-    }
-    
-    /**
-     * Cette methode permet de lancer un thread client, elle verifie s'il est possible
-     * d'ajouter ce client avant de le faire
-     * 
-     * @param serveur socket sur lequel le client communiquera
-     */
-    public static void ajoutClient(ServerSocket serveur){
-    	Socket socket;
-    	try{
-    		socket=serveur.accept();
-    		if(!peutAjouterClient()){//evite l'ajout de threads surnumeraires
-    			try{
-    				//mise en attente du thread si necessaire
-    				Thread.currentThread().join();
-    			}catch(InterruptedException e){
-    				GestionMessage.message(1,"Serveur","Probleme d'interruption du Thread : "+e);
-    			}
-    		}
-    		//lancement du thread
-    		new TraitementRequete(socket);
-    		clientsEnCours++;
-    	}catch (IOException e){
-    		GestionMessage.message(1,"Serveur","Erreur lors de la creation du socket de communication : "+e);
+	}
+
+	/**
+	 * Cette methode permet de lancer un thread client, elle verifie s'il est
+	 * possible d'ajouter ce client avant de le faire
+	 * 
+	 * @param serveur
+	 *            socket sur lequel le client communiquera
+	 */
+	public static void ajoutClient(ServerSocket serveur) {
+		Socket socket;
+		try {
+			socket = serveur.accept();
+			if (!peutAjouterClient()) {// evite l'ajout de threads surnumeraires
+				try {
+					// mise en attente du thread si necessaire
+					Thread.currentThread().join();
+				} catch (InterruptedException e) {
+					GestionMessage.message(1, "Serveur", "Probleme d'interruption du Thread : " + e);
+				}
+			}
+			// lancement du thread
+			new TraitementRequete(socket);
+			clientsEnCours++;
+		} catch (IOException e) {
+			GestionMessage.message(1, "Serveur", "Erreur lors de la creation du socket de communication : " + e);
 		}
-    }
-    /**
-     * Cette methode permet de supprimer un thread client
-     */
-    synchronized public static void supprClient(){
-    	clientsEnCours--;
-    }
-    
-    /**
-     * Methode permettant de savoir si le service est en cours
-     * d'execution ou non
-     * 
-     * @return retourne true si le service est en cours d'execution, false sinon
-     */
-    synchronized public static boolean etatService(){
-    	return(serveurON);
-    }
-    /**
-     * Methode initialisant le service de la classe
-     */
-    synchronized public static void ouvertureService(){
-    	serveurON=true;
-    	clientsEnCours=0;
-    	maxClients=Agent.NbThread;
-    }
-    /**
-     * Methode fermant le service lance par la classe
-     */
-    synchronized public static void fermetureService(){
-    	serveurON=false;
-    }
-    
-    /**
-     * Methode d'acces a l'attribut prive contenant le nombre de threads actuellement lances
-     * 
-     * @return retourne le nombre de clients courant
-     */
-    synchronized public static int getNbClients(){
-    	return(clientsEnCours);
-    }
-    
-    /**
-     * Methode permettant de verifier si l'ajout d'un thread de traitement de requete
-     * est possible
-     * 
-     * @return retourne true si l'on peut lancer un nouveau thread, false sinon
-     */
-    synchronized private static boolean peutAjouterClient(){
-    	if(getNbClients()<maxClients)
-    		return(true);
-    	else
-    		return(false);
-   	}
+	}
+
+	/**
+	 * Cette methode permet de supprimer un thread client
+	 */
+	synchronized public static void supprClient() {
+		clientsEnCours--;
+	}
+
+	/**
+	 * Methode permettant de savoir si le service est en cours d'execution ou non
+	 * 
+	 * @return retourne true si le service est en cours d'execution, false sinon
+	 */
+	synchronized public static boolean etatService() {
+		return (serveurON);
+	}
+
+	/**
+	 * Methode initialisant le service de la classe
+	 */
+	synchronized public static void ouvertureService() {
+		serveurON = true;
+		clientsEnCours = 0;
+		maxClients = Agent.NbThread;
+	}
+
+	/**
+	 * Methode fermant le service lance par la classe
+	 */
+	synchronized public static void fermetureService() {
+		serveurON = false;
+	}
+
+	/**
+	 * Methode d'acces a l'attribut prive contenant le nombre de threads
+	 * actuellement lances
+	 * 
+	 * @return retourne le nombre de clients courant
+	 */
+	synchronized public static int getNbClients() {
+		return (clientsEnCours);
+	}
+
+	/**
+	 * Methode permettant de verifier si l'ajout d'un thread de traitement de
+	 * requete est possible
+	 * 
+	 * @return retourne true si l'on peut lancer un nouveau thread, false sinon
+	 */
+	synchronized private static boolean peutAjouterClient() {
+		if (getNbClients() < maxClients)
+			return (true);
+		else
+			return (false);
+	}
 }

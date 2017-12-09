@@ -26,10 +26,10 @@ package agent;
  * --LICENSE NOTICE--
  */
 
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
 /**
  * Titre : classe publique EnregistrementHandler Description : classe permettant
  * de parser un fichier XML avec l'aide du parser XERCES étend la classe
@@ -67,8 +67,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * Méthode de détection de balise de départ
 	 */
-	public void startElement(String uri, String localName, String qName,
-			Attributes attributes) throws SAXException {
+	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (qName.equals("search")) {
 			enregistrement = new Enregistrement();
 		} else if (qName.equals("keywords")) {
@@ -82,8 +81,7 @@ public class EnregistrementHandler extends DefaultHandler {
 				lien.setRang(rank);
 				lien.setScore(score);
 			} catch (Exception e) {
-				GestionMessage.message(1, "EnregistrementHandler",
-						"le contenu de rank ou score n'est pas un entier");
+				GestionMessage.message(1, "EnregistrementHandler", "le contenu de rank ou score n'est pas un entier");
 				// erreur, le contenu de rank ou score n'est pas un entier
 				throw new SAXException(e);
 			}
@@ -95,8 +93,7 @@ public class EnregistrementHandler extends DefaultHandler {
 			inDesc = true;
 		} else {
 			// erreur, on peut lever une exception
-			GestionMessage.message(2, "EnregistrementHandler", "Balise "
-					+ qName + " inconnue.");
+			GestionMessage.message(2, "EnregistrementHandler", "Balise " + qName + " inconnue.");
 			throw new SAXException("Balise " + qName + " inconnue.");
 
 		}
@@ -105,8 +102,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * Méthode de détection de balise de fin
 	 */
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
+	public void endElement(String uri, String localName, String qName) throws SAXException {
 		if (qName.equals("search")) {
 		} else if (qName.equals("keywords")) {
 			inKeywords = false;
@@ -122,8 +118,7 @@ public class EnregistrementHandler extends DefaultHandler {
 			inDesc = false;
 		} else {
 			// erreur, on peut lever une exception
-			GestionMessage.message(2, "EnregistrementHandler", "Balise "
-					+ qName + " inconnue.");
+			GestionMessage.message(2, "EnregistrementHandler", "Balise " + qName + " inconnue.");
 			throw new SAXException("Balise " + qName + " inconnue.");
 		}
 	}
@@ -131,8 +126,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * Méthode de détection de caractères
 	 */
-	public void characters(char[] ch, int start, int length)
-			throws SAXException {
+	public void characters(char[] ch, int start, int length) throws SAXException {
 		String lecture = new String(ch, start, length);
 		if (inKeywords) {
 			enregistrement.setKeywords(lecture);
@@ -150,16 +144,14 @@ public class EnregistrementHandler extends DefaultHandler {
 	 * Méthode qui débute le parsing
 	 */
 	public void startDocument() throws SAXException {
-		GestionMessage.message(0, "EnregistrementHandler",
-				"Début du parsing XML Résultat");
+		GestionMessage.message(0, "EnregistrementHandler", "Début du parsing XML Résultat");
 	}
 
 	/**
 	 * Méthode déclenchée à la fin du parsing
 	 */
 	public void endDocument() throws SAXException {
-		GestionMessage.message(0, "EnregistrementHandler",
-				"Fin du parsing XML Résultat");
+		GestionMessage.message(0, "EnregistrementHandler", "Fin du parsing XML Résultat");
 	}
 
 	/**

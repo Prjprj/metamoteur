@@ -24,7 +24,7 @@ import client.Client;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
- /**
+/**
  * Classe de tests pour la gestion de parsing Google
  * 
  * @author Jeremy Frechard
@@ -34,35 +34,40 @@ import client.Client;
  * @version 0.9
  */
 public class TestParsingGoogle {
-	public static void main(String args[]){
+	public static void main(String args[]) {
 		String url; // The URL to read
-			// url avec résultats + pub + desc vide
-			//url = new URL("http://www.google.fr/search?num=20&hl=fr&q=business+intelligence&btnG=Rechercher&meta=");
-			// url avec des résulats en japonais
-			//url = new URL("http://www.google.fr/search?num=20hl=fr&q=regex+java&btnG=Recherche+Google&meta=");
-			// url avec des fichiers ppt
-			//url = new URL("http://www.google.fr/search?num=20&hl=fr&q=filetype%3Appt+lol&btnG=Rechercher&meta=");				
-			// url avec des résulats pdf
-			//url = new URL("http://www.google.fr/search?num=20&hl=fr&q=pdf&btnG=Rechercher&meta=");	
-			// url avec des résulats doc
-			//url = new URL("http://www.google.fr/search?q=document+word+*.doc&btnG=Rechercher&num=20&hl=fr");					
-			// url sans résultats
-			//url = new URL("http://www.google.fr/search?num=20&hl=fr&q=hdghgfghghfgh&btnG=Rechercher&meta=");
-			// url pas de description pour certain liens 
-			url = "http://www.google.fr/search?num=20&hl=fr&q=google&btnG=Recherche+Google";			
-			// url fichier extention inconnue !!! 15 / 16
-			
-			Enregistrement enr = new Enregistrement(ParsingGoogle.htmlParsing(Client.envoiRequeteGET(url)));
-			enr.setKeywords("google"); //on initialise les mots-Clés dans enr
-			// appel de la méthode !!!
-			//Agent.BaseBDD
-			
-			//pour insérer un enr dans la Bdd
-			//GestionBDD.envoiRequete(enr.toSql());
-			
-			//pour affichage
-			enr.toString();
-		
-	
+		// url avec résultats + pub + desc vide
+		// url = new
+		// URL("http://www.google.fr/search?num=20&hl=fr&q=business+intelligence&btnG=Rechercher&meta=");
+		// url avec des résulats en japonais
+		// url = new
+		// URL("http://www.google.fr/search?num=20hl=fr&q=regex+java&btnG=Recherche+Google&meta=");
+		// url avec des fichiers ppt
+		// url = new
+		// URL("http://www.google.fr/search?num=20&hl=fr&q=filetype%3Appt+lol&btnG=Rechercher&meta=");
+		// url avec des résulats pdf
+		// url = new
+		// URL("http://www.google.fr/search?num=20&hl=fr&q=pdf&btnG=Rechercher&meta=");
+		// url avec des résulats doc
+		// url = new
+		// URL("http://www.google.fr/search?q=document+word+*.doc&btnG=Rechercher&num=20&hl=fr");
+		// url sans résultats
+		// url = new
+		// URL("http://www.google.fr/search?num=20&hl=fr&q=hdghgfghghfgh&btnG=Rechercher&meta=");
+		// url pas de description pour certain liens
+		url = "http://www.google.fr/search?num=20&hl=fr&q=google&btnG=Recherche+Google";
+		// url fichier extention inconnue !!! 15 / 16
+
+		Enregistrement enr = new Enregistrement(ParsingGoogle.htmlParsing(Client.envoiRequeteGET(url)));
+		enr.setKeywords("google"); // on initialise les mots-Clés dans enr
+		// appel de la méthode !!!
+		// Agent.BaseBDD
+
+		// pour insérer un enr dans la Bdd
+		// GestionBDD.envoiRequete(enr.toSql());
+
+		// pour affichage
+		enr.toString();
+
 	}
 }

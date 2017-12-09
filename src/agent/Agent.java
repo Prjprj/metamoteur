@@ -61,12 +61,12 @@ public class Agent {
 
 	public static int Debug = 3;
 
-	public static int PromLocale = 2 ;
-		
+	public static int PromLocale = 2;
+
 	public static int CoefPonderation = 1;
-		
+
 	public static double CoefSim = 0.7;
-	
+
 	public static String FichierLog = "metaMoteur.log";
 
 	public static int PortServeur = 8080;
@@ -123,8 +123,7 @@ public class Agent {
 			CoefSim = Double.parseDouble(ConfigParser.GetProperty("CoefSim"));
 		}
 		if (!ConfigParser.GetProperty("PortServeur").contentEquals("")) {
-			PortServeur = Integer.parseInt(ConfigParser
-					.GetProperty("PortServeur"));
+			PortServeur = Integer.parseInt(ConfigParser.GetProperty("PortServeur"));
 		}
 		if (!ConfigParser.GetProperty("NbThread").contentEquals("")) {
 			NbThread = Integer.parseInt(ConfigParser.GetProperty("NbThread"));
@@ -137,26 +136,25 @@ public class Agent {
 		}
 		if (!ConfigParser.GetProperty("Moteurs").contentEquals("")) {
 			Moteurs = ConfigParser.GetProperty("Moteurs").split(" ");
-		}
-		else{
-			Moteurs =  new String[1];
+		} else {
+			Moteurs = new String[1];
 			Moteurs[0] = "";
 		}
 		if (!ConfigParser.GetProperty("Contacts").contentEquals("")) {
 			Contacts = ConfigParser.GetProperty("Contacts").split(" ");
-		}
-		else{
-			Contacts =  new String[1];
+		} else {
+			Contacts = new String[1];
 			Contacts[0] = "";
 		}
 	}
 
 	public static void main(String args[]) {
 		new Agent();
-	 //if(GestionBDD.testBDD()){
-		 Serveur.service();
-	 //}
+		// if(GestionBDD.testBDD()){
+		Serveur.service();
+		// }
 	}
+
 	/**
 	 * Cette classe permet l'affichage des variables de l'agent
 	 *
@@ -174,18 +172,18 @@ public class Agent {
 		agentVariables += "Debug = " + Debug + "\n";
 		agentVariables += "FichierLog = " + FichierLog + "\n";
 		agentVariables += "PromLocale = " + PromLocale + "\n";
-		agentVariables += "CoefPonderation = " + CoefPonderation + "\n";		
-	    agentVariables += "CoefSim = " + CoefSim + "\n";
+		agentVariables += "CoefPonderation = " + CoefPonderation + "\n";
+		agentVariables += "CoefSim = " + CoefSim + "\n";
 		agentVariables += "PortServeur = " + PortServeur + "\n";
 		agentVariables += "NbThread = " + NbThread + "\n";
 		agentVariables += "PageIndex = " + PageIndex + "\n";
 		agentVariables += "Path = " + Path + "\n";
-		for(int i=0; i<Moteurs.length;i++){
-		agentVariables += "Moteurs = " + Moteurs[i] + "\n";
+		for (int i = 0; i < Moteurs.length; i++) {
+			agentVariables += "Moteurs = " + Moteurs[i] + "\n";
 		}
-		for(int i=0; i<Contacts.length;i++){
+		for (int i = 0; i < Contacts.length; i++) {
 			agentVariables += "Contacts = " + Contacts[i] + "\n";
-			}
+		}
 
 		return agentVariables;
 	}

@@ -38,12 +38,12 @@ import agent.Lien;
  * @version 1.0
  */
 public class ParsingGoogle {
-	
+
 	// résultats de notre parsing
 	private static Enregistrement enregistrement;
-	
+
 	private static Lien lien;
-	
+
 	/**
 	 * Méthode de parsing Google générale
 	 * 
@@ -56,8 +56,7 @@ public class ParsingGoogle {
 		enregistrement.setId(0);
 		// Nettoyage de printemps de la page
 		// compilation de regex
-		GestionMessage.message(0, "ParsingGoogle",
-		"Debut du parcours de la réponse Google");
+		GestionMessage.message(0, "ParsingGoogle", "Debut du parcours de la réponse Google");
 		Pattern htmlNettoyage = Pattern.compile(".+<div>(.+)</div>.+</div>.+");
 		Matcher m = htmlNettoyage.matcher(pageHtml);
 		boolean test = m.matches();
@@ -78,15 +77,13 @@ public class ParsingGoogle {
 				}
 			}
 		} else {
-			
-			GestionMessage.message(1, "ParsingGoogle",
-			"Pas de résultat Google trouvé");
+
+			GestionMessage.message(1, "ParsingGoogle", "Pas de résultat Google trouvé");
 		}
-		GestionMessage.message(0, "ParsingGoogle",
-		"Fin du parcours de la réponse Google");
+		GestionMessage.message(0, "ParsingGoogle", "Fin du parcours de la réponse Google");
 		return enregistrement;
 	}
-	
+
 	/**
 	 * Méthode de nettoyage d'un bloc titre + url + desc pour un résulat commun
 	 * 
@@ -100,15 +97,14 @@ public class ParsingGoogle {
 		lien.setRang(rang);
 		// Nettoyage de printemps du bloc
 		// compilation de regex
-		Pattern htmlNettoyage = Pattern
-		.compile("<a class=l href=\"(.+)<nobr>.*");
+		Pattern htmlNettoyage = Pattern.compile("<a class=l href=\"(.+)<nobr>.*");
 		Matcher m = htmlNettoyage.matcher(blocHtml);
 		boolean test = m.matches();
 		if (test || m.groupCount() == 2) {
 			// Maintenant on matche les blocs de résultats
 			// Compilation de la regex
 			Pattern blocResultat = Pattern.compile("(http.*)" + // 1er bloc
-					// (url)
+			// (url)
 					"\">" + "(.*)" + // 2eme bloc (titre)
 					"</a>.*<td class=j><font size=-1>" + "(.*)" + // 3eme bloc
 					// (desc)
@@ -116,27 +112,25 @@ public class ParsingGoogle {
 			// séparation en sous-chaînes
 			Matcher m2 = blocResultat.matcher(m.group(1).replace("</a> ]", ""));
 			boolean test2 = m2.matches();
-			
+
 			if (test2) {
 				for (int j = 1; j <= m2.groupCount(); j++) {
 					switch (j) {
 					case 1:
 						lien.setUrl(nettoyageBalisesSimple(m2.group(j)));
 						break;
-						
+
 					case 2:
 						lien.setTitre(nettoyageBalisesSimple(m2.group(j)));
 						break;
-						
+
 					default:
 						// Attention au bloc fichier Inconnu !!!
-						if (j == 3
-								&& m2.group(3).contains("<font color=#6f6f6f>")) {
+						if (j == 3 && m2.group(3).contains("<font color=#6f6f6f>")) {
 							// On nettoie le bloc de ses balises superflus
 							// tout est OK on initialise un résultat en
 							// nettoyant les balises simples
-							lien.setDesc(nettoyageBalisesSimple(m2.group(3)
-									.replaceAll("<font(.*)</a>", "")));
+							lien.setDesc(nettoyageBalisesSimple(m2.group(3).replaceAll("<font(.*)</a>", "")));
 						} else {
 							// tout est OK on initialise un résultat en
 							// nettoyant les balises simples
@@ -149,24 +143,22 @@ public class ParsingGoogle {
 				lien.setTitre(" ");
 				lien.setDesc(" ");
 				// Erreur de parsing
-				GestionMessage.message(1, "ParsingGoogle",
-				"Erreur dans le 2eme parsing d'un bloc de résulat");
+				GestionMessage.message(1, "ParsingGoogle", "Erreur dans le 2eme parsing d'un bloc de résulat");
 			}
 		} else {
 			lien.setUrl(" ");
 			lien.setTitre(" ");
 			lien.setDesc(" ");
 			// Erreur de parsing
-			GestionMessage.message(1, "ParsingGoogle",
-			"Erreur dans le 1er parsing d'un bloc de résulat");
+			GestionMessage.message(1, "ParsingGoogle", "Erreur dans le 1er parsing d'un bloc de résulat");
 		}
 		enregistrement.add(lien);
 		lien = null;
 	}
-	
+
 	/**
-	 * Méthode de nettoyage d'un bloc titre + url + desc pour un résulat
-	 * document [PDF|PS|...]
+	 * Méthode de nettoyage d'un bloc titre + url + desc pour un résulat document
+	 * [PDF|PS|...]
 	 * 
 	 * @param chaine
 	 *            Une chaine de caractère.
@@ -178,8 +170,7 @@ public class ParsingGoogle {
 		lien.setRang(rang);
 		// Nettoyage de printemps du bloc document
 		// compilation de regex
-		Pattern htmlNettoyage = Pattern
-		.compile(".*<a class=l href=\"(.+)<nobr>.*");
+		Pattern htmlNettoyage = Pattern.compile(".*<a class=l href=\"(.+)<nobr>.*");
 		// séparation en sous-chaînes
 		Matcher m = htmlNettoyage.matcher(blocHtml);
 		boolean test = m.matches();
@@ -188,10 +179,9 @@ public class ParsingGoogle {
 			// Maintenant on matche les blocs de résultats
 			// Compilation de la regex
 			Pattern blocResultat = Pattern.compile("(http://.*)" + // 1er bloc
-					// (url)
+			// (url)
 					"\">" + "(.*)" + // 2eme bloc (titre)
-					"</a>.*<td class=j><font size=-1>.*[</a>|</span>]<br>"
-					+ "(.*)" + // 3eme bloc (descriptif)
+					"</a>.*<td class=j><font size=-1>.*[</a>|</span>]<br>" + "(.*)" + // 3eme bloc (descriptif)
 					"<br><font color=#008000>" + ".*");
 			// séparation en sous-chaînes
 			// "</a> ]" retiré pour aider la moulinette et enlever un 1/2 lien
@@ -208,37 +198,34 @@ public class ParsingGoogle {
 					case 1:
 						lien.setUrl(nettoyageBalisesSimple(m2.group(j)));
 						break;
-						
+
 					case 2:
 						lien.setTitre(nettoyageBalisesSimple(m2.group(j)));
 						break;
-						
+
 					default:
 						lien.setDesc(nettoyageBalisesSimple(m2.group(j)));
 					}
 				}
-				
+
 			} else {
 				lien.setUrl(" ");
 				lien.setTitre(" ");
 				lien.setDesc(" ");
 				// Erreur de parsing
-				GestionMessage
-				.message(1, "ParsingGoogle",
-				"Erreur dans le 2eme parsing d'un bloc de résulat document");
+				GestionMessage.message(1, "ParsingGoogle", "Erreur dans le 2eme parsing d'un bloc de résulat document");
 			}
 		} else {
 			lien.setUrl(" ");
 			lien.setTitre(" ");
 			lien.setDesc(" ");
 			// Erreur de parsing
-			GestionMessage.message(1, "ParsingGoogle",
-			"Erreur dans le 1er parsing d'un bloc de résulat document");
+			GestionMessage.message(1, "ParsingGoogle", "Erreur dans le 1er parsing d'un bloc de résulat document");
 		}
 		enregistrement.add(lien);
 		lien = null;
 	}
-	
+
 	/**
 	 * Méthode qui enlève les balises simples d'une chaine de caractères balises
 	 * simples : <b>, </b>, ... balises sans attributs Cette méthode est non
@@ -251,5 +238,5 @@ public class ParsingGoogle {
 	private static String nettoyageBalisesSimple(String chaine) {
 		return chaine.replaceAll("(?i)<[a-z]+>|</[a-z]+>", "");
 	}
-	
+
 }

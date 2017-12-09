@@ -43,18 +43,19 @@ public class TestBDD {
 		new Agent();
 		try {
 			// Test Connexion
-			Connection connection=GestionBDD.connectionBDD();
-			Statement statement=connection.createStatement();
+			Connection connection = GestionBDD.connectionBDD();
+			Statement statement = connection.createStatement();
 			statement.executeQuery("select * from BDD");
-		}catch(Exception e){
-			//Affichage d'un message d'erreur en cas de non possibilite de la connection a la base
+		} catch (Exception e) {
+			// Affichage d'un message d'erreur en cas de non possibilite de la connection a
+			// la base
 			System.out.println(e.getMessage());
 		}
-		
+
 		// Test Select
-		Vector res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","BDD"," "));
+		Vector res = GestionBDD.envoiRequete(GestionBDD.construitSelect("*", "BDD", " "));
 		System.out.println(res);
-		
+
 		/*
 		 * Vector
 		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
