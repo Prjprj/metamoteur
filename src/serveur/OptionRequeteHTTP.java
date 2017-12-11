@@ -36,50 +36,56 @@ import java.util.Vector;
 public class OptionRequeteHTTP {
 	private String nom;
 	private String valeur;
-	
+
 	/**
 	 * Constructeur d'une OptionRequete HTTP
 	 * 
-	 * @param nom nom de l'option
-	 * @param valeur valeur de l'option
+	 * @param nom
+	 *            nom de l'option
+	 * @param valeur
+	 *            valeur de l'option
 	 */
-	public OptionRequeteHTTP(String nom,String valeur){
-		this.nom=new String(nom);
-		this.valeur=new String (valeur);
+	public OptionRequeteHTTP(String nom, String valeur) {
+		this.nom = new String(nom);
+		this.valeur = new String(valeur);
 	}
+
 	/**
 	 * Constructeur d'une OptionRequete HTTP
 	 */
-	public OptionRequeteHTTP(){
-		this.nom=new String("");
-		this.valeur=new String("");
+	public OptionRequeteHTTP() {
+		this.nom = new String("");
+		this.valeur = new String("");
 	}
-	
+
 	/**
 	 * Methode permettant d'acceder a l'attribut prive nom de cette option
 	 * 
 	 * @return retourne le nom de l'option
 	 */
-	public String getNom(){
-		return(this.nom);
+	public String getNom() {
+		return (this.nom);
 	}
+
 	/**
 	 * Methode permettant d'acceder a l'attribut prive valeur de cette option
 	 * 
 	 * @return retourne la valeur de l'option
 	 */
-	public String getValeur(){
-		return(this.valeur);
+	public String getValeur() {
+		return (this.valeur);
 	}
-	
+
 	/**
-	 * Methode renvoyant un vecteur contenant les differents options des requetes HTTP
+	 * Methode renvoyant un vecteur contenant les differents options des requetes
+	 * HTTP
 	 * 
-	 * @return retourne un vecteur contenant les differents options des requetes HTTP
+	 * @return retourne un vecteur contenant les differents options des requetes
+	 *         HTTP
 	 */
-	public static Vector listeOptions(){
-		Vector vecteur=new Vector();
-		//construction d'un vecteur contenant les options reconnues par le serveur
+	public static Vector listeOptions() {
+		Vector vecteur = new Vector();
+		// construction d'un vecteur contenant les options reconnues par le serveur
 		vecteur.add(new String("Accept"));
 		vecteur.add(new String("Accept-Charset"));
 		vecteur.add(new String("Accept-Encoding"));
@@ -101,12 +107,13 @@ public class OptionRequeteHTTP {
 		vecteur.add(new String("Host"));
 		return vecteur;
 	}
+
 	/**
 	 * Methode toString de cette classe
 	 * 
 	 * @return retourne une chaine representant l'objet
 	 */
-	public String toString(){
-		return(this.nom+" "+this.valeur);
+	public String toString() {
+		return (this.nom + " " + this.valeur);
 	}
 }

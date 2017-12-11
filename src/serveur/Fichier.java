@@ -38,19 +38,20 @@ public class Fichier {
 	private String nom;
 	private int type;
 	private long taille;
-	
+
 	/**
 	 * Constructeur d'un Fichier
 	 * 
-	 * @param nom nom du fichier
+	 * @param nom
+	 *            nom du fichier
 	 */
-	public Fichier(String nom){
-		this.nom=new String(nom);
-		//detection du type
-		this.type=detectType();
-		//ouverture du fichier pour en avoir la taille
-		File fich=new File(System.getProperty("user.dir")+Agent.Path,this.nom);
-		this.taille=fich.length();
+	public Fichier(String nom) {
+		this.nom = new String(nom);
+		// detection du type
+		this.type = detectType();
+		// ouverture du fichier pour en avoir la taille
+		File fich = new File(System.getProperty("user.dir") + Agent.Path, this.nom);
+		this.taille = fich.length();
 	}
 
 	/**
@@ -58,47 +59,51 @@ public class Fichier {
 	 * 
 	 * @return retourne le type de fichier (par rapport a son extension)
 	 */
-	public int getType(){
-		return(this.type);
+	public int getType() {
+		return (this.type);
 	}
+
 	/**
-	 * Methode toString heritee de Object reimplementee pour renvoyer le nom du fichier
+	 * Methode toString heritee de Object reimplementee pour renvoyer le nom du
+	 * fichier
 	 * 
 	 * @return retourne le nom du fichier
 	 */
-	public String toString(){
-		return(this.nom);
+	public String toString() {
+		return (this.nom);
 	}
+
 	/**
 	 * Methode permettant d'acceder a l'attribut prive taille
 	 * 
 	 * @return retourne la taille du fichier
 	 */
-	public long getTaille(){
-		return(this.taille);
+	public long getTaille() {
+		return (this.taille);
 	}
-	
+
 	/**
 	 * Methode permettant de trouver le type du fichier en fonction de son extension
 	 * 
 	 * @return retourne le type du fichier
 	 */
-	private int detectType(){
-		//recuperation de l'extension pour en connaitre le type
-		String extension=getExtension();
-		if(extension.equals("conf")||extension.equals("html")||extension.equals("htm")||extension.equals("css")||extension.equals("js")||extension.equals("txt"))
+	private int detectType() {
+		// recuperation de l'extension pour en connaitre le type
+		String extension = getExtension();
+		if (extension.equals("conf") || extension.equals("html") || extension.equals("htm") || extension.equals("css")
+				|| extension.equals("js") || extension.equals("txt"))
 			return Constantes.TEXTE;
-		else{
-			if(extension.equals("jpg")||extension.equals("jpeg"))
+		else {
+			if (extension.equals("jpg") || extension.equals("jpeg"))
 				return Constantes.IMAGE_JPG;
-			else{
-				if(extension.equals("bmp"))
+			else {
+				if (extension.equals("bmp"))
 					return Constantes.IMAGE_BMP;
-				else{
-					if(extension.equals("gif"))
+				else {
+					if (extension.equals("gif"))
 						return Constantes.IMAGE_GIF;
-					else{
-						if(extension.equals("png"))
+					else {
+						if (extension.equals("png"))
 							return Constantes.IMAGE_PNG;
 					}
 				}
@@ -106,23 +111,25 @@ public class Fichier {
 			return Constantes.INCONNU;
 		}
 	}
+
 	/**
 	 * Methode permettant de recuperer l'extension d'un fichier
 	 * 
 	 * @return retourne un String contenant l'extension du fichier
 	 */
-	private String getExtension(){
-		return(new String(this.nom.substring(this.nom.lastIndexOf(".")+1)));
+	private String getExtension() {
+		return (new String(this.nom.substring(this.nom.lastIndexOf(".") + 1)));
 	}
+
 	/**
 	 * Methode renvoyant true si le fichier existe dans le systeme de fichier
 	 * 
 	 * @return retourne true si le fichier existe dans le systeme de fichier
 	 */
-	public boolean fichierExiste(){
-		//verification que le fichier existe
-		File fich=new File(System.getProperty("user.dir")+Agent.Path,this.nom);
-		if((fich.exists())&&(fich.isFile()))
+	public boolean fichierExiste() {
+		// verification que le fichier existe
+		File fich = new File(System.getProperty("user.dir") + Agent.Path, this.nom);
+		if ((fich.exists()) && (fich.isFile()))
 			return true;
 		else
 			return false;

@@ -42,171 +42,183 @@ public class RequeteHTTP {
 	private boolean suiteRequetePresente;
 	private int type;
 	private Vector options;
-	
+
 	/**
 	 * Constructeur d'une Requete HTTP
 	 * 
-	 * @param corps corps de la requete a construire
+	 * @param corps
+	 *            corps de la requete a construire
 	 */
-	public RequeteHTTP(String corps){
-		//recuperation du corps de la requete
-		this.corps=corps;
-		//detection du type de la requete
+	public RequeteHTTP(String corps) {
+		// recuperation du corps de la requete
+		this.corps = corps;
+		// detection du type de la requete
 		this.detectType();
-		//detection du fichier pointe
+		// detection du fichier pointe
 		this.detectFichierPointe();
-		//test du type de la requete
-		if(this.type==Constantes.GET){
-			//verification de la presence d'un point d'interrogation
-			this.suiteRequetePresente=this.pointInterPresent();
-			//recuperation de la suite de la requete si celle ci est presente
-			if(this.suiteRequetePresente)
-				this.suiteRequete=new String(this.corps.substring(this.corps.indexOf("?")+1,this.corps.indexOf(" ",this.corps.indexOf("?"))));
+		// test du type de la requete
+		if (this.type == Constantes.GET) {
+			// verification de la presence d'un point d'interrogation
+			this.suiteRequetePresente = this.pointInterPresent();
+			// recuperation de la suite de la requete si celle ci est presente
+			if (this.suiteRequetePresente)
+				this.suiteRequete = new String(this.corps.substring(this.corps.indexOf("?") + 1,
+						this.corps.indexOf(" ", this.corps.indexOf("?"))));
 			else
-				this.suiteRequete=null;
-		}
-		else{
-//			recuperation de la suite de la requete si celle ci est presente
-			if(this.corps.indexOf(Constantes.retourChariot+Constantes.retourChariot)!=this.corps.length()-5){
-				this.suiteRequetePresente=true;
-				this.suiteRequete=this.corps.substring(this.corps.indexOf(Constantes.retourChariot+Constantes.retourChariot)+4);
+				this.suiteRequete = null;
+		} else {
+			// recuperation de la suite de la requete si celle ci est presente
+			if (this.corps.indexOf(Constantes.retourChariot + Constantes.retourChariot) != this.corps.length() - 5) {
+				this.suiteRequetePresente = true;
+				this.suiteRequete = this.corps
+						.substring(this.corps.indexOf(Constantes.retourChariot + Constantes.retourChariot) + 4);
+			} else {
+				this.suiteRequetePresente = false;
+				this.suiteRequete = null;
 			}
-			else{
-				this.suiteRequetePresente=false;
-				this.suiteRequete=null;
-			}
 		}
-		//recuperation des options de la requete
-		this.options=new Vector();
+		// recuperation des options de la requete
+		this.options = new Vector();
 		rechercheOptions();
 	}
-	
+
 	/**
 	 * Methode d'acces a l'attribut prive type
 	 * 
 	 * @return retourne le type de la requete envoyee par le client
 	 */
-	public int getType(){
-		return(this.type);
+	public int getType() {
+		return (this.type);
 	}
+
 	/**
 	 * Methode d'acces a l'attribut prive coprs
 	 * 
 	 * @return retourne le corps de la requete envoyee par le client
 	 */
-	public String getCorps(){
-		return(this.corps);
+	public String getCorps() {
+		return (this.corps);
 	}
+
 	/**
 	 * Methode d'acces a l'attribut prive fichierPointe
 	 * 
 	 * @return retourne le fichier pointe par la requete envoyee par le client
 	 */
-	public String getFichierPointe(){
-		if(!this.fichierPointe.toString().endsWith("/"))
-			return(this.fichierPointe.toString());
+	public String getFichierPointe() {
+		if (!this.fichierPointe.toString().endsWith("/"))
+			return (this.fichierPointe.toString());
 		else
-			return(this.fichierPointe.toString()+Agent.PageIndex);
+			return (this.fichierPointe.toString() + Agent.PageIndex);
 	}
+
 	/**
 	 * Methode d'acces a l'attribut prive suiteRequete
 	 * 
 	 * @return retourne la chaine qiu suit la requete
 	 */
-	public String getSuiteRequete(){
-		return(this.suiteRequete);
+	public String getSuiteRequete() {
+		return (this.suiteRequete);
 	}
+
 	/**
 	 * Methode d'acces a l'attribut prive suiteRequetePresente
 	 * 
 	 * @return retourne true si la chaine contient une suite
 	 */
-	public boolean isSuitePresente(){
-		return(this.suiteRequetePresente);
+	public boolean isSuitePresente() {
+		return (this.suiteRequetePresente);
 	}
-	
+
 	/**
 	 * Methode permettant de calculer le type de la requete envoyee par le client
 	 */
-	private void detectType(){
-		if(this.corps.startsWith("GET"))
-			this.type=Constantes.GET;
-		else{
-			if(this.corps.startsWith("POST"))
-				this.type=Constantes.POST;
+	private void detectType() {
+		if (this.corps.startsWith("GET"))
+			this.type = Constantes.GET;
+		else {
+			if (this.corps.startsWith("POST"))
+				this.type = Constantes.POST;
 			else
-				this.type=Constantes.INCONNU;
+				this.type = Constantes.INCONNU;
 		}
 	}
+
 	/**
-	 * Methode permettant de calculer le fichier pointe par la requete envoyee par le client
+	 * Methode permettant de calculer le fichier pointe par la requete envoyee par
+	 * le client
 	 */
-	private void detectFichierPointe(){
-		if(this.type==Constantes.GET){
-			fichierPointe=new Fichier(this.corps.substring(4,this.detectDernierCarFichierPointe(4)));
+	private void detectFichierPointe() {
+		if (this.type == Constantes.GET) {
+			fichierPointe = new Fichier(this.corps.substring(4, this.detectDernierCarFichierPointe(4)));
 		}
-		if(this.type==Constantes.POST){
-			fichierPointe=new Fichier(this.corps.substring(5,this.detectDernierCarFichierPointe(5)));
+		if (this.type == Constantes.POST) {
+			fichierPointe = new Fichier(this.corps.substring(5, this.detectDernierCarFichierPointe(5)));
 		}
 	}
+
 	/**
-	 * Methode permettant de recuperer la position du dernier caractere du nom pour la methode de detection du nom de fichier pointe
+	 * Methode permettant de recuperer la position du dernier caractere du nom pour
+	 * la methode de detection du nom de fichier pointe
 	 * 
 	 * @return retourne la position du dernier caractere du nom du fichier
 	 */
-	private int detectDernierCarFichierPointe(int depart){
+	private int detectDernierCarFichierPointe(int depart) {
 		int pointInter;
 		int espace;
-		espace=this.corps.indexOf(" ",depart);
-		pointInter=this.corps.indexOf("?",depart);
-		if(pointInter==-1)
-			return(espace);
-		else{
-			if(pointInter<espace)
-				return(pointInter);
+		espace = this.corps.indexOf(" ", depart);
+		pointInter = this.corps.indexOf("?", depart);
+		if (pointInter == -1)
+			return (espace);
+		else {
+			if (pointInter < espace)
+				return (pointInter);
 			else
-				return(espace);
+				return (espace);
 		}
 	}
+
 	/**
-	 * Methode verifiant si il y a une suite apres le fichier pointe (si c'est de la forme "fichier"?"quelqueChose")
+	 * Methode verifiant si il y a une suite apres le fichier pointe (si c'est de la
+	 * forme "fichier"?"quelqueChose")
 	 * 
-	 * @return retourne true un ? est detecte a la fin du nom du fichier pointe, false sinon
+	 * @return retourne true un ? est detecte a la fin du nom du fichier pointe,
+	 *         false sinon
 	 */
-	private boolean pointInterPresent(){
+	private boolean pointInterPresent() {
 		char caractere;
-		if(this.type==Constantes.GET){
-			caractere=this.corps.charAt(4+this.fichierPointe.toString().length());
-		}
-		else if(this.type==Constantes.POST){
-			caractere=this.corps.charAt(5+this.fichierPointe.toString().length());
-		}
-		else caractere=' ';
-		return(caractere=='?');
+		if (this.type == Constantes.GET) {
+			caractere = this.corps.charAt(4 + this.fichierPointe.toString().length());
+		} else if (this.type == Constantes.POST) {
+			caractere = this.corps.charAt(5 + this.fichierPointe.toString().length());
+		} else
+			caractere = ' ';
+		return (caractere == '?');
 	}
+
 	/**
 	 * Methode permettant de recuperer les options contenue dans la requete HTTP
 	 *
 	 */
-	private void rechercheOptions(){
-		//recuperation d'un vecteur contenant les options connues
-		Vector vecteur=OptionRequeteHTTP.listeOptions();
-		int taille=vecteur.size();
-		//parsage de la requete pour en recuperer les options
-		for(int i=0;i<taille;i++){
-			//recuperation d'une option pour recherche dans la requete
-			String nom=(String)vecteur.get(i);
-			nom+=": ";
-			//recherche de l'option
-			int position=this.corps.indexOf(nom);
-			//si l'option est trouvee
-			if(position!=-1){
+	private void rechercheOptions() {
+		// recuperation d'un vecteur contenant les options connues
+		Vector vecteur = OptionRequeteHTTP.listeOptions();
+		int taille = vecteur.size();
+		// parsage de la requete pour en recuperer les options
+		for (int i = 0; i < taille; i++) {
+			// recuperation d'une option pour recherche dans la requete
+			String nom = (String) vecteur.get(i);
+			nom += ": ";
+			// recherche de l'option
+			int position = this.corps.indexOf(nom);
+			// si l'option est trouvee
+			if (position != -1) {
 				String valeur;
-				//recuperation de la taille de l'option
-				position+=nom.length();
-				//recuperation de l'option
-				valeur=this.corps.substring(position,this.corps.indexOf(Constantes.retourChariot,position));
-				this.options.add(new OptionRequeteHTTP(nom,valeur));
+				// recuperation de la taille de l'option
+				position += nom.length();
+				// recuperation de l'option
+				valeur = this.corps.substring(position, this.corps.indexOf(Constantes.retourChariot, position));
+				this.options.add(new OptionRequeteHTTP(nom, valeur));
 			}
 		}
 	}

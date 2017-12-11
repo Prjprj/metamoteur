@@ -21,7 +21,7 @@ package client;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
- /**
+/**
  * Classe de tests pour le client HTTP
  * 
  * @author Jeremy Frechard
@@ -31,9 +31,9 @@ package client;
  * @version 1.0
  */
 public class TestClient {
-	public static void main(String args[]){
-		//tentative de requetes sur le serveur HTTP installe sur la machine du testeur
+	public static void main(String args[]) {
+		// tentative de requetes sur le serveur HTTP installe sur la machine du testeur
 		System.out.println(Client.envoiRequeteGET("http://localhost"));
-		System.out.println(Client.envoiRequetePOST("localhost","/","essai",80));
+		System.out.println(Client.envoiRequetePOST("localhost", "/", "essai", 80));
 	}
 }

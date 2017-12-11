@@ -46,100 +46,101 @@ import agent.GestionMessage;
  * @version 1.0
  */
 
-
 /**
- *Cette classe permet de contacter d'autres agents ou des moteurs de recherches par des requêtes HTTP
+ * Cette classe permet de contacter d'autres agents ou des moteurs de recherches
+ * par des requêtes HTTP
  */
 
-
-public class Client{
+public class Client {
 	/**
 	 * Methode permettant d'envoyer une requete HTTP de type GET a l'url demandee
 	 * 
-	 * @param adresse adresse complete a envoyer (contenant la partie apres le ? si necessaire=
+	 * @param adresse
+	 *            adresse complete a envoyer (contenant la partie apres le ? si
+	 *            necessaire=
 	 * @return retourne la reponse du serveur contacte
 	 */
-	public static String envoiRequeteGET(String adresse){
+	public static String envoiRequeteGET(String adresse) {
 		URL url;
 		HttpURLConnection conn;
 		BufferedReader rd;
 		String line;
 		String result = "";
-		try{
-			//recuperation de l'url sur laquelle adresser la requete
+		try {
+			// recuperation de l'url sur laquelle adresser la requete
 			url = new URL(adresse);
-			//ouverture de la connection HTTP
+			// ouverture de la connection HTTP
 			conn = (HttpURLConnection) url.openConnection();
-			//mise en place du timeout sur la requete
-			//conn.setConnectTimeout(Agent.TimeOutMoteurRecherche);
-			//ajout d'un user-agent pour eviter une erreur 403 sur google
-			conn.setRequestProperty("User-Agent","MetaBot/1.0"); 
-			//choix du type de la methode
+			// mise en place du timeout sur la requete
+			// conn.setConnectTimeout(Agent.TimeOutMoteurRecherche);
+			// ajout d'un user-agent pour eviter une erreur 403 sur google
+			conn.setRequestProperty("User-Agent", "MetaBot/1.0");
+			// choix du type de la methode
 			conn.setRequestMethod("GET");
-			//ouverture des flux de recuperation de la reponse
+			// ouverture des flux de recuperation de la reponse
 			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			//recuperation de la reponse du serveur contacte
+			// recuperation de la reponse du serveur contacte
 			while ((line = rd.readLine()) != null) {
 				result += line;
 			}
-			//fermeture du flux
+			// fermeture du flux
 			rd.close();
-		}catch (Exception e) {
-			//affichage d'un message en cas d'erreur
-			GestionMessage.message(1,"Client","Erreur pour la requete GET : "+adresse+", "+e);
+		} catch (Exception e) {
+			// affichage d'un message en cas d'erreur
+			GestionMessage.message(1, "Client", "Erreur pour la requete GET : " + adresse + ", " + e);
 		}
-		//renvoi du resultat de la requete
+		// renvoi du resultat de la requete
 		return result;
 	}
+
 	/**
 	 * Methode permettant d'envoyer une requete HTTP de type post a un serveur web
 	 * 
-	 * @param url url du serveur (http://www.google.fr)
-	 * @param adresse adresse relative (suite de la requete)(search.html...)
-	 * @param corps corps de la requete a envoyer
+	 * @param url
+	 *            url du serveur (http://www.google.fr)
+	 * @param adresse
+	 *            adresse relative (suite de la requete)(search.html...)
+	 * @param corps
+	 *            corps de la requete a envoyer
 	 * @return retourne la reponse du serveur contacte
 	 */
-	public static String envoiRequetePOST(String url,String adresse,String corps,int port){
-	    String str=null;
-	    String retour=null;
-	    try {
-	    	//ouverture du socket sur l'url donnee
-			Socket socketToWeb = new Socket(url,port);
-			//selection du timeout de la connection
-			//socketToWeb.setSoTimeout(Agent.TimeOutAgent);
-			//verification si la connexion a ete etablie
-			if(socketToWeb.isConnected()){
-				//ouverture des flux de transfert de donnees
+	public static String envoiRequetePOST(String url, String adresse, String corps, int port) {
+		String str = null;
+		String retour = null;
+		try {
+			// ouverture du socket sur l'url donnee
+			Socket socketToWeb = new Socket(url, port);
+			// selection du timeout de la connection
+			// socketToWeb.setSoTimeout(Agent.TimeOutAgent);
+			// verification si la connexion a ete etablie
+			if (socketToWeb.isConnected()) {
+				// ouverture des flux de transfert de donnees
 				PrintWriter toWeb = new PrintWriter(
-						new BufferedWriter (
-								new OutputStreamWriter (
-										socketToWeb.getOutputStream())),true);
-				BufferedReader fromWeb = new BufferedReader(
-						new InputStreamReader (
-								socketToWeb.getInputStream()));
-				//construction de la requete
-				str = "POST "+adresse+" HTTP/1.1\r\nUser-Agent: MetaBot/1.0\r\n\r\n"+corps+"\r\n\r\n";
-				//envoi de la requete
+						new BufferedWriter(new OutputStreamWriter(socketToWeb.getOutputStream())), true);
+				BufferedReader fromWeb = new BufferedReader(new InputStreamReader(socketToWeb.getInputStream()));
+				// construction de la requete
+				str = "POST " + adresse + " HTTP/1.1\r\nUser-Agent: MetaBot/1.0\r\n\r\n" + corps + "\r\n\r\n";
+				// envoi de la requete
 				toWeb.println(str);
-				retour=new String("");
-				//recuperation de la reponse du serveur
-				while ( true ) {
+				retour = new String("");
+				// recuperation de la reponse du serveur
+				while (true) {
 					str = fromWeb.readLine();
-					if ( str == null ) break;
-					retour+=str+"\r\n";
+					if (str == null)
+						break;
+					retour += str + "\r\n";
 				}
-				//suppression de la partie inutile de la reponse
-				retour=retour.substring(retour.indexOf("\r\n\r\n")+4);
+				// suppression de la partie inutile de la reponse
+				retour = retour.substring(retour.indexOf("\r\n\r\n") + 4);
+			} else {
+				// renvoi pour la forme
+				retour = "";
 			}
-			else{
-				//renvoi pour la forme
-				retour="";
-			}
-		} catch ( IOException e ) {
-			//affichage d'un message en cas d'erreur
-			GestionMessage.message(1,"Client","Erreur pour la requete POST : "+url+"/"+adresse+", "+e);
+		} catch (IOException e) {
+			// affichage d'un message en cas d'erreur
+			GestionMessage.message(1, "Client", "Erreur pour la requete POST : " + url + "/" + adresse + ", " + e);
 		}
-		//renvoi des donnees
+		// renvoi des donnees
 		return retour;
 	}
 }

@@ -36,58 +36,62 @@ import java.util.Date;
 public class OptionReponseHTTP {
 	private String nom;
 	private String valeur;
-	
+
 	/**
 	 * Constructeur d'une OptionReponse HTTP
 	 * 
-	 * @param nom nom de l'option
-	 * @param valeur valeur de l'option
+	 * @param nom
+	 *            nom de l'option
+	 * @param valeur
+	 *            valeur de l'option
 	 */
-	public OptionReponseHTTP(String nom,String valeur){
-		this.nom=new String(nom);
-		this.valeur=new String (valeur);
+	public OptionReponseHTTP(String nom, String valeur) {
+		this.nom = new String(nom);
+		this.valeur = new String(valeur);
 	}
-	/* autres options HTTP
-	 * Content-Encoding
-	 * Content-Language
-	 * Expires
-	 * Forwarded
+
+	/*
+	 * autres options HTTP Content-Encoding Content-Language Expires Forwarded
 	 * Location
 	 */
 	/**
 	 * Constructeur d'une OptionReponse HTTP
 	 * 
-	 * @param nom nom de l'option
+	 * @param nom
+	 *            nom de l'option
 	 */
-	public OptionReponseHTTP(String nom){
-		if(nom.equals("Server"))
+	public OptionReponseHTTP(String nom) {
+		if (nom.equals("Server"))
 			this.construcServ();
-		if(nom.equals("Date"))
+		if (nom.equals("Date"))
 			this.construcDate();
 	}
+
 	/**
 	 * Constructeur d'une OptionReponse HTTP
 	 */
-	public OptionReponseHTTP(){
-		this.nom=new String("");
-		this.valeur=new String("");
+	public OptionReponseHTTP() {
+		this.nom = new String("");
+		this.valeur = new String("");
 	}
+
 	/**
 	 * Methode construisant un nouvel objet OptionRequeteHTTP de type Server
 	 */
-	public void construcServ(){
-		//construction d'une option "Server"
-		this.nom=new String("Server");
-		this.valeur=new String("MetaMoteur de recherche oriente communaute");
+	public void construcServ() {
+		// construction d'une option "Server"
+		this.nom = new String("Server");
+		this.valeur = new String("MetaMoteur de recherche oriente communaute");
 	}
+
 	/**
 	 * Methode construisant un nouvel objet OptionRequeteHTTP de type Date
 	 */
-	public void construcDate(){
-//		construction d'une option "Date"
-		this.nom=new String("Date");
-		Date date=new Date();
-		this.valeur=new String(date.toString());
+	public void construcDate() {
+		// construction d'une option "Date"
+		this.nom = new String("Date");
+		Date date = new Date();
+		this.valeur = new String(date.toString());
 	}
 
 	/**
@@ -95,23 +99,25 @@ public class OptionReponseHTTP {
 	 * 
 	 * @return retourne le nom de l'option
 	 */
-	public String getNom(){
-		return(this.nom);
+	public String getNom() {
+		return (this.nom);
 	}
+
 	/**
 	 * Methode permettant d'acceder a l'attribut prive valeur de cette option
 	 * 
 	 * @return retourne la valeur de l'option
 	 */
-	public String getValeur(){
-		return(this.valeur);
+	public String getValeur() {
+		return (this.valeur);
 	}
+
 	/**
 	 * Methode toString de cette classe
 	 * 
 	 * @return retourne une chaine representant l'objet
 	 */
-	public String toString(){
-		return(this.nom+" : "+this.valeur);
+	public String toString() {
+		return (this.nom + " : " + this.valeur);
 	}
 }

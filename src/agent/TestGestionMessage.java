@@ -21,7 +21,7 @@ package agent;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
- /**
+/**
  * Classe de tests pour la gestion de message
  * 
  * @author Jeremy Frechard
@@ -31,14 +31,13 @@ package agent;
  * @version 0.9
  */
 public class TestGestionMessage {
-	public static void main(String args[]){
+	public static void main(String args[]) {
 		/*
-		 *  les erreurs du système - 2
-		 *  les erreurs non-bloquantes - 1
-		 *  les messages de traitements - 0
+		 * les erreurs du système - 2 les erreurs non-bloquantes - 1 les messages de
+		 * traitements - 0
 		 */
-		GestionMessage.message(0,"Ma_Classe","Aie !!!");
-		GestionMessage.message(1,"Ma_Classe","1 Aie !!!");
-		GestionMessage.message(2,"Ma_Classe","2 Aie !!!");
+		GestionMessage.message(0, "Ma_Classe", "Aie !!!");
+		GestionMessage.message(1, "Ma_Classe", "1 Aie !!!");
+		GestionMessage.message(2, "Ma_Classe", "2 Aie !!!");
 	}
 }
