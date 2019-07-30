@@ -1,6 +1,6 @@
-src.agent
-src.bdd
-src.client
-src.moteur
-src.serveur
-src.tri
+src.main.java.agent
+src.main.java.bdd
+src.main.java.client
+src.main.java.moteur
+src.main.java.serveur
+src.main.java.tri
