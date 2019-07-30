@@ -99,22 +99,22 @@ java.lang.Object
 
 <P>
 Titre       : classe publique GestionMessage
- Description : classe permettant de gérée les messages interne 
- de l'agent et permet soit d'écrire sur la sortie standard le message, 
+ Description : classe permettant de gï¿½rï¿½e les messages interne 
+ de l'agent et permet soit d'ï¿½crire sur la sortie standard le message,
  soit d'enregistrer le message dans un fichier log ou 
- bien les 2 en même temps. Les messages sont de trois
-  types différents :    
-  - [ERR] les erreurs du système - 2
+ bien les 2 en mï¿½me temps. Les messages sont de trois
+  types diffï¿½rents :    
+  - [ERR] les erreurs du systï¿½me - 2
   - [WAR] les erreurs non-bloquantes - 1
   - [MES] les messages de traitements - 0
   
-   Les messages  sont écrit de la manière standardisé suivante : 
-   [ERR] date - heure - classeEmettrice – Message
+   Les messages  sont ï¿½crit de la maniï¿½re standardisï¿½ suivante : 
+   [ERR] date - heure - classeEmettrice ï¿½ Message
    
-   La méthode Write permet d'écrire le message soit dans le 
+   La mï¿½thode Write permet d'ï¿½crire le message soit dans le 
    fichier log, soit en sortie standard
-   La méthode gestionMessage permet de déclenchée 
-   la méthode adaptée suivant les configuration de l'agent.
+   La mï¿½thode gestionMessage permet de dï¿½clenchï¿½e 
+   la mï¿½thode adaptï¿½e suivant les configuration de l'agent.
    # Sortie  0 : aucune sortie
    #         1 : FichierLog
    #         2 : Sortie standard
@@ -130,7 +130,7 @@ Titre       : classe publique GestionMessage
 <DT><B>Version:</B></DT>
   <DD>0.9</DD>
 <DT><B>Author:</B></DT>
-  <DD>Jeremy FRECHARD, Cécile GIRARD, Aysel GUNES, Pierre RAMOS</DD>
+  <DD>Jeremy FRECHARD, Cï¿½cile GIRARD, Aysel GUNES, Pierre RAMOS</DD>
 </DL>
 <HR>
 
@@ -168,7 +168,7 @@ Titre       : classe publique GestionMessage
         java.lang.String&nbsp;message)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Méthode d'envoie de message</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mï¿½thode d'envoie de message</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -217,10 +217,10 @@ public static void <B>message</B>(int&nbsp;typeErreur,
                            java.lang.String&nbsp;classeEmetrice,
                            java.lang.String&nbsp;message)</PRE>
 <DL>
-<DD>Méthode d'envoie de message
+<DD>Mï¿½thode d'envoie de message
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>typeErreur</CODE> - int le type d'erreur<DD><CODE>classeEmetrice</CODE> - String la classe qui appelle la méthode<DD><CODE>message</CODE> - String le message à traiter</DL>
+<DT><B>Parameters:</B><DD><CODE>typeErreur</CODE> - int le type d'erreur<DD><CODE>classeEmetrice</CODE> - String la classe qui appelle la mï¿½thode<DD><CODE>message</CODE> - String le message ï¿½ traiter</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
