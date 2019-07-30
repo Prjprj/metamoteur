@@ -68,17 +68,8 @@ public class Document extends Lien {
 	 * 
 	 * @param id
 	 *            Un entier representant un identifiant de document.
-	 * @param motsCles
-	 *            Un vecteur representant un ensemble de mots cles correspondant a
-	 *            ce document.
-	 * @param url
-	 *            Un objet representant une url.
-	 * @param titre
-	 *            Un objet representant un titre.
-	 * @param desc
-	 *            Un objet representant une description.
-	 * @param rang
-	 *            Un entier representant un rang.
+	 * @param lien
+	 *            Un Lien
 	 */
 	public Document(int id, Lien lien) {
 		this.id = id;

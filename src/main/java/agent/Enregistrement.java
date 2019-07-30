@@ -560,8 +560,6 @@ public class Enregistrement {
 	 * @param id
 	 *            int : un entier representant l'identifiant d'un enregistrement de
 	 *            la base de donnees
-	 * @param numero
-	 *            int : un entier representant le numero du lien
 	 * @return Vector : un vecteur de Liens contenant les liens associe a
 	 *         l'enregistrement courant
 	 */
@@ -615,7 +613,8 @@ public class Enregistrement {
 	 * Retourne une chaine de caracteres. Affichage des informations sur un
 	 * Enregistrement, a savoir son identifiant, ses mots cles et ses liens (url,
 	 * titre, desc, rang et score) en XHTML.
-	 * 
+	 *
+	 * @param reponsesClient booleen
 	 * @return String : une chaine de caracteres
 	 */
 	public String toXhtml(boolean reponsesClient) {

@@ -75,6 +75,8 @@ public class Lien {
 	 *            String : Une chaine de caracteres representant une description.
 	 * @param rang
 	 *            int : Un entier representant le rang.
+	 * @param score
+	 * 			  int : score
 	 */
 	public Lien(String url, String titre, String desc, int rang, int score) {
 		this.url = url;

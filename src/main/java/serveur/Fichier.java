@@ -50,7 +50,7 @@ public class Fichier {
 		// detection du type
 		this.type = detectType();
 		// ouverture du fichier pour en avoir la taille
-		File fich = new File(System.getProperty("user.dir") + Agent.Path, this.nom);
+		File fich = new File(Agent.Path, this.nom);
 		this.taille = fich.length();
 	}
 
@@ -128,7 +128,7 @@ public class Fichier {
 	 */
 	public boolean fichierExiste() {
 		// verification que le fichier existe
-		File fich = new File(System.getProperty("user.dir") + Agent.Path, this.nom);
+		File fich = new File(Agent.Path, this.nom);
 		if ((fich.exists()) && (fich.isFile()))
 			return true;
 		else

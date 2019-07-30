@@ -162,7 +162,7 @@ public class Permutations {
 	 * @param urlMR
 	 *            String : Une chaine de caractere representant une url (celle
 	 *            retournee par le(s) moteurs de recherche).
-	 * @paramCasSources Vector : Un vecteur de cas sources (enregistrements retenus
+	 * @param casSources Vector : Un vecteur de cas sources (enregistrements retenus
 	 *                  par la methode "simMotsCles").
 	 * @return Vector : Un vecteur de cas sources
 	 */
@@ -301,7 +301,7 @@ public class Permutations {
 	 * @param descMR
 	 *            String : Une chaine de caractere representant une description
 	 *            (celle retournee par le(s) moteurs de recherche).
-	 * @paramCasSources Vector : Un vecteur de cas sources (enregistrements retenus
+	 * @param casSources Vector : Un vecteur de cas sources (enregistrements retenus
 	 *                  par la methode "simMotsCles").
 	 * @return Vector : Un vecteur de cas sources
 	 */
