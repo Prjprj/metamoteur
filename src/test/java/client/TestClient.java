@@ -3,8 +3,8 @@ package client;
 import agent.Agent;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import serveur.Serveur;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -42,18 +42,24 @@ public class TestClient {
 
 	@Before
 	public void setUp() throws Exception {
-		new Agent();
-		Serveur.service();
+		//new Agent();
+		//Serveur.service();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		new Agent();
+		Client.envoiRequeteGET("http://localhost:"+Agent.PortServeur+"/stoppeAgent.html");
 	}
 	
 	@Test
+	@Ignore
 	public void runClientTests() {
+		new Agent();
 		// tentative de requetes sur le serveur HTTP installe sur la machine du testeur
-		assertNotNull(Client.envoiRequeteGET("http://localhost"));
-		assertNotNull(Client.envoiRequetePOST("localhost", "/", "essai", 80));
+		String res=Client.envoiRequeteGET("http://localhost:"+Agent.PortServeur);
+		assertNotNull(res);
+		String res2=Client.envoiRequetePOST("localhost", "/", "essai", Agent.PortServeur);
+		assertNotNull(res2);
 	}
 }
