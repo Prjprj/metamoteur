@@ -156,7 +156,8 @@ public class EnregistrementHandler extends DefaultHandler {
 
 	/**
 	 * Utilisation du toXhtml de Enregistrement
-	 * 
+	 *
+	 * @param bool booleen
 	 * @return string
 	 */
 	public String toXhtml(boolean bool) {

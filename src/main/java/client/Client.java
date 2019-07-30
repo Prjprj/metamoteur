@@ -102,6 +102,8 @@ public class Client {
 	 *            adresse relative (suite de la requete)(search.html...)
 	 * @param corps
 	 *            corps de la requete a envoyer
+	 * @param port
+	 * 			  port pour la requete
 	 * @return retourne la reponse du serveur contacte
 	 */
 	public static String envoiRequetePOST(String url, String adresse, String corps, int port) {

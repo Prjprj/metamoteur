@@ -47,7 +47,7 @@ public class ParsingGoogle {
 	/**
 	 * M�thode de parsing Google g�n�rale
 	 * 
-	 * @param string
+	 * @param pageHtml
 	 *            Une chaine de caract�re.
 	 * @return boolean
 	 */

@@ -376,6 +376,8 @@ public class GestionBDD {
 
 	/**
 	 * Methode permettant d'arr�ter la base HSQL
+	 *
+	 * @param connection Connection : La connection
 	 */
 	public static void shutdownHSQL(Connection connection) {
 		try {

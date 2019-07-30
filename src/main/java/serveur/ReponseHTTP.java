@@ -123,6 +123,8 @@ public class ReponseHTTP {
 	 * 
 	 * @param sortie
 	 *            flux de sortie ouvert sur le socket vers le client
+     * @param code
+     *            code retour HTTP
 	 * @param fichier
 	 *            fichier a envoyer
 	 */
@@ -145,7 +147,7 @@ public class ReponseHTTP {
 			else
 				sortie.write(this.corps.getBytes());
 			// ouverture du fichier
-			File fich = new File(System.getProperty("user.dir") + Agent.Path, fichier.toString().substring(1));
+			File fich = new File(Agent.Path, fichier.toString().substring(1));
 			try {
 				FileInputStream fluxFichier = new FileInputStream(fich);
 				int buffer;
@@ -236,7 +238,7 @@ public class ReponseHTTP {
 			// ecriture du debut de la requete sur le flux
 			sortie2.write(this.corps);
 			// ouverture du fichier
-			File fich = new File(System.getProperty("user.dir") + Agent.Path, fichier.toString().substring(1));
+			File fich = new File(Agent.Path, fichier.toString().substring(1));
 			RenderedImage image = ImageIO.read(fich);
 			String type = null;
 			// recuperation du type du fichier
@@ -277,7 +279,7 @@ public class ReponseHTTP {
 	 */
 	public static String erreur404(RequeteHTTP requete) {
 		String chaine = new String("");
-		System.out.println(System.getProperty("user.dir") + Agent.Path);
+		System.out.println(Agent.Path);
 		chaine += "HTTP/1.0 404 ERROR" + Constantes.retourChariot;
 		chaine += Constantes.retourChariot;
 		chaine += "<HTML><H1>Erreur 404</H1><p>" + Constantes.retourChariot;

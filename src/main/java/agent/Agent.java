@@ -75,7 +75,7 @@ public class Agent {
 
 	public static String PageIndex = "index.html";
 
-	public static String Path = "src/www/";
+	public static String Path = "/www/";
 
 	public static String[] Moteurs;
 
