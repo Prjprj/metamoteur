@@ -21,6 +21,9 @@ package agent;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
+import org.junit.Test;
+
 /**
  * Classe de tests pour la gestion de message
  * 
@@ -31,13 +34,30 @@ package agent;
  * @version 0.9
  */
 public class TestGestionMessage {
-	public static void main(String args[]) {
+	private String classToShow = "Ma_Classe";
+
+	@Test
+	public void runMessageTests1() {
 		/*
 		 * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
 		 * traitements - 0
 		 */
-		GestionMessage.message(0, "Ma_Classe", "Aie !!!");
-		GestionMessage.message(1, "Ma_Classe", "1 Aie !!!");
-		GestionMessage.message(2, "Ma_Classe", "2 Aie !!!");
+		GestionMessage.message(0, classToShow, "Aie !!!");
+	}
+	@Test
+	public void runMessageTests2() {
+		/*
+		 * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
+		 * traitements - 0
+		 */
+		GestionMessage.message(1, classToShow, "1 Aie !!!");
+	}
+	@Test
+	public void runMessageTests3() {
+		/*
+		 * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
+		 * traitements - 0
+		 */
+		GestionMessage.message(2, classToShow, "2 Aie !!!");
 	}
 }
