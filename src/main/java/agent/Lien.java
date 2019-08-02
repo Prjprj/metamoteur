@@ -237,7 +237,7 @@ public class Lien {
 	 * @return String : Une chaine de caracteres.
 	 */
 	public String toString() {
-		return this.url.toString() + "," + this.titre.toString() + "," + this.desc.toString() + "," + this.rang;
+		return this.url + "," + this.titre + "," + this.desc + "," + this.rang;
 	}
 
 	/**

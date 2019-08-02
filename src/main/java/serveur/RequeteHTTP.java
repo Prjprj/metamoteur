@@ -62,8 +62,8 @@ public class RequeteHTTP {
 			this.suiteRequetePresente = this.pointInterPresent();
 			// recuperation de la suite de la requete si celle ci est presente
 			if (this.suiteRequetePresente)
-				this.suiteRequete = new String(this.corps.substring(this.corps.indexOf("?") + 1,
-						this.corps.indexOf(" ", this.corps.indexOf("?"))));
+				this.suiteRequete = this.corps.substring(this.corps.indexOf('?') + 1,
+						this.corps.indexOf(' ', this.corps.indexOf('?')));
 			else
 				this.suiteRequete = null;
 		} else {
@@ -166,8 +166,8 @@ public class RequeteHTTP {
 	private int detectDernierCarFichierPointe(int depart) {
 		int pointInter;
 		int espace;
-		espace = this.corps.indexOf(" ", depart);
-		pointInter = this.corps.indexOf("?", depart);
+		espace = this.corps.indexOf(' ', depart);
+		pointInter = this.corps.indexOf('?', depart);
 		if (pointInter == -1)
 			return (espace);
 		else {

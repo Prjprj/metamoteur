@@ -130,11 +130,11 @@ public class ReponseHTTP {
 	 */
 	public void envoieFichierTexte(OutputStream sortie, int code, Fichier fichier) {
 		long taille = fichier.getTaille();
-		this.corps = new String("");
+		this.corps = "";
 		// creation du debut de la requete
 		this.corps += "HTTP/1.0 " + code + " OK" + Constantes.retourChariot;
 		// ajout des options de la reponse
-		this.options.add(new OptionReponseHTTP("Content-Length", new String(String.valueOf(taille))));
+		this.options.add(new OptionReponseHTTP("Content-Length", String.valueOf(taille)));
 		this.options.add(new OptionReponseHTTP("Content-Type", "text/html"));
 		// inclusion des options
 		inclueOptions();
@@ -177,7 +177,7 @@ public class ReponseHTTP {
 	 *            url de la page sur laquelle la redirection doit etre operee
 	 */
 	public void redirection(PrintWriter sortie, String url) {
-		this.corps = new String("");
+		this.corps = "";
 		// creation du debut de la requete
 		this.corps += "HTTP/1.0 200 OK" + Constantes.retourChariot;
 		// ajout de l'option representant le type
@@ -206,12 +206,12 @@ public class ReponseHTTP {
 	 */
 	public void envoieImage(OutputStream sortie, Fichier fichier) {
 		long taille = fichier.getTaille();
-		this.corps = new String("");
+		this.corps = "";
 		// creation du debut de la requete
 		this.corps += "HTTP/1.0 200 OK" + Constantes.retourChariot;
 		// ajout des options a la requete
 		this.options.add(new OptionReponseHTTP("Accept-Ranges", "bytes"));
-		this.options.add(new OptionReponseHTTP("Content-Length", new String(String.valueOf(taille))));
+		this.options.add(new OptionReponseHTTP("Content-Length", String.valueOf(taille)));
 		switch (this.fichierPointe.getType()) {
 		case Constantes.IMAGE_PNG: {
 			this.options.add(new OptionReponseHTTP("Content-Type", "image/png"));
@@ -244,19 +244,19 @@ public class ReponseHTTP {
 			// recuperation du type du fichier
 			switch (this.fichierPointe.getType()) {
 			case Constantes.IMAGE_PNG: {
-				type = new String("png");
+				type = "png";
 				break;
 			}
 			case Constantes.IMAGE_GIF: {
-				type = new String("gif");
+				type = "gif";
 				break;
 			}
 			case Constantes.IMAGE_JPG: {
-				type = new String("jpg");
+				type = "jpg";
 				break;
 			}
 			case Constantes.IMAGE_BMP: {
-				type = new String("bmp");
+				type = "bmp";
 				break;
 			}
 			}
@@ -278,7 +278,7 @@ public class ReponseHTTP {
 	 * @return retourne la chaine permettant d'envoyer la page d'erreur au client
 	 */
 	public static String erreur404(RequeteHTTP requete) {
-		String chaine = new String("");
+		String chaine = "";
 		System.out.println(Agent.Path);
 		chaine += "HTTP/1.0 404 ERROR" + Constantes.retourChariot;
 		chaine += Constantes.retourChariot;
@@ -302,7 +302,7 @@ public class ReponseHTTP {
 	 * @return retourne une chaine contenant le debut de la page a envoyer au client
 	 */
 	public static String debutReponseHTML() {
-		String chaine = new String();
+		String chaine = "";
 		chaine += "HTTP/1.0 200 OK" + Constantes.retourChariot;
 		ReponseHTTP rep = new ReponseHTTP(new Fichier(""));
 		rep.options.add(new OptionReponseHTTP("Content-Type", "text/html"));
@@ -383,7 +383,7 @@ public class ReponseHTTP {
 	 * @return page a envoyer au client
 	 */
 	public static String pasDeReponse(String motsCle) {
-		String chaine = new String();
+		String chaine = "";
 		chaine += "HTTP/1.0 200 OK" + Constantes.retourChariot;
 		ReponseHTTP rep = new ReponseHTTP(new Fichier(""));
 		rep.options.add(new OptionReponseHTTP("Content-Type", "text/html"));
@@ -486,7 +486,7 @@ public class ReponseHTTP {
 	}
 
 	public static String includeCSSinHTML() {
-		String css = new String();
+		String css = "";
 		css = "<style type=\"text/css\">";
 		css += "body { padding: 0; margin: 0; font-size: 12px; font-family: tahoma, sans-serif; letter-spacing: 1px; line-height: 160%; background: #cdcdcd; color: #454545; }";
 		css += "div { text-align: left;	}";

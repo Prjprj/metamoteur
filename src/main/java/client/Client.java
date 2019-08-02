@@ -124,7 +124,7 @@ public class Client {
 				str = "POST " + adresse + " HTTP/1.1\r\nUser-Agent: MetaBot/1.0\r\n\r\n" + corps + "\r\n\r\n";
 				// envoi de la requete
 				toWeb.println(str);
-				retour = new String("");
+				retour = "";
 				// recuperation de la reponse du serveur
 				while (true) {
 					str = fromWeb.readLine();

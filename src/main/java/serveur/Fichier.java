@@ -46,7 +46,7 @@ public class Fichier {
 	 *            nom du fichier
 	 */
 	public Fichier(String nom) {
-		this.nom = new String(nom);
+		this.nom = nom;
 		// detection du type
 		this.type = detectType();
 		// ouverture du fichier pour en avoir la taille
@@ -118,7 +118,7 @@ public class Fichier {
 	 * @return retourne un String contenant l'extension du fichier
 	 */
 	private String getExtension() {
-		return (new String(this.nom.substring(this.nom.lastIndexOf(".") + 1)));
+		return (this.nom.substring(this.nom.lastIndexOf('.') + 1));
 	}
 
 	/**
