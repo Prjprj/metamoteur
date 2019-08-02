@@ -46,16 +46,16 @@ public class OptionRequeteHTTP {
 	 *            valeur de l'option
 	 */
 	public OptionRequeteHTTP(String nom, String valeur) {
-		this.nom = new String(nom);
-		this.valeur = new String(valeur);
+		this.nom = nom;
+		this.valeur = valeur;
 	}
 
 	/**
 	 * Constructeur d'une OptionRequete HTTP
 	 */
 	public OptionRequeteHTTP() {
-		this.nom = new String("");
-		this.valeur = new String("");
+		this.nom = "";
+		this.valeur = "";
 	}
 
 	/**
@@ -86,25 +86,25 @@ public class OptionRequeteHTTP {
 	public static Vector listeOptions() {
 		Vector vecteur = new Vector();
 		// construction d'un vecteur contenant les options reconnues par le serveur
-		vecteur.add(new String("Accept"));
-		vecteur.add(new String("Accept-Charset"));
-		vecteur.add(new String("Accept-Encoding"));
-		vecteur.add(new String("Accept-Language"));
-		vecteur.add(new String("Authorization"));
-		vecteur.add(new String("Content-Encoding"));
-		vecteur.add(new String("Content-Language"));
-		vecteur.add(new String("Content-Length"));
-		vecteur.add(new String("Content-Type"));
-		vecteur.add(new String("Date"));
-		vecteur.add(new String("Fowarded"));
-		vecteur.add(new String("From"));
-		vecteur.add(new String("Link"));
-		vecteur.add(new String("Orig-URL"));
-		vecteur.add(new String("Referer"));
-		vecteur.add(new String("User-Agent"));
-		vecteur.add(new String("Keep-Alive"));
-		vecteur.add(new String("Connection"));
-		vecteur.add(new String("Host"));
+		vecteur.add("Accept");
+		vecteur.add("Accept-Charset");
+		vecteur.add("Accept-Encoding");
+		vecteur.add("Accept-Language");
+		vecteur.add("Authorization");
+		vecteur.add("Content-Encoding");
+		vecteur.add("Content-Language");
+		vecteur.add("Content-Length");
+		vecteur.add("Content-Type");
+		vecteur.add("Date");
+		vecteur.add("Fowarded");
+		vecteur.add("From");
+		vecteur.add("Link");
+		vecteur.add("Orig-URL");
+		vecteur.add("Referer");
+		vecteur.add("User-Agent");
+		vecteur.add("Keep-Alive");
+		vecteur.add("Connection");
+		vecteur.add("Host");
 		return vecteur;
 	}
 

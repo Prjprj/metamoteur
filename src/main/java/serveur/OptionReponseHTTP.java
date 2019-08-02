@@ -46,8 +46,8 @@ public class OptionReponseHTTP {
 	 *            valeur de l'option
 	 */
 	public OptionReponseHTTP(String nom, String valeur) {
-		this.nom = new String(nom);
-		this.valeur = new String(valeur);
+		this.nom = nom;
+		this.valeur = valeur;
 	}
 
 	/*
@@ -71,8 +71,8 @@ public class OptionReponseHTTP {
 	 * Constructeur d'une OptionReponse HTTP
 	 */
 	public OptionReponseHTTP() {
-		this.nom = new String("");
-		this.valeur = new String("");
+		this.nom = "";
+		this.valeur = "";
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class OptionReponseHTTP {
 	 */
 	public void construcServ() {
 		// construction d'une option "Server"
-		this.nom = new String("Server");
-		this.valeur = new String("MetaMoteur de recherche oriente communaute");
+		this.nom = "Server";
+		this.valeur = "MetaMoteur de recherche oriente communaute";
 	}
 
 	/**
@@ -89,9 +89,9 @@ public class OptionReponseHTTP {
 	 */
 	public void construcDate() {
 		// construction d'une option "Date"
-		this.nom = new String("Date");
+		this.nom = "Date";
 		Date date = new Date();
-		this.valeur = new String(date.toString());
+		this.valeur = date.toString();
 	}
 
 	/**

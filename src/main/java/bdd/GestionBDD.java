@@ -136,7 +136,7 @@ public class GestionBDD {
 			// preparation de la requete
 			Statement statement = connection.createStatement();
 			// en cas de requete SELECT il faut recuperer le resultat
-			if (requete.substring(0, requete.indexOf(" ")).equals("SELECT")) {
+			if (requete.substring(0, requete.indexOf(' ')).equals("SELECT")) {
 				// recuperation du resultat de la requete
 				ResultSet resultats = statement.executeQuery(requete);
 				// recuperation des metadonnees sur les resultats
@@ -193,9 +193,9 @@ public class GestionBDD {
 	 */
 	public static String construitSelect(String restriction, String table, String condition) {
 		if (!condition.equals(" "))
-			return (new String("SELECT " + restriction + " FROM " + table + " WHERE " + condition));
+			return ("SELECT " + restriction + " FROM " + table + " WHERE " + condition);
 		else
-			return (new String("SELECT " + restriction + " FROM " + table));
+			return ("SELECT " + restriction + " FROM " + table);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class GestionBDD {
 			Statement statement = connection.createStatement();
 			// envoi d'une requete quelconque sur la table pour en recuperer les noms de
 			// colonnes
-			ResultSet resultats = statement.executeQuery(new String("SELECT * FROM " + table));
+			ResultSet resultats = statement.executeQuery("SELECT * FROM " + table);
 			// recuperation des metadonnees sur la table
 			ResultSetMetaData meta = resultats.getMetaData();
 			// recuperation du nombre de colonnes
@@ -239,7 +239,7 @@ public class GestionBDD {
 			GestionMessage.message(2, "GestionBDD", "Erreur lors de l'acces a la base de donnees pour un insert");
 		}
 		// creation d'une String pour construire la requete
-		String col = new String("");
+		String col = "";
 		int taille = retour.size();
 		// creation de la chaine a inserer dans la requete
 		for (int i = 0; i < taille; i++) {
@@ -249,7 +249,7 @@ public class GestionBDD {
 				col += ",";
 		}
 		System.out.println("INSERT INTO " + table + " (" + col + ") VALUES (" + valeurs + ")");
-		return (new String("INSERT INTO " + table + " (" + col + ") VALUES (" + valeurs + ")"));
+		return ("INSERT INTO " + table + " (" + col + ") VALUES (" + valeurs + ")");
 	}
 
 	/**
@@ -268,9 +268,9 @@ public class GestionBDD {
 	 */
 	public static String construitUpdate(String table, String valeurs, String condition) {
 		if (!condition.equals(" "))
-			return (new String("UPDATE " + table + " SET " + valeurs + " WHERE " + condition));
+			return ("UPDATE " + table + " SET " + valeurs + " WHERE " + condition);
 		else
-			return (new String("UPDATE " + table + " SET " + valeurs));
+			return ("UPDATE " + table + " SET " + valeurs);
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class GestionBDD {
 	 *            enregistrement a ajouter a la base
 	 */
 	public static Boolean insertEnregistrement(Enregistrement enr) {
-		String val = new String("");
+		String val = "";
 		// construction de la chaine a ajouter a la requete
 		if (Agent.TypeBDD.equals("MySQL")) {
 			// le 0 permet de gerer l'auto increment
@@ -315,7 +315,7 @@ public class GestionBDD {
 	 *            url cliquee a mettre a jour
 	 */
 	public static Boolean updateURL(String url) {
-		String condition = new String();
+		String condition = "";
 		String quote = "";
 		if (Agent.TypeBDD.equals("MySQL")) {
 			quote = "`";

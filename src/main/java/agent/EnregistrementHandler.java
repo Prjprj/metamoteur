@@ -67,6 +67,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * M�thode de d�tection de balise de d�part
 	 */
+	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (qName.equals("search")) {
 			enregistrement = new Enregistrement();
@@ -102,6 +103,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * M�thode de d�tection de balise de fin
 	 */
+	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		if (qName.equals("search")) {
 		} else if (qName.equals("keywords")) {
@@ -126,6 +128,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * M�thode de d�tection de caract�res
 	 */
+	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		String lecture = new String(ch, start, length);
 		if (inKeywords) {
@@ -143,6 +146,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * M�thode qui d�bute le parsing
 	 */
+    @Override
 	public void startDocument() throws SAXException {
 		GestionMessage.message(0, "EnregistrementHandler", "D�but du parsing XML R�sultat");
 	}
@@ -150,6 +154,7 @@ public class EnregistrementHandler extends DefaultHandler {
 	/**
 	 * M�thode d�clench�e � la fin du parsing
 	 */
+    @Override
 	public void endDocument() throws SAXException {
 		GestionMessage.message(0, "EnregistrementHandler", "Fin du parsing XML R�sultat");
 	}

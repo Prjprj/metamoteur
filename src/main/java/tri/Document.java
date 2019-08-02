@@ -99,6 +99,7 @@ public class Document extends Lien {
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString() {
 		return id + "," + lien.toString() + "\n";
 	}
