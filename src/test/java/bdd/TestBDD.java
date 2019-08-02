@@ -1,9 +1,14 @@
 package bdd;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 import agent.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /*
  * This file is part of "M�ta-moteur".
@@ -36,25 +41,25 @@ import agent.*;
  * @version 1.0
  */
 public class TestBDD {
-
-	// variables d'un agent et leur configuration par d�faut
-
-	public static void main(String args[]) {
+	@Test
+	public void runTestBDD1() {
+		// variables d'un agent et leur configuration par d�faut
 		new Agent();
-		try {
+		/*try {
 			// Test Connexion
 			Connection connection = GestionBDD.connectionBDD();
-			Statement statement = connection.createStatement();
-			statement.executeQuery("select * from BDD");
+			try (Statement statement = connection.createStatement()) {
+				statement.executeQuery("select * from BDD");
+			}
 		} catch (Exception e) {
 			// Affichage d'un message d'erreur en cas de non possibilite de la connection a
 			// la base
 			System.out.println(e.getMessage());
-		}
+		}*/
 
 		// Test Select
 		Vector res = GestionBDD.envoiRequete(GestionBDD.construitSelect("*", "BDD", " "));
-		System.out.println(res);
+		assertNotNull("Select * from BDD",res);
 
 		/*
 		 * Vector
@@ -69,6 +74,12 @@ public class TestBDD {
 		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
 		 * System.out.println(res);
 		 */
+	}
+
+	@Test
+	public void runTestBDD2() {
+		// variables d'un agent et leur configuration par d�faut
+		new Agent();
 		// construction d'un lien pour test
 		Lien lien = new Lien("url&�\"����^�~", "titre", "desc", 1, 0);
 		// construction d'un vecteur de liens
@@ -95,8 +106,14 @@ public class TestBDD {
 		vecteur.add(lien);
 		vecteur.add(lien);
 		// insertion de l'enregistement
-		GestionBDD.insertEnregistrement(new Enregistrement(-1, "mot cle", vecteur));
+		assertTrue("Insert",GestionBDD.insertEnregistrement(new Enregistrement(-1, "mot cle", vecteur)));
+	}
+
+	@Test
+	public void runTestBDD3() {
+		// variables d'un agent et leur configuration par d�faut
+		new Agent();
 		// tentative d'update
-		GestionBDD.updateURL("http://www.ilocis.org/fr/help.html");
+		assertTrue("Update",GestionBDD.updateURL("http://www.ilocis.org/fr/help.html"));
 	}
 }

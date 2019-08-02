@@ -280,7 +280,7 @@ public class GestionBDD {
 	 * @param enr
 	 *            enregistrement a ajouter a la base
 	 */
-	public static void insertEnregistrement(Enregistrement enr) {
+	public static Boolean insertEnregistrement(Enregistrement enr) {
 		String val = new String("");
 		// construction de la chaine a ajouter a la requete
 		if (Agent.TypeBDD.equals("MySQL")) {
@@ -302,6 +302,8 @@ public class GestionBDD {
 		String requete = GestionBDD.construitInsert(Agent.TableBDD, val);
 		// envoi de la requete
 		GestionBDD.envoiRequete(requete);
+
+		return true;
 	}
 
 	/**
@@ -312,7 +314,7 @@ public class GestionBDD {
 	 * @param url
 	 *            url cliquee a mettre a jour
 	 */
-	public static void updateURL(String url) {
+	public static Boolean updateURL(String url) {
 		String condition = new String();
 		String quote = "";
 		if (Agent.TypeBDD.equals("MySQL")) {
@@ -372,6 +374,8 @@ public class GestionBDD {
 				}
 			}
 		}
+
+		return true;
 	}
 
 	/**

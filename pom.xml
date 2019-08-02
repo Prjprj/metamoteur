@@ -45,9 +45,6 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
             </resource>
         </resources>
         <plugins>
@@ -136,6 +133,5 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-  	</dependencies>
-  </dependencyManagement>
+    </dependencies>
 </project>
