@@ -238,7 +238,7 @@ public class Tri {
 		int nbEnr = ensEnrAA.size();
 		Vector resultat = new Vector();
 		if (nbEnr > 0) {
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < 10; i++) {
 				int somme = sommeRangLien(i, ensEnrAA);
 				resultat = Permutations.ajoutRangMoyen(somme, nbEnr, resultat);
 			}
