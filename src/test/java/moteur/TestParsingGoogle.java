@@ -2,6 +2,7 @@ package moteur;
 
 import agent.Enregistrement;
 import client.Client;
+import org.junit.Test;
 
 /*
  * This file is part of "M�ta-moteur".
@@ -34,7 +35,8 @@ import client.Client;
  * @version 0.9
  */
 public class TestParsingGoogle {
-	public static void main(String args[]) {
+	@Test
+	public void runTestParsingGoogle() {
 		String url; // The URL to read
 		// url avec r�sultats + pub + desc vide
 		// url = new

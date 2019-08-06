@@ -1,10 +1,14 @@
 package agent;
 
+import org.junit.Test;
+
 import java.util.Vector;
 
-public class TestEnregistrement {
+import static org.junit.Assert.assertTrue;
 
-	public static void main(String args[]) {
+public class TestEnregistrement {
+	@Test
+	public void runTestEnregistrement() {
 		/*
 		 * Vector v = Enregistrement.recuperationEnregistrements(); Enregistrement enr =
 		 * (Enregistrement) v.elementAt(1); Enregistrement enr =
@@ -49,11 +53,15 @@ public class TestEnregistrement {
 		liens.addElement(new Lien("url9", "titre9", "desc9", 9, 0));
 		liens.addElement(new Lien("url10", "titre10", "desc10", 10, 100));
 
+		int score[] = {100,100,60,30,4,4,2,0,0,0};
+		int rang[] = {1,2,3,4,5,6,7,8,9,10};
 		Vector resLiens = Enregistrement.promotionLiensCliques(liens);
 		for (int i = 0; i < resLiens.size(); i++) {
-			System.out.println(((Lien) resLiens.elementAt(i)).getUrl());
+			assertTrue(((Lien) resLiens.elementAt(i)).getRang()==rang[i]);
+			assertTrue(((Lien) resLiens.elementAt(i)).getScore()==score[i]);
+			/*System.out.println(((Lien) resLiens.elementAt(i)).getUrl());
 			System.out.print("     Rang :" + ((Lien) resLiens.elementAt(i)).getRang());
-			System.out.println("    Score :" + ((Lien) resLiens.elementAt(i)).getScore());
+			System.out.println("    Score :" + ((Lien) resLiens.elementAt(i)).getScore());*/
 		}
 
 		/*

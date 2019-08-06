@@ -1,10 +1,13 @@
 package agent;
 
+import org.junit.Test;
 import org.xml.sax.*;
 
 import javax.xml.parsers.*;
 
 import java.io.*;
+
+import static org.junit.Assert.assertNotNull;
 
 /*
  * This file is part of "M�ta-moteur".
@@ -126,7 +129,8 @@ public class TestEnregistrementHandler {
 			+ "					<desc>Par exemple une recherche sur \"aide et industrie et bois\" permet de trouver les documents contenant les trois mots � la fois. ...</desc>"
 			+ "				</link>" + "			</list>" + "</search>";
 
-	public static void main(String args[]) {
+	@Test
+	public void runTestEnregistrementHandler() {
 		Enregistrement enr = new Enregistrement();
 		try {
 			// cr�ation d'une fabrique de parseurs SAX
@@ -150,6 +154,7 @@ public class TestEnregistrementHandler {
 			GestionMessage.message(2, "La_classe", "Erreur d'entr�e/sortie, Lors de l'appel � parse() : " + ioe);
 		}
 
+		assertNotNull(enr.toSql());
 		System.out.println(enr.toSql());
 
 	}
