@@ -72,7 +72,7 @@ public class Client {
 			// ouverture de la connection HTTP
 			conn = (HttpURLConnection) url.openConnection();
 			// mise en place du timeout sur la requete
-			// conn.setConnectTimeout(Agent.TimeOutMoteurRecherche);
+			//conn.setConnectTimeout(Agent.TimeOutMoteurRecherche);
 			// ajout d'un user-agent pour eviter une erreur 403 sur google
 			conn.setRequestProperty("User-Agent", "MetaBot/1.0");
 			// choix du type de la methode
@@ -111,32 +111,33 @@ public class Client {
 		String retour = null;
 		try {
 			// ouverture du socket sur l'url donnee
-			Socket socketToWeb = new Socket(url, port);
-			// selection du timeout de la connection
-			// socketToWeb.setSoTimeout(Agent.TimeOutAgent);
-			// verification si la connexion a ete etablie
-			if (socketToWeb.isConnected()) {
-				// ouverture des flux de transfert de donnees
-				PrintWriter toWeb = new PrintWriter(
-						new BufferedWriter(new OutputStreamWriter(socketToWeb.getOutputStream())), true);
-				BufferedReader fromWeb = new BufferedReader(new InputStreamReader(socketToWeb.getInputStream()));
-				// construction de la requete
-				str = "POST " + adresse + " HTTP/1.1\r\nUser-Agent: MetaBot/1.0\r\n\r\n" + corps + "\r\n\r\n";
-				// envoi de la requete
-				toWeb.println(str);
-				retour = "";
-				// recuperation de la reponse du serveur
-				while (true) {
-					str = fromWeb.readLine();
-					if (str == null)
-						break;
-					retour += str + "\r\n";
+			try (Socket socketToWeb = new Socket(url, port)) {
+				// selection du timeout de la connection
+				// socketToWeb.setSoTimeout(Agent.TimeOutAgent);
+				// verification si la connexion a ete etablie
+				if (socketToWeb.isConnected()) {
+					// ouverture des flux de transfert de donnees
+					PrintWriter toWeb = new PrintWriter(
+							new BufferedWriter(new OutputStreamWriter(socketToWeb.getOutputStream())), true);
+					BufferedReader fromWeb = new BufferedReader(new InputStreamReader(socketToWeb.getInputStream()));
+					// construction de la requete
+					str = "POST " + adresse + " HTTP/1.1\r\nUser-Agent: MetaBot/1.0\r\n\r\n" + corps + "\r\n\r\n";
+					// envoi de la requete
+					toWeb.println(str);
+					retour = "";
+					// recuperation de la reponse du serveur
+					while (true) {
+						str = fromWeb.readLine();
+						if (str == null)
+							break;
+						retour += str + "\r\n";
+					}
+					// suppression de la partie inutile de la reponse
+					retour = retour.substring(retour.indexOf("\r\n\r\n") + 4);
+				} else {
+					// renvoi pour la forme
+					retour = "";
 				}
-				// suppression de la partie inutile de la reponse
-				retour = retour.substring(retour.indexOf("\r\n\r\n") + 4);
-			} else {
-				// renvoi pour la forme
-				retour = "";
 			}
 		} catch (IOException e) {
 			// affichage d'un message en cas d'erreur

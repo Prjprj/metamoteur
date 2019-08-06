@@ -30,7 +30,7 @@ package serveur;
  * @author Pierre Ramos
  * @version 1.0
  */
-public interface Constantes {
+public class Constantes {
 	public static final int GET = 1;
 	public static final int POST = 2;
 	public static final int INCONNU = 0;
@@ -40,5 +40,5 @@ public interface Constantes {
 	public static final int IMAGE_GIF = 4;
 	public static final int IMAGE_PNG = 5;
 	public static final int TAILLE_BLOC = 1024;
-	public static final String retourChariot = "\r\n";
+	public static final String RETOUR_CHARIOT = "\r\n";
 }

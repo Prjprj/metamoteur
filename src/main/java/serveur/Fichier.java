@@ -90,25 +90,25 @@ public class Fichier {
 	private int detectType() {
 		// recuperation de l'extension pour en connaitre le type
 		String extension = getExtension();
-		if (extension.equals("conf") || extension.equals("html") || extension.equals("htm") || extension.equals("css")
-				|| extension.equals("js") || extension.equals("txt"))
-			return Constantes.TEXTE;
-		else {
-			if (extension.equals("jpg") || extension.equals("jpeg"))
+		switch (extension){
+			case "conf":
+			case "html":
+			case "htm":
+			case "css":
+			case "js":
+			case "txt":
+				return Constantes.TEXTE;
+			case "jpg":
+			case "jpeg":
 				return Constantes.IMAGE_JPG;
-			else {
-				if (extension.equals("bmp"))
-					return Constantes.IMAGE_BMP;
-				else {
-					if (extension.equals("gif"))
-						return Constantes.IMAGE_GIF;
-					else {
-						if (extension.equals("png"))
-							return Constantes.IMAGE_PNG;
-					}
-				}
-			}
-			return Constantes.INCONNU;
+			case "bmp":
+				return Constantes.IMAGE_BMP;
+			case "gif":
+				return Constantes.IMAGE_GIF;
+			case "png":
+				return Constantes.IMAGE_PNG;
+			default:
+				return Constantes.INCONNU;
 		}
 	}
 
@@ -129,9 +129,9 @@ public class Fichier {
 	public boolean fichierExiste() {
 		// verification que le fichier existe
 		File fich = new File(Agent.Path, this.nom);
+		Boolean retour=false;
 		if ((fich.exists()) && (fich.isFile()))
-			return true;
-		else
-			return false;
+			retour=true;
+		return retour;
 	}
 }

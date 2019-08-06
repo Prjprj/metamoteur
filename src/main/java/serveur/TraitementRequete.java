@@ -157,7 +157,7 @@ public class TraitementRequete extends Thread {
 				}
 			}
 			// finalisation de la recuperation de la requete
-			requete = sb.toString() + Constantes.retourChariot;
+			requete = sb.toString() + Constantes.RETOUR_CHARIOT;
 			// creation de l'objet requete, permettant de recuperer certaines informations
 			// sur le type de requete
 			this.requete = new RequeteHTTP(requete);
@@ -168,28 +168,28 @@ public class TraitementRequete extends Thread {
 				GestionMessage.message(0, "TraitementRequete", "Arret de l'agent");
 				Serveur.fermetureService();
 				// construction de la page de reponse
-				String chaine = "HTTP/1.0 200 OK" + Constantes.retourChariot + Constantes.retourChariot;
+				String chaine = "HTTP/1.0 200 OK" + Constantes.RETOUR_CHARIOT + Constantes.RETOUR_CHARIOT;
 				chaine += "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">"
-						+ Constantes.retourChariot;
+						+ Constantes.RETOUR_CHARIOT;
 				chaine += "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"fr\" lang=\"fr\">"
-						+ Constantes.retourChariot;
-				chaine += "<head>" + Constantes.retourChariot;
-				chaine += "<title>Network Search</title>" + Constantes.retourChariot;
+						+ Constantes.RETOUR_CHARIOT;
+				chaine += "<head>" + Constantes.RETOUR_CHARIOT;
+				chaine += "<title>Network Search</title>" + Constantes.RETOUR_CHARIOT;
 				chaine += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\" />"
-						+ Constantes.retourChariot;
+						+ Constantes.RETOUR_CHARIOT;
 				chaine += "<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />"
-						+ Constantes.retourChariot;
-				chaine += "<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />" + Constantes.retourChariot;
-				chaine += "<meta http-equiv=\"Content-Language\" content=\"fr\" />" + Constantes.retourChariot;
+						+ Constantes.RETOUR_CHARIOT;
+				chaine += "<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />" + Constantes.RETOUR_CHARIOT;
+				chaine += "<meta http-equiv=\"Content-Language\" content=\"fr\" />" + Constantes.RETOUR_CHARIOT;
 				chaine += "<link rel=\"stylesheet\" href=\"style/default.css\" type=\"text/css\" />"
-						+ Constantes.retourChariot;
-				chaine += "</head>" + Constantes.retourChariot;
-				chaine += "<body>" + Constantes.retourChariot;
-				chaine += "<div id=\"body\">" + Constantes.retourChariot;
-				chaine += "<p>l'agent est maintenant ferm�</p>" + Constantes.retourChariot;
-				chaine += "</div>" + Constantes.retourChariot;
-				chaine += "</body>" + Constantes.retourChariot;
-				chaine += "</html>" + Constantes.retourChariot;
+						+ Constantes.RETOUR_CHARIOT;
+				chaine += "</head>" + Constantes.RETOUR_CHARIOT;
+				chaine += "<body>" + Constantes.RETOUR_CHARIOT;
+				chaine += "<div id=\"body\">" + Constantes.RETOUR_CHARIOT;
+				chaine += "<p>l'agent est maintenant ferm�</p>" + Constantes.RETOUR_CHARIOT;
+				chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+				chaine += "</body>" + Constantes.RETOUR_CHARIOT;
+				chaine += "</html>" + Constantes.RETOUR_CHARIOT;
 				// envoi de la page de reponse
 				sortie.println(chaine);
 				sortie.close();
@@ -233,7 +233,7 @@ public class TraitementRequete extends Thread {
 					Permutations.lancementPermutations(enr);
 					Enregistrement enre = Permutations.getEnrMR_liensPermutes();
 					// preparation et envoi de la reponse au serveur client
-					String renvoi = "HTTP/1.0 200 OK" + Constantes.retourChariot + Constantes.retourChariot;
+					String renvoi = "HTTP/1.0 200 OK" + Constantes.RETOUR_CHARIOT + Constantes.RETOUR_CHARIOT;
 					renvoi += enre.toXml();
 					sortie.println(renvoi);
 					sortie.close();

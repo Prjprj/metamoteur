@@ -113,9 +113,9 @@ public class ReponseHTTP {
 		// parcours des options et ajout au corps de la reponse
 		for (int i = 0; i < taille; i++) {
 			this.corps += this.options.get(i).toString();
-			this.corps += Constantes.retourChariot;
+			this.corps += Constantes.RETOUR_CHARIOT;
 		}
-		this.corps += Constantes.retourChariot;
+		this.corps += Constantes.RETOUR_CHARIOT;
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class ReponseHTTP {
 		long taille = fichier.getTaille();
 		this.corps = "";
 		// creation du debut de la requete
-		this.corps += "HTTP/1.0 " + code + " OK" + Constantes.retourChariot;
+		this.corps += "HTTP/1.0 " + code + " OK" + Constantes.RETOUR_CHARIOT;
 		// ajout des options de la reponse
 		this.options.add(new OptionReponseHTTP("Content-Length", String.valueOf(taille)));
 		this.options.add(new OptionReponseHTTP("Content-Type", "text/html"));
@@ -179,19 +179,19 @@ public class ReponseHTTP {
 	public void redirection(PrintWriter sortie, String url) {
 		this.corps = "";
 		// creation du debut de la requete
-		this.corps += "HTTP/1.0 200 OK" + Constantes.retourChariot;
+		this.corps += "HTTP/1.0 200 OK" + Constantes.RETOUR_CHARIOT;
 		// ajout de l'option representant le type
 		this.options.add(new OptionReponseHTTP("Content-Type", "text/html"));
 		// inclusion des options
 		inclueOptions();
 		// construction du fichier HTML pour la redirection
-		corps += "<HTML>" + Constantes.retourChariot + "<HEAD>" + Constantes.retourChariot
-				+ "<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=" + url + "\">" + Constantes.retourChariot;
-		corps += "</HEAD>" + Constantes.retourChariot + "<BODY>" + Constantes.retourChariot + "<P>"
-				+ Constantes.retourChariot + "Redirection vers <a href=\"" + url + "\">" + url + "</a>"
-				+ Constantes.retourChariot;
-		corps += "</P>" + Constantes.retourChariot + "</BODY>" + Constantes.retourChariot + "</HTML>"
-				+ Constantes.retourChariot + Constantes.retourChariot + Constantes.retourChariot;
+		corps += "<HTML>" + Constantes.RETOUR_CHARIOT + "<HEAD>" + Constantes.RETOUR_CHARIOT
+				+ "<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=" + url + "\">" + Constantes.RETOUR_CHARIOT;
+		corps += "</HEAD>" + Constantes.RETOUR_CHARIOT + "<BODY>" + Constantes.RETOUR_CHARIOT + "<P>"
+				+ Constantes.RETOUR_CHARIOT + "Redirection vers <a href=\"" + url + "\">" + url + "</a>"
+				+ Constantes.RETOUR_CHARIOT;
+		corps += "</P>" + Constantes.RETOUR_CHARIOT + "</BODY>" + Constantes.RETOUR_CHARIOT + "</HTML>"
+				+ Constantes.RETOUR_CHARIOT + Constantes.RETOUR_CHARIOT + Constantes.RETOUR_CHARIOT;
 		// envoi de la requete construite
 		sortie.println(this.corps);
 	}
@@ -208,7 +208,7 @@ public class ReponseHTTP {
 		long taille = fichier.getTaille();
 		this.corps = "";
 		// creation du debut de la requete
-		this.corps += "HTTP/1.0 200 OK" + Constantes.retourChariot;
+		this.corps += "HTTP/1.0 200 OK" + Constantes.RETOUR_CHARIOT;
 		// ajout des options a la requete
 		this.options.add(new OptionReponseHTTP("Accept-Ranges", "bytes"));
 		this.options.add(new OptionReponseHTTP("Content-Length", String.valueOf(taille)));
@@ -280,18 +280,18 @@ public class ReponseHTTP {
 	public static String erreur404(RequeteHTTP requete) {
 		String chaine = "";
 		System.out.println(Agent.Path);
-		chaine += "HTTP/1.0 404 ERROR" + Constantes.retourChariot;
-		chaine += Constantes.retourChariot;
-		chaine += "<HTML><H1>Erreur 404</H1><p>" + Constantes.retourChariot;
-		chaine += "<H2>Le fichier est inconnu</H2><p>" + Constantes.retourChariot;
+		chaine += "HTTP/1.0 404 ERROR" + Constantes.RETOUR_CHARIOT;
+		chaine += Constantes.RETOUR_CHARIOT;
+		chaine += "<HTML><H1>Erreur 404</H1><p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<H2>Le fichier est inconnu</H2><p>" + Constantes.RETOUR_CHARIOT;
 		chaine += "methode = ";
 		if (requete.getType() == Constantes.GET)
 			chaine += "GET";
 		else
 			chaine += "POST";
-		chaine += "<br>" + Constantes.retourChariot;
-		chaine += "URL = " + requete.getFichierPointe().substring(1) + "<br>" + Constantes.retourChariot;
-		chaine += "</HTML>" + Constantes.retourChariot;
+		chaine += "<br>" + Constantes.RETOUR_CHARIOT;
+		chaine += "URL = " + requete.getFichierPointe().substring(1) + "<br>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</HTML>" + Constantes.RETOUR_CHARIOT;
 		return chaine;
 	}
 
@@ -303,74 +303,74 @@ public class ReponseHTTP {
 	 */
 	public static String debutReponseHTML() {
 		String chaine = "";
-		chaine += "HTTP/1.0 200 OK" + Constantes.retourChariot;
+		chaine += "HTTP/1.0 200 OK" + Constantes.RETOUR_CHARIOT;
 		ReponseHTTP rep = new ReponseHTTP(new Fichier(""));
 		rep.options.add(new OptionReponseHTTP("Content-Type", "text/html"));
 		rep.inclueOptions();
 		chaine += rep.corps;
 		chaine += "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">"
-				+ Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
 		chaine += "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"fr\" lang=\"fr\">"
-				+ Constantes.retourChariot;
-		chaine += "<head>" + Constantes.retourChariot;
-		chaine += "<title>Network Search</title>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<head>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<title>Network Search</title>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\" />"
-				+ Constantes.retourChariot;
-		chaine += "<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />" + Constantes.retourChariot;
-		chaine += includeCSSinHTML() + Constantes.retourChariot;
-		chaine += "<meta http-equiv=\"Content-Language\" content=\"fr\" />" + Constantes.retourChariot;
-		chaine += "<link rel=\"stylesheet\" href=\"style/default.css\" type=\"text/css\" />" + Constantes.retourChariot;
-		chaine += "<script type=\"text/javascript\" src=\"script/clicTous.js\"></script>" + Constantes.retourChariot;
-		chaine += "</head>" + Constantes.retourChariot;
-		chaine += "<body>" + Constantes.retourChariot;
-		chaine += "<div id=\"topOfPage\">" + Constantes.retourChariot;
-		chaine += "<a name=\"Haut\">&nbsp;</a>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"conteiner\">" + Constantes.retourChariot;
-		chaine += "<div id=\"header\">" + Constantes.retourChariot;
-		chaine += "<div id=\"logo\">" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += includeCSSinHTML() + Constantes.RETOUR_CHARIOT;
+		chaine += "<meta http-equiv=\"Content-Language\" content=\"fr\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<link rel=\"stylesheet\" href=\"style/default.css\" type=\"text/css\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<script type=\"text/javascript\" src=\"script/clicTous.js\"></script>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</head>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<body>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"topOfPage\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<a name=\"Haut\">&nbsp;</a>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"conteiner\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"header\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"logo\">" + Constantes.RETOUR_CHARIOT;
 		chaine += "<a href=\"index.html\"><img src=\"images/logo.png\" alt=\"Network search logo\" /></a>"
-				+ Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"bar\">" + Constantes.retourChariot;
-		chaine += "<ul>" + Constantes.retourChariot;
-		chaine += "<li class=\"active\">" + Constantes.retourChariot;
-		chaine += "Recherche" + Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "<li>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"bar\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<ul>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li class=\"active\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "Recherche" + Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<a href=\"aide.html\" accesskey=\"a\"><span class=\"underline\">A</span>ide</a>"
-				+ Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "<li>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<a href=\"apropos.html\" accesskey=\"p\">A <span class=\"underline\">P</span>ropos</a>"
-				+ Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "</ul>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"top\">" + Constantes.retourChariot;
-		chaine += "<div id=\"search\">" + Constantes.retourChariot;
-		chaine += "<form action=\"recherche.html\" method=\"post\">" + Constantes.retourChariot;
-		chaine += "<p>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</ul>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"top\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"search\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<form action=\"recherche.html\" method=\"post\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<p>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<input name=\"recherche\" id=\"recherche\" value=\"\" tabindex=\"1\" type=\"text\" />"
-				+ Constantes.retourChariot;
-		chaine += "<input class=\"submit\" value=\"Recherche\" type=\"submit\" /></p>" + Constantes.retourChariot;
-		chaine += "<div class=\"rechercheliste\">" + Constantes.retourChariot;
-		chaine += "<p>Choix du moteur de recherche : </p>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<input class=\"submit\" value=\"Recherche\" type=\"submit\" /></p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div class=\"rechercheliste\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<p>Choix du moteur de recherche : </p>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<p><input id=\"moteurs\" name=\"moteur1\" value=\"0\" type=\"checkbox\" onclick=\"if (this.checked) { clicTous(this.form,true) } else { clicTous(this.form,false) };\" />"
-				+ Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">Tous</label>" + Constantes.retourChariot;
-		chaine += "<input name=\"moteur2\" value=\"1\" type=\"checkbox\" checked />" + Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">Google</label>" + Constantes.retourChariot;
-		chaine += "<input name=\"moteur3\" value=\"2\" type=\"checkbox\" disabled />" + Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">Yahoo</label>" + Constantes.retourChariot;
-		chaine += "<input name=\"moteur4\" value=\"3\" type=\"checkbox\" disabled />" + Constantes.retourChariot;
-		chaine += "<input name=\"bourage\" value=\"0\" type=\"hidden\" />" + Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">AltaVista</label></p>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</form>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">Tous</label>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"moteur2\" value=\"1\" type=\"checkbox\" checked />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">Google</label>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"moteur3\" value=\"2\" type=\"checkbox\" disabled />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">Yahoo</label>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"moteur4\" value=\"3\" type=\"checkbox\" disabled />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"bourage\" value=\"0\" type=\"hidden\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">AltaVista</label></p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</form>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
 		return chaine;
 	}
 
@@ -384,104 +384,104 @@ public class ReponseHTTP {
 	 */
 	public static String pasDeReponse(String motsCle) {
 		String chaine = "";
-		chaine += "HTTP/1.0 200 OK" + Constantes.retourChariot;
+		chaine += "HTTP/1.0 200 OK" + Constantes.RETOUR_CHARIOT;
 		ReponseHTTP rep = new ReponseHTTP(new Fichier(""));
 		rep.options.add(new OptionReponseHTTP("Content-Type", "text/html"));
 		rep.inclueOptions();
 		chaine += rep.corps;
 		chaine += "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">"
-				+ Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
 		chaine += "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"fr\" lang=\"fr\">"
-				+ Constantes.retourChariot;
-		chaine += "<head>" + Constantes.retourChariot;
-		chaine += "<title>Network Search</title>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<head>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<title>Network Search</title>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\" />"
-				+ Constantes.retourChariot;
-		chaine += "<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />" + Constantes.retourChariot;
-		chaine += includeCSSinHTML() + Constantes.retourChariot;
-		chaine += "<meta http-equiv=\"Content-Language\" content=\"fr\" />" + Constantes.retourChariot;
-		chaine += "<link rel=\"stylesheet\" href=\"style/default.css\" type=\"text/css\" />" + Constantes.retourChariot;
-		chaine += "<script type=\"text/javascript\" src=\"script/clicTous.js\"></script>" + Constantes.retourChariot;
-		chaine += "</head>" + Constantes.retourChariot;
-		chaine += "<body>" + Constantes.retourChariot;
-		chaine += "<div id=\"topOfPage\">" + Constantes.retourChariot;
-		chaine += "<a name=\"Haut\">&nbsp;</a>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"conteiner\">" + Constantes.retourChariot;
-		chaine += "<div id=\"header\">" + Constantes.retourChariot;
-		chaine += "<div id=\"logo\">" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += includeCSSinHTML() + Constantes.RETOUR_CHARIOT;
+		chaine += "<meta http-equiv=\"Content-Language\" content=\"fr\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<link rel=\"stylesheet\" href=\"style/default.css\" type=\"text/css\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<script type=\"text/javascript\" src=\"script/clicTous.js\"></script>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</head>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<body>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"topOfPage\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<a name=\"Haut\">&nbsp;</a>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"conteiner\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"header\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"logo\">" + Constantes.RETOUR_CHARIOT;
 		chaine += "<a href=\"index.html\"><img src=\"images/logo.png\" alt=\"Network search logo\" /></a>"
-				+ Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"bar\">" + Constantes.retourChariot;
-		chaine += "<ul>" + Constantes.retourChariot;
-		chaine += "<li class=\"active\">" + Constantes.retourChariot;
-		chaine += "Recherche" + Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "<li>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"bar\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<ul>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li class=\"active\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "Recherche" + Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<a href=\"aide.html\" accesskey=\"a\"><span class=\"underline\">A</span>ide</a>"
-				+ Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "<li>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<a href=\"apropos.html\" accesskey=\"p\">A <span class=\"underline\">P</span>ropos</a>"
-				+ Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "</ul>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"top\">" + Constantes.retourChariot;
-		chaine += "<div id=\"search\">" + Constantes.retourChariot;
-		chaine += "<form action=\"recherche.html\" method=\"post\">" + Constantes.retourChariot;
-		chaine += "<p>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</ul>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"top\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"search\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<form action=\"recherche.html\" method=\"post\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<p>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<input name=\"recherche\" id=\"recherche\" value=\"\" tabindex=\"1\" type=\"text\" />"
-				+ Constantes.retourChariot;
-		chaine += "<input class=\"submit\" value=\"Recherche\" type=\"submit\" /></p>" + Constantes.retourChariot;
-		chaine += "<div class=\"rechercheliste\">" + Constantes.retourChariot;
-		chaine += "<p>Choix du moteur de recherche : </p>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<input class=\"submit\" value=\"Recherche\" type=\"submit\" /></p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div class=\"rechercheliste\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<p>Choix du moteur de recherche : </p>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<p><input id=\"moteurs\" name=\"moteur1\" value=\"0\" type=\"checkbox\" onclick=\"if (this.checked) { clicTous(this.form,true) } else { clicTous(this.form,false) };\" />"
-				+ Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">Tous</label>" + Constantes.retourChariot;
-		chaine += "<input name=\"moteur2\" value=\"1\" type=\"checkbox\" checked />" + Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">Google</label>" + Constantes.retourChariot;
-		chaine += "<input name=\"moteur3\" value=\"2\" type=\"checkbox\" disabled />" + Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">Yahoo</label>" + Constantes.retourChariot;
-		chaine += "<input name=\"moteur4\" value=\"3\" type=\"checkbox\" disabled />" + Constantes.retourChariot;
-		chaine += "<input name=\"bourage\" value=\"0\" type=\"hidden\" />" + Constantes.retourChariot;
-		chaine += "<label class=\"inline\" for=\"moteurs\">AltaVista</label></p>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</form>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"body\">" + Constantes.retourChariot;
-		chaine += "<h1>" + Constantes.retourChariot;
-		chaine += " R�sultats de la recherche : " + motsCle + Constantes.retourChariot;
-		chaine += "</h1>" + Constantes.retourChariot;
-		chaine += "<div class=\"blockDistinct\">" + Constantes.retourChariot;
-		chaine += "<p>" + Constantes.retourChariot;
-		chaine += "D�sol�, mais le moteur de recherche ne nous a pas fourni de r�ponse" + Constantes.retourChariot;
-		chaine += "</p>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "<div id=\"footer\" title=\"Menu\">" + Constantes.retourChariot;
-		chaine += "<ul>" + Constantes.retourChariot;
-		chaine += "<li>" + Constantes.retourChariot;
-		chaine += "<a href=\"index.html\">Recherche</a>" + Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "<li>" + Constantes.retourChariot;
-		chaine += "<a href=\"apropos.html\">A Propos</a>" + Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
-		chaine += "<li>" + Constantes.retourChariot;
-		chaine += "<a href=\"aide.html\">Aide</a>" + Constantes.retourChariot;
-		chaine += "</li>" + Constantes.retourChariot;
+				+ Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">Tous</label>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"moteur2\" value=\"1\" type=\"checkbox\" checked />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">Google</label>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"moteur3\" value=\"2\" type=\"checkbox\" disabled />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">Yahoo</label>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"moteur4\" value=\"3\" type=\"checkbox\" disabled />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<input name=\"bourage\" value=\"0\" type=\"hidden\" />" + Constantes.RETOUR_CHARIOT;
+		chaine += "<label class=\"inline\" for=\"moteurs\">AltaVista</label></p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</form>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"body\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<h1>" + Constantes.RETOUR_CHARIOT;
+		chaine += " R�sultats de la recherche : " + motsCle + Constantes.RETOUR_CHARIOT;
+		chaine += "</h1>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div class=\"blockDistinct\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "D�sol�, mais le moteur de recherche ne nous a pas fourni de r�ponse" + Constantes.RETOUR_CHARIOT;
+		chaine += "</p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<div id=\"footer\" title=\"Menu\">" + Constantes.RETOUR_CHARIOT;
+		chaine += "<ul>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<a href=\"index.html\">Recherche</a>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<a href=\"apropos.html\">A Propos</a>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<li>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<a href=\"aide.html\">Aide</a>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</li>" + Constantes.RETOUR_CHARIOT;
 		chaine += "<li><a href=\"stoppeAgent.html\">Arr�t du serveur</a></li>";
-		chaine += "</ul>" + Constantes.retourChariot;
-		chaine += "<p>" + Constantes.retourChariot;
-		chaine += "<a href=\"licence.html\">CopyLeft</a> &copy; M�ta-moteur Staff 2006" + Constantes.retourChariot;
-		chaine += "</p>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</div>" + Constantes.retourChariot;
-		chaine += "</body>" + Constantes.retourChariot;
-		chaine += "</html>" + Constantes.retourChariot;
+		chaine += "</ul>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "<a href=\"licence.html\">CopyLeft</a> &copy; M�ta-moteur Staff 2006" + Constantes.RETOUR_CHARIOT;
+		chaine += "</p>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</div>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</body>" + Constantes.RETOUR_CHARIOT;
+		chaine += "</html>" + Constantes.RETOUR_CHARIOT;
 		return chaine;
 	}
 

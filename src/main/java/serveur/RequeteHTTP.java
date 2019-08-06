@@ -68,10 +68,10 @@ public class RequeteHTTP {
 				this.suiteRequete = null;
 		} else {
 			// recuperation de la suite de la requete si celle ci est presente
-			if (this.corps.indexOf(Constantes.retourChariot + Constantes.retourChariot) != this.corps.length() - 5) {
+			if (this.corps.indexOf(Constantes.RETOUR_CHARIOT + Constantes.RETOUR_CHARIOT) != this.corps.length() - 5) {
 				this.suiteRequetePresente = true;
 				this.suiteRequete = this.corps
-						.substring(this.corps.indexOf(Constantes.retourChariot + Constantes.retourChariot) + 4);
+						.substring(this.corps.indexOf(Constantes.RETOUR_CHARIOT + Constantes.RETOUR_CHARIOT) + 4);
 			} else {
 				this.suiteRequetePresente = false;
 				this.suiteRequete = null;
@@ -217,7 +217,7 @@ public class RequeteHTTP {
 				// recuperation de la taille de l'option
 				position += nom.length();
 				// recuperation de l'option
-				valeur = this.corps.substring(position, this.corps.indexOf(Constantes.retourChariot, position));
+				valeur = this.corps.substring(position, this.corps.indexOf(Constantes.RETOUR_CHARIOT, position));
 				this.options.add(new OptionRequeteHTTP(nom, valeur));
 			}
 		}
