@@ -58,13 +58,6 @@ public class GestionBDD {
 				// la base
 				GestionMessage.message(2, "GestionBDD", "Erreur de connexion a la base de donnees");
 			}
-			finally {
-				try {
-					connection.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		if (Agent.TypeBDD.equals("HSQL")) {
 			try {
@@ -119,13 +112,6 @@ public class GestionBDD {
 				// Affichage d'un message d'erreur en cas de non possibilite de la connection a
 				// la base
 				GestionMessage.message(2, "GestionBDD", "Erreur de connexion a la base de donnees");
-			}
-			finally {
-				try {
-					connection.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		// renvoi de l'objet de connection a la base
