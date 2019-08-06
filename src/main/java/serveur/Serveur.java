@@ -69,7 +69,7 @@ public class Serveur {
 			try {
 				// fermeture du socket
 				serveur.close();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				GestionMessage.message(1, "Serveur", "Erreur lors de la fermeture du socket d'ecoute : " + e);
 			}
 		}
@@ -90,7 +90,7 @@ public class Serveur {
 				try {
 					// mise en attente du thread si necessaire
 					Thread.currentThread().join();
-				} catch (InterruptedException e) {
+				} catch (Exception e) {
 					GestionMessage.message(1, "Serveur", "Probleme d'interruption du Thread : " + e);
 				}
 			}
@@ -105,7 +105,7 @@ public class Serveur {
 	/**
 	 * Cette methode permet de supprimer un thread client
 	 */
-	synchronized public static void supprClient() {
+	public static synchronized void supprClient() {
 		clientsEnCours--;
 	}
 
@@ -114,14 +114,14 @@ public class Serveur {
 	 * 
 	 * @return retourne true si le service est en cours d'execution, false sinon
 	 */
-	synchronized public static boolean etatService() {
+	public static synchronized boolean etatService() {
 		return (serveurON);
 	}
 
 	/**
 	 * Methode initialisant le service de la classe
 	 */
-	synchronized public static void ouvertureService() {
+	public static synchronized void ouvertureService() {
 		serveurON = true;
 		clientsEnCours = 0;
 		maxClients = Agent.NbThread;
@@ -130,7 +130,7 @@ public class Serveur {
 	/**
 	 * Methode fermant le service lance par la classe
 	 */
-	synchronized public static void fermetureService() {
+	public static synchronized void fermetureService() {
 		serveurON = false;
 	}
 
@@ -140,7 +140,7 @@ public class Serveur {
 	 * 
 	 * @return retourne le nombre de clients courant
 	 */
-	synchronized public static int getNbClients() {
+	public static synchronized int getNbClients() {
 		return (clientsEnCours);
 	}
 
@@ -150,7 +150,7 @@ public class Serveur {
 	 * 
 	 * @return retourne true si l'on peut lancer un nouveau thread, false sinon
 	 */
-	synchronized private static boolean peutAjouterClient() {
+	private static synchronized boolean peutAjouterClient() {
 		if (getNbClients() < maxClients)
 			return (true);
 		else

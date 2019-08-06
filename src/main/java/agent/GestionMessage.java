@@ -212,6 +212,17 @@ public class GestionMessage {
 		catch (IOException ioe) {
 			System.out.println("[ERR] - " + dateFormat() + " - GestionMessage - " + ioe);
 		}
-
+		finally {
+            try {
+                output.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                fw.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+		}
 	}
 }
