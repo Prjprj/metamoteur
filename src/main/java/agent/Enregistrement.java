@@ -405,7 +405,7 @@ public class Enregistrement {
 	 * @return int : un entier contenant un identifiant
 	 */
 	public static int recuperationId(int id) {
-		String requete = GestionBDD.construitSelect("Uid", Agent.TableBDD, "`Uid`='" + id + "'");
+		String requete = GestionBDD.construitSelect("UID", Agent.TableBDD, "UID='" + id + "'");
 		Vector vecteurId = GestionBDD.envoiRequete(requete);
 		int identifiant = ((Integer) ((Vector) (vecteurId.get(0))).get(0)).intValue();
 		return identifiant;
@@ -424,7 +424,7 @@ public class Enregistrement {
 	 */
 	public static String recuperationMotsCles(int id) {
 		Vector vecteurMotsCles = GestionBDD
-				.envoiRequete(GestionBDD.construitSelect("Keywords", Agent.TableBDD, "`Uid`='" + id + "'"));
+				.envoiRequete(GestionBDD.construitSelect("Keywords", Agent.TableBDD, "Uid='" + id + "'"));
 		String motsCles = ((String) ((Vector) (vecteurMotsCles.get(0))).get(0));
 		return motsCles;
 	}
@@ -444,7 +444,7 @@ public class Enregistrement {
 	 */
 	public static String recuperationUrlNumero(int id, int numero) {
 		Vector vecteurUrl = GestionBDD
-				.envoiRequete(GestionBDD.construitSelect("Url" + numero, Agent.TableBDD, "`Uid`='" + id + "'"));
+				.envoiRequete(GestionBDD.construitSelect("Url" + numero, Agent.TableBDD, "Uid='" + id + "'"));
 		String url = ((String) ((Vector) (vecteurUrl.get(0))).get(0));
 		return url;
 	}
@@ -464,7 +464,7 @@ public class Enregistrement {
 	 */
 	public static String recuperationTitreNumero(int id, int numero) {
 		Vector vecteurTitre = GestionBDD
-				.envoiRequete(GestionBDD.construitSelect("Title" + numero, Agent.TableBDD, "`Uid`='" + id + "'"));
+				.envoiRequete(GestionBDD.construitSelect("Title" + numero, Agent.TableBDD, "Uid='" + id + "'"));
 		String titre = ((String) ((Vector) (vecteurTitre.get(0))).get(0));
 		return titre;
 	}
@@ -484,7 +484,7 @@ public class Enregistrement {
 	 */
 	public static String recuperationDescNumero(int id, int numero) {
 		Vector vecteurDesc = GestionBDD
-				.envoiRequete(GestionBDD.construitSelect("Desc" + numero, Agent.TableBDD, "`Uid`='" + id + "'"));
+				.envoiRequete(GestionBDD.construitSelect("Desc" + numero, Agent.TableBDD, "Uid='" + id + "'"));
 		String desc = ((String) ((Vector) (vecteurDesc.get(0))).get(0));
 		return desc;
 	}
@@ -504,7 +504,7 @@ public class Enregistrement {
 	 */
 	public static int recuperationRangNumero(int id, int numero) {
 		Vector vecteurRang = GestionBDD
-				.envoiRequete(GestionBDD.construitSelect("Rank" + numero, Agent.TableBDD, "`Uid`='" + id + "'"));
+				.envoiRequete(GestionBDD.construitSelect("Rank" + numero, Agent.TableBDD, "Uid='" + id + "'"));
 		int rang = ((Integer) ((Vector) (vecteurRang.get(0))).get(0)).intValue();
 		return rang;
 	}
@@ -524,7 +524,7 @@ public class Enregistrement {
 	 */
 	public static int recuperationScoreNumero(int id, int numero) {
 		Vector vecteurRang = GestionBDD
-				.envoiRequete(GestionBDD.construitSelect("Rank" + numero, Agent.TableBDD, "`Uid`='" + id + "'"));
+				.envoiRequete(GestionBDD.construitSelect("Rank" + numero, Agent.TableBDD, "Uid='" + id + "'"));
 		int rang = ((Integer) ((Vector) (vecteurRang.get(0))).get(0)).intValue();
 		return rang;
 	}
