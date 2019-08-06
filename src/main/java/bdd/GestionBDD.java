@@ -67,44 +67,45 @@ public class GestionBDD {
 				connection = DriverManager.getConnection("jdbc:hsqldb:file:db/" + Agent.BaseBDD + ";ifexists=false",
 						Agent.UserBDD, Agent.PassBDD);
 
-				String createStatement = "CREATE TABLE IF NOT EXISTS BDD (\n" + "  UID INTEGER IDENTITY PRIMARY KEY,\n"
+				String createStatement = "CREATE TABLE IF NOT EXISTS BDD (\n" + "  UID INT ,\n"
 						+ "  KEYWORDS VARCHAR(255),\n" + "  URL1 VARCHAR(255),\n" + "  TITLE1 VARCHAR(255),\n"
-						+ "  DESC1 VARCHAR(1000),\n" + "  RANK1 INTEGER,\n" + "  SELECT1 INTEGER,\n"
+						+ "  DESC1 VARCHAR(1000),\n" + "  RANK1 INT,\n" + "  SELECT1 INT,\n"
 						+ "  URL2 VARCHAR(255),\n" + "  TITLE2 VARCHAR(255),\n" + "  DESC2 VARCHAR(1000),\n"
-						+ "  RANK2 INTEGER,\n" + "  SELECT2 INTEGER,\n" + "  URL3 VARCHAR(255),\n"
-						+ "  TITLE3 VARCHAR(255),\n" + "  DESC3 VARCHAR(1000),\n" + "  RANK3 INTEGER,\n"
-						+ "  SELECT3 INTEGER,\n" + "  URL4 VARCHAR(255),\n" + "  TITLE4 VARCHAR(255),\n"
-						+ "  DESC4 VARCHAR(1000),\n" + "  RANK4 INTEGER,\n" + "  SELECT4 INTEGER,\n"
+						+ "  RANK2 INT,\n" + "  SELECT2 INT,\n" + "  URL3 VARCHAR(255),\n"
+						+ "  TITLE3 VARCHAR(255),\n" + "  DESC3 VARCHAR(1000),\n" + "  RANK3 INT,\n"
+						+ "  SELECT3 INT,\n" + "  URL4 VARCHAR(255),\n" + "  TITLE4 VARCHAR(255),\n"
+						+ "  DESC4 VARCHAR(1000),\n" + "  RANK4 INT,\n" + "  SELECT4 INT,\n"
 						+ "  URL5 VARCHAR(255),\n" + "  TITLE5 VARCHAR(255),\n" + "  DESC5 VARCHAR(1000),\n"
-						+ "  RANK5 INTEGER,\n" + "  SELECT5 INTEGER,\n" + "  URL6 VARCHAR(255),\n"
-						+ "  TITLE6 VARCHAR(255),\n" + "  DESC6 VARCHAR(1000),\n" + "  RANK6 INTEGER,\n"
-						+ "  SELECT6 INTEGER,\n" + "  URL7 VARCHAR(255),\n" + "  TITLE7 VARCHAR(255),\n"
-						+ "  DESC7 VARCHAR(1000),\n" + "  RANK7 INTEGER,\n" + "  SELECT7 INTEGER,\n"
+						+ "  RANK5 INT,\n" + "  SELECT5 INT,\n" + "  URL6 VARCHAR(255),\n"
+						+ "  TITLE6 VARCHAR(255),\n" + "  DESC6 VARCHAR(1000),\n" + "  RANK6 INT,\n"
+						+ "  SELECT6 INT,\n" + "  URL7 VARCHAR(255),\n" + "  TITLE7 VARCHAR(255),\n"
+						+ "  DESC7 VARCHAR(1000),\n" + "  RANK7 INT,\n" + "  SELECT7 INT,\n"
 						+ "  URL8 VARCHAR(255),\n" + "  TITLE8 VARCHAR(255),\n" + "  DESC8 VARCHAR(1000),\n"
-						+ "  RANK8 INTEGER,\n" + "  SELECT8 INTEGER,\n" + "  URL9 VARCHAR(255),\n"
-						+ "  TITLE9 VARCHAR(255),\n" + "  DESC9 VARCHAR(1000),\n" + "  RANK9 INTEGER,\n"
-						+ "  SELECT9 INTEGER,\n" + "  URL10 VARCHAR(255),\n" + "  TITLE10 VARCHAR(255),\n"
-						+ "  DESC10 VARCHAR(1000),\n" + "  RANK10 INTEGER,\n" + "  SELECT10 INTEGER,\n"
+						+ "  RANK8 INT,\n" + "  SELECT8 INT,\n" + "  URL9 VARCHAR(255),\n"
+						+ "  TITLE9 VARCHAR(255),\n" + "  DESC9 VARCHAR(1000),\n" + "  RANK9 INT,\n"
+						+ "  SELECT9 INT,\n" + "  URL10 VARCHAR(255),\n" + "  TITLE10 VARCHAR(255),\n"
+						+ "  DESC10 VARCHAR(1000),\n" + "  RANK10 INT,\n" + "  SELECT10 INT,\n"
 						+ "  URL11 VARCHAR(255),\n" + "  TITLE11 VARCHAR(255),\n" + "  DESC11 VARCHAR(1000),\n"
-						+ "  RANK11 INTEGER,\n" + "  SELECT11 INTEGER,\n" + "  URL12 VARCHAR(255),\n"
-						+ "  TITLE12 VARCHAR(255),\n" + "  DESC12 VARCHAR(1000),\n" + "  RANK12 INTEGER,\n"
-						+ "  SELECT12 INTEGER,\n" + "  URL13 VARCHAR(255),\n" + "  TITLE13 VARCHAR(255),\n"
-						+ "  DESC13 VARCHAR(1000),\n" + "  RANK13 INTEGER,\n" + "  SELECT13 INTEGER,\n"
+						+ "  RANK11 INT,\n" + "  SELECT11 INT,\n" + "  URL12 VARCHAR(255),\n"
+						+ "  TITLE12 VARCHAR(255),\n" + "  DESC12 VARCHAR(1000),\n" + "  RANK12 INT,\n"
+						+ "  SELECT12 INT,\n" + "  URL13 VARCHAR(255),\n" + "  TITLE13 VARCHAR(255),\n"
+						+ "  DESC13 VARCHAR(1000),\n" + "  RANK13 INT,\n" + "  SELECT13 INT,\n"
 						+ "  URL14 VARCHAR(255),\n" + "  TITLE14 VARCHAR(255),\n" + "  DESC14 VARCHAR(1000),\n"
-						+ "  RANK14 INTEGER,\n" + "  SELECT14 INTEGER,\n" + "  URL15 VARCHAR(255),\n"
-						+ "  TITLE15 VARCHAR(255),\n" + "  DESC15 VARCHAR(1000),\n" + "  RANK15 INTEGER,\n"
-						+ "  SELECT15 INTEGER,\n" + "  URL16 VARCHAR(255),\n" + "  TITLE16 VARCHAR(255),\n"
-						+ "  DESC16 VARCHAR(1000),\n" + "  RANK16 INTEGER,\n" + "  SELECT16 INTEGER,\n"
+						+ "  RANK14 INT,\n" + "  SELECT14 INT,\n" + "  URL15 VARCHAR(255),\n"
+						+ "  TITLE15 VARCHAR(255),\n" + "  DESC15 VARCHAR(1000),\n" + "  RANK15 INT,\n"
+						+ "  SELECT15 INT,\n" + "  URL16 VARCHAR(255),\n" + "  TITLE16 VARCHAR(255),\n"
+						+ "  DESC16 VARCHAR(1000),\n" + "  RANK16 INT,\n" + "  SELECT16 INT,\n"
 						+ "  URL17 VARCHAR(255),\n" + "  TITLE17 VARCHAR(255),\n" + "  DESC17 VARCHAR(1000),\n"
-						+ "  RANK17 INTEGER,\n" + "  SELECT17 INTEGER,\n" + "  URL18 VARCHAR(255),\n"
-						+ "  TITLE18 VARCHAR(255),\n" + "  DESC18 VARCHAR(1000),\n" + "  RANK18 INTEGER,\n"
-						+ "  SELECT18 INTEGER,\n" + "  URL19 VARCHAR(255),\n" + "  TITLE19 VARCHAR(255),\n"
-						+ "  DESC19 VARCHAR(1000),\n" + "  RANK19 INTEGER,\n" + "  SELECT19 INTEGER,\n"
+						+ "  RANK17 INT,\n" + "  SELECT17 INT,\n" + "  URL18 VARCHAR(255),\n"
+						+ "  TITLE18 VARCHAR(255),\n" + "  DESC18 VARCHAR(1000),\n" + "  RANK18 INT,\n"
+						+ "  SELECT18 INT,\n" + "  URL19 VARCHAR(255),\n" + "  TITLE19 VARCHAR(255),\n"
+						+ "  DESC19 VARCHAR(1000),\n" + "  RANK19 INT,\n" + "  SELECT19 INT,\n"
 						+ "  URL20 VARCHAR(255),\n" + "  TITLE20 VARCHAR(255),\n" + "  DESC20 VARCHAR(1000),\n"
-						+ "  RANK20 INTEGER,\n" + "  SELECT20 INTEGER,\n" + "  TIMEQUERY VARCHAR(20)\n" + ")";
+						+ "  RANK20 INT,\n" + "  SELECT20 INT,\n" + "  TIMEQUERY VARCHAR(20)\n" + ")";
 
-				Statement statement = connection.createStatement();
-				statement.execute(createStatement);
+                try (Statement statement = connection.createStatement()) {
+                    statement.execute(createStatement);
+                }
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println(e.getStackTrace());
@@ -134,35 +135,37 @@ public class GestionBDD {
 		Vector retour = new Vector();
 		try {
 			// preparation de la requete
-			Statement statement = connection.createStatement();
-			// en cas de requete SELECT il faut recuperer le resultat
-			if (requete.substring(0, requete.indexOf(' ')).equals("SELECT")) {
-				// recuperation du resultat de la requete
-				ResultSet resultats = statement.executeQuery(requete);
-				// recuperation des metadonnees sur les resultats
-				ResultSetMetaData meta = resultats.getMetaData();
-				// recuperation du nombre de colonnes a traiter
-				int taille = meta.getColumnCount();
-				// parcours de l'iterateur de resultats
-				while (resultats.next()) {
-					// creation d'un sous vecteur representant une entree dans la base de donnees
-					Vector temp = new Vector();
-					// parcours des champs de l'entree de la base
-					for (int i = 1; i <= taille; i++) {
-						// ajout des champs au sous vecteur
-						temp.add(resultats.getObject(i));
-					}
-					// ajout du sous vecteur au vecteur a renvoyer
-					retour.add(temp);
-				}
-				// fermeture de l'iterateur
-				resultats.close();
-			} else {
-				// execution de la requete
-				statement.execute(requete);
-			}
-			// liberation de la memoire utilisee pour la requete
-			statement.close();
+            try (Statement statement = connection.createStatement()) {
+                // en cas de requete SELECT il faut recuperer le resultat
+                if (requete.substring(0, requete.indexOf(' ')).equals("SELECT")) {
+                    // recuperation du resultat de la requete
+                    try (ResultSet resultats = statement.executeQuery(requete)) {
+                        // recuperation des metadonnees sur les resultats
+                        ResultSetMetaData meta = resultats.getMetaData();
+                        // recuperation du nombre de colonnes a traiter
+                        int taille = meta.getColumnCount();
+                        // parcours de l'iterateur de resultats
+                        while (resultats.next()) {
+                            // creation d'un sous vecteur representant une entree dans la base de donnees
+                            Vector temp = new Vector();
+                            // parcours des champs de l'entree de la base
+                            for (int i = 1; i <= taille; i++) {
+                                // ajout des champs au sous vecteur
+                                temp.add(resultats.getObject(i));
+                            }
+                            // ajout du sous vecteur au vecteur a renvoyer
+                            retour.add(temp);
+                        }
+                        // fermeture de l'iterateur
+                        resultats.close();
+                    }
+                } else {
+                    // execution de la requete
+                    statement.execute(requete);
+                }
+                // liberation de la memoire utilisee pour la requete
+                statement.close();
+            }
 			if (Agent.TypeBDD.equals("HSQL")) {
 				shutdownHSQL(connection);
 			}
@@ -212,27 +215,26 @@ public class GestionBDD {
 	public static String construitInsert(String table, String valeurs) {
 		Connection connection = connectionBDD();
 		Vector retour = new Vector();
-		int offset = 1;
-		if (Agent.TypeBDD.equals("MySQL")) {
-			offset = 0;
-		}
+		int offset = 0;
 		try {
 			// recuperation d'un vecteur contenant le nom des colonnes de la table dans
 			// laquelle l'insertion doit etre operee
-			Statement statement = connection.createStatement();
-			// envoi d'une requete quelconque sur la table pour en recuperer les noms de
-			// colonnes
-			ResultSet resultats = statement.executeQuery("SELECT * FROM " + table);
-			// recuperation des metadonnees sur la table
-			ResultSetMetaData meta = resultats.getMetaData();
-			// recuperation du nombre de colonnes
-			int taille = meta.getColumnCount();
-			for (int i = 1 + offset; i <= taille; i++)
-				// recuperation du nom des colonnes
-				retour.add(meta.getColumnName(i));
-			// liberation de la memoire necessaire a la requete
-			resultats.close();
-			statement.close();
+            try (Statement statement = connection.createStatement()) {
+                // envoi d'une requete quelconque sur la table pour en recuperer les noms de
+                // colonnes
+                try (ResultSet resultats = statement.executeQuery("SELECT * FROM " + table)) {
+                    // recuperation des metadonnees sur la table
+                    ResultSetMetaData meta = resultats.getMetaData();
+                    // recuperation du nombre de colonnes
+                    int taille = meta.getColumnCount();
+                    for (int i = 1 + offset; i <= taille; i++)
+                        // recuperation du nom des colonnes
+                        retour.add(meta.getColumnName(i));
+                    // liberation de la memoire necessaire a la requete
+                    resultats.close();
+                }
+                statement.close();
+            }
 			connection.close();
 		} catch (SQLException e) {
 			// affichage d'un message en cas d'erreur
@@ -287,6 +289,9 @@ public class GestionBDD {
 			// le 0 permet de gerer l'auto increment
 			val += "'0',";
 		}
+		else{
+			val += enr.getId()+",";
+		}
 		val += "'" + enr.getKeywords() + "'";
 		val += ",";
 		Vector liens = enr.getLiens();
@@ -337,7 +342,7 @@ public class GestionBDD {
 			condition = "";
 			for (int i = 0; i < vect.size() - 1; i++) {
 				condition += quote + "UID" + quote + "='" + ((Integer) ((Vector) (vect.get(i))).get(0)).intValue()
-						+ "' OR";
+						+ "' OR ";
 			}
 			condition += quote + "UID" + quote + "='"
 					+ ((Integer) ((Vector) (vect.get(vect.size() - 1))).get(0)).intValue() + "'";
@@ -385,8 +390,9 @@ public class GestionBDD {
 	 */
 	public static void shutdownHSQL(Connection connection) {
 		try {
-			Statement statement = connection.createStatement();
-			statement.execute("SHUTDOWN");
+            try (Statement statement = connection.createStatement()) {
+                statement.execute("SHUTDOWN");
+            }
 		} catch (Exception exception) {
 			GestionMessage.message(2, "GestionBDD", "Erreur lors de l'arret de la base de donnees");
 		}
