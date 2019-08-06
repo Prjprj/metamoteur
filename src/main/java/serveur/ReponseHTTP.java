@@ -149,14 +149,15 @@ public class ReponseHTTP {
 			// ouverture du fichier
 			File fich = new File(Agent.Path, fichier.toString().substring(1));
 			try {
-				FileInputStream fluxFichier = new FileInputStream(fich);
-				int buffer;
-				// lecture et ecriture du fichier
-				while (taille > 0) {
-					buffer = fluxFichier.read();
-					sortie.write(buffer);
-					taille--;
-				}
+                try (FileInputStream fluxFichier = new FileInputStream(fich)) {
+                    int buffer;
+                    // lecture et ecriture du fichier
+                    while (taille > 0) {
+                        buffer = fluxFichier.read();
+                        sortie.write(buffer);
+                        taille--;
+                    }
+                }
 			} catch (java.io.FileNotFoundException e) {
 				// affichage d'un message en cas d'erreur
 				GestionMessage.message(1, "ReponseHTTP", "Fichier non trouve");

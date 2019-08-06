@@ -247,9 +247,8 @@ public class Lien {
 	 * @return String : Une chaine de caracteres.
 	 */
 	public String toSql() {
-		String sql = "'" + this.url + "','" + this.titre.replaceAll("'", " ") + "','" + this.desc.replaceAll("'", " ")
+        return "'" + this.url + "','" + this.titre.replaceAll("'", " ") + "','" + this.desc.replaceAll("'", " ")
 				+ "','" + this.rang + "','" + this.score + "',";
-		return sql;
 	}
 
 	/**
