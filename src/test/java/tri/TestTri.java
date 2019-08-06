@@ -2,10 +2,11 @@ package tri;
 
 import java.util.Vector;
 import agent.*;
+import org.junit.Test;
 
 public class TestTri {
-
-	public static void main(String args[]) {
+	@Test
+	public void runTestTri() {
 
 		Vector liensAL = new Vector();
 		liensAL.addElement(new Lien("url1", "titre1", "desc1", 1, 10));

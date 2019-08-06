@@ -2,8 +2,13 @@ package tri;
 
 import java.util.Vector;
 
+import agent.Agent;
 import agent.Enregistrement;
 import agent.Lien;
+import bdd.GestionBDD;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class TestPermutations {
 
@@ -16,7 +21,39 @@ public class TestPermutations {
 	 * methode.
 	 */
 
-	public static void main(String args[]) {
+	@Test
+	public void runTestPermutations() {
+		new Agent();
+
+//		GestionBDD.envoiRequete("INSERT INTO `bdd` VALUES (1, 'dsds', 'dsds', 'sddsds', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '0000-00-00');");
+		Lien lien2 = new Lien("url&�\"����^�~", "titre", "desc", 1, 0);
+		// construction d'un vecteur de liens
+		Vector vecteur = new Vector();
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		lien2 = new Lien("http://www.ilocis.org/fr/help.html", "titre", "desc", 1, 0);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		vecteur.add(lien2);
+		// insertion de l'enregistement
+		GestionBDD.insertEnregistrement(new Enregistrement(1, "mot cle", vecteur));
+
+
 		Enregistrement enrMR = Enregistrement.recuperationEnregistrement(1);
 
 		/*
