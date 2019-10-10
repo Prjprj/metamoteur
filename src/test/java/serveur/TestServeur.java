@@ -28,7 +28,7 @@ import org.junit.Test;
 
 /**
  * Classe de tests pour la gestion de message
- * 
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
@@ -37,10 +37,10 @@ import org.junit.Test;
  */
 public class TestServeur {
 
-	@Test
-	@Ignore
-	public void runTestServeur() {
-		new Agent();
-		Serveur.service();
-	}
+    @Test
+    //@Ignore
+    public void runTestServeur() {
+        new Agent();
+        Serveur.service();
+    }
 }

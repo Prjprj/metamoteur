@@ -26,7 +26,7 @@ import org.junit.Test;
 
 /**
  * Classe de tests pour la gestion de message
- * 
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
@@ -34,30 +34,32 @@ import org.junit.Test;
  * @version 0.9
  */
 public class TestGestionMessage {
-	private String classToShow = "Ma_Classe";
+    private String classToShow = "Ma_Classe";
 
-	@Test
-	public void runMessageTests1() {
-		/*
-		 * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
-		 * traitements - 0
-		 */
-		GestionMessage.message(0, classToShow, "Aie !!!");
-	}
-	@Test
-	public void runMessageTests2() {
-		/*
-		 * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
-		 * traitements - 0
-		 */
-		GestionMessage.message(1, classToShow, "1 Aie !!!");
-	}
-	@Test
-	public void runMessageTests3() {
-		/*
-		 * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
-		 * traitements - 0
-		 */
-		GestionMessage.message(2, classToShow, "2 Aie !!!");
-	}
+    @Test
+    public void runMessageTests1() {
+        /*
+         * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
+         * traitements - 0
+         */
+        GestionMessage.message(0, classToShow, "Aie !!!");
+    }
+
+    @Test
+    public void runMessageTests2() {
+        /*
+         * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
+         * traitements - 0
+         */
+        GestionMessage.message(1, classToShow, "1 Aie !!!");
+    }
+
+    @Test
+    public void runMessageTests3() {
+        /*
+         * les erreurs du syst�me - 2 les erreurs non-bloquantes - 1 les messages de
+         * traitements - 0
+         */
+        GestionMessage.message(2, classToShow, "2 Aie !!!");
+    }
 }

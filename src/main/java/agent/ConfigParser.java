@@ -4,7 +4,7 @@ package agent;
  *--------------
  * ConfigParser.java
  *--------------
- 
+
  * This file is part of "M�ta-moteur".
  *
  * (c) M�ta-moteur 2005-2006. All Rights Reserved.
@@ -27,7 +27,6 @@ package agent;
  */
 
 /**
- *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
@@ -52,158 +51,158 @@ import java.io.Writer;
 
 public class ConfigParser {
 
-	static Properties P = null;
-	static String nomFichier = new String("metaMoteur.conf");
+    static Properties P = null;
+    static String nomFichier = new String("metaMoteur.conf");
 
-	/**
-	 * Cette m�thode permet de retourner la valeur de la propri�t� �tant une chaine
-	 * de caractere
-	 * 
-	 * @param Item
-	 *            Une chaine de caractere
-	 * @return Une chaine de caractere
-	 */
-	static public String GetProperty(String Item) {
-		try {
-			P = new Properties();
-			FileInputStream in = new FileInputStream(nomFichier);
-			P.load(in);
-			in.close();
-		} catch (Exception e) {
-			System.out.println("Erreur d'ouverture du fichier de configuration");
-			e.printStackTrace();
-			return null;
-		}
-		String S = P.getProperty(Item);
-		if (S == null)
-			return null;
-		else
-			return (S.trim());
+    /**
+     * Cette m�thode permet de retourner la valeur de la propri�t� �tant une chaine
+     * de caractere
+     *
+     * @param Item
+     *            Une chaine de caractere
+     * @return Une chaine de caractere
+     */
+    static public String GetProperty(String Item) {
+        try {
+            P = new Properties();
+            FileInputStream in = new FileInputStream(nomFichier);
+            P.load(in);
+            in.close();
+        } catch (Exception e) {
+            System.out.println("Erreur d'ouverture du fichier de configuration");
+            e.printStackTrace();
+            return null;
+        }
+        String S = P.getProperty(Item);
+        if (S == null)
+            return null;
+        else
+            return (S.trim());
 
-	}
+    }
 
-	/**
-	 * M�thode permettant d'ouvrir le fichier pour modifier des propi�t�s dans le
-	 * fichier de configuration
-	 * 
-	 * @param Item
-	 *            Une chaine de caractere
-	 * @param Valeur
-	 *            Une chaine de caractere
-	 */
-	static public void SetProperty(String Item, String Valeur) {
-		P = new Properties();
-		try {
-			System.out.println("Erreur d'ouverture du fichier de configuration");
-			String nomFichier = new String("metaMoteur.conf");
-			FileInputStream in = new FileInputStream(nomFichier);
-			P.load(in);
-			in.close();
-		} catch (Exception e2) {
-			System.out.println("Erreur d'ouverture du fichier de configuration");
-			e2.printStackTrace();
-		}
+    /**
+     * M�thode permettant d'ouvrir le fichier pour modifier des propi�t�s dans le
+     * fichier de configuration
+     *
+     * @param Item
+     *            Une chaine de caractere
+     * @param Valeur
+     *            Une chaine de caractere
+     */
+    static public void SetProperty(String Item, String Valeur) {
+        P = new Properties();
+        try {
+            System.out.println("Erreur d'ouverture du fichier de configuration");
+            String nomFichier = new String("metaMoteur.conf");
+            FileInputStream in = new FileInputStream(nomFichier);
+            P.load(in);
+            in.close();
+        } catch (Exception e2) {
+            System.out.println("Erreur d'ouverture du fichier de configuration");
+            e2.printStackTrace();
+        }
 
-		P.put(Item, Valeur);
-		FileOutputStream out = null;
-		try {
-			out = new FileOutputStream(nomFichier);
-		} catch (FileNotFoundException e) {
-			System.out.println("Erreur de creation de fichier");
-			e.printStackTrace();
-		}
-		try {
-			P.store(out, null);
-		} catch (IOException e1) {
-			System.out.println("erreur sauvegarde");
-			e1.printStackTrace();
-		}
-		try {
-			out.close();
-		} catch (IOException e3) {
-			System.out.println("erreur de fermeture");
-			e3.printStackTrace();
-		}
+        P.put(Item, Valeur);
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(nomFichier);
+        } catch (FileNotFoundException e) {
+            System.out.println("Erreur de creation de fichier");
+            e.printStackTrace();
+        }
+        try {
+            P.store(out, null);
+        } catch (IOException e1) {
+            System.out.println("erreur sauvegarde");
+            e1.printStackTrace();
+        }
+        try {
+            out.close();
+        } catch (IOException e3) {
+            System.out.println("erreur de fermeture");
+            e3.printStackTrace();
+        }
 
-	}
+    }
 
-	/**
-	 * Cette m�thode retourne le nom du fichier
-	 * 
-	 * @return une chaine de caractere
-	 */
-	public static String getNomFichier() {
-		return nomFichier;
-	}
+    /**
+     * Cette m�thode retourne le nom du fichier
+     *
+     * @return une chaine de caractere
+     */
+    public static String getNomFichier() {
+        return nomFichier;
+    }
 
-	/**
-	 * Modification du nom de fichier
-	 * 
-	 * @param nomFichier
-	 *            Une chaine de caractere
-	 */
-	public static void setNomFichier(String nomFichier) {
-		ConfigParser.nomFichier = nomFichier;
-	}
+    /**
+     * Modification du nom de fichier
+     *
+     * @param nomFichier
+     *            Une chaine de caractere
+     */
+    public static void setNomFichier(String nomFichier) {
+        ConfigParser.nomFichier = nomFichier;
+    }
 
-	/**
-	 * Cette methode permet de lire le fichier.
-	 * 
-	 * @return un objet
-	 */
+    /**
+     * Cette methode permet de lire le fichier.
+     *
+     * @return un objet
+     */
 
-	public Object load() {
-		String NomFichier = "." + this.getClass().getName() + ".conf";
+    public Object load() {
+        String NomFichier = "." + this.getClass().getName() + ".conf";
 
-		Object o = null;
-		Reader lecteur = null;
+        Object o = null;
+        Reader lecteur = null;
 
-		try {
-			lecteur = new FileReader(NomFichier);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+        try {
+            lecteur = new FileReader(NomFichier);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-		try {
-			lecteur.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+        try {
+            lecteur.close();
+        } catch (IOException e) {
+            e.printStackTrace();
 
-		}
-		return o;
-	}
+        }
+        return o;
+    }
 
-	/**
-	 * Cette m�thode permet de sauver les param�tres dans le fichier.
-	 */
-	public void sauver() {
-		String NomFichier = "." + this.getClass().getName() + ".conf";
-		File file = new File(NomFichier);
-		Writer writer = null;
-		try {
-			writer = new FileWriter(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    /**
+     * Cette m�thode permet de sauver les param�tres dans le fichier.
+     */
+    public void sauver() {
+        String NomFichier = "." + this.getClass().getName() + ".conf";
+        File file = new File(NomFichier);
+        Writer writer = null;
+        try {
+            writer = new FileWriter(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		try {
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("fichier ecrit " + file.getAbsoluteFile());
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("fichier ecrit " + file.getAbsoluteFile());
 
-	}
+    }
 
-	/**
-	 * Cette methode permet de retourner la valeur True si le fichier de
-	 * configuration existe d�j�.
-	 * 
-	 * @return une valeur bool�enne
-	 */
-	public boolean ExistanceFichier() {
-		File f = new File(nomFichier);
-		return f.exists();
-	}
+    /**
+     * Cette methode permet de retourner la valeur True si le fichier de
+     * configuration existe d�j�.
+     *
+     * @return une valeur bool�enne
+     */
+    public boolean ExistanceFichier() {
+        File f = new File(nomFichier);
+        return f.exists();
+    }
 
 }
