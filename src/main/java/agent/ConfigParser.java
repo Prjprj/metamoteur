@@ -30,16 +30,8 @@ package agent;
  * @version 1.0
  */
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.Reader;
-import java.io.Writer;
 
 /**
  * Cette classe permet la gestion du fichier de configuration
@@ -51,11 +43,10 @@ public class ConfigParser {
     static String nomFichier = new String("metaMoteur.conf");
 
     /**
-     * Cette m�thode permet de retourner la valeur de la propri�t� �tant une chaine
+     * Cette methode permet de retourner la valeur de la propriete etant une chaine
      * de caractere
      *
-     * @param Item
-     *            Une chaine de caractere
+     * @param Item Une chaine de caractere
      * @return Une chaine de caractere
      */
     static public String GetProperty(String Item) {
@@ -78,13 +69,11 @@ public class ConfigParser {
     }
 
     /**
-     * M�thode permettant d'ouvrir le fichier pour modifier des propi�t�s dans le
+     * Methode permettant d'ouvrir le fichier pour modifier des propietes dans le
      * fichier de configuration
      *
-     * @param Item
-     *            Une chaine de caractere
-     * @param Valeur
-     *            Une chaine de caractere
+     * @param Item   Une chaine de caractere
+     * @param Valeur Une chaine de caractere
      */
     static public void SetProperty(String Item, String Valeur) {
         P = new Properties();
@@ -123,7 +112,7 @@ public class ConfigParser {
     }
 
     /**
-     * Cette m�thode retourne le nom du fichier
+     * Cette methode retourne le nom du fichier
      *
      * @return une chaine de caractere
      */
@@ -134,8 +123,7 @@ public class ConfigParser {
     /**
      * Modification du nom de fichier
      *
-     * @param nomFichier
-     *            Une chaine de caractere
+     * @param nomFichier Une chaine de caractere
      */
     public static void setNomFichier(String nomFichier) {
         ConfigParser.nomFichier = nomFichier;
@@ -169,7 +157,7 @@ public class ConfigParser {
     }
 
     /**
-     * Cette m�thode permet de sauver les param�tres dans le fichier.
+     * Cette methode permet de sauver les parametres dans le fichier.
      */
     public void sauver() {
         String NomFichier = "." + this.getClass().getName() + ".conf";
@@ -192,13 +180,12 @@ public class ConfigParser {
 
     /**
      * Cette methode permet de retourner la valeur True si le fichier de
-     * configuration existe d�j�.
+     * configuration existe deja.
      *
-     * @return une valeur bool�enne
+     * @return une valeur booleenne
      */
     public boolean ExistanceFichier() {
         File f = new File(nomFichier);
         return f.exists();
     }
-
 }

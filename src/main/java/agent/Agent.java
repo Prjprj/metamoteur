@@ -22,7 +22,6 @@ package agent;
  * --LICENSE NOTICE--
  */
 
-import bdd.GestionBDD;
 import serveur.Serveur;
 
 /**
@@ -31,7 +30,7 @@ import serveur.Serveur;
  * serveur
  *
  * @author Jeremy FRECHARD
- * @author C�cile GIRARD
+ * @author Cecile GIRARD
  * @author Aysel GUNES
  * @author Pierre RAMOS
  * @version 1.0
@@ -39,7 +38,7 @@ import serveur.Serveur;
 
 public class Agent {
 
-    // variables d'un agent et leur configuration par d�faut
+    // variables d'un agent et leur configuration par defaut
     public static String FichierConf = "metaMoteur.conf";
 
     public static String HostBDD;

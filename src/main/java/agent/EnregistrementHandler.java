@@ -28,18 +28,18 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Titre : classe publique EnregistrementHandler Description : classe permettant
- * de parser un fichier XML avec l'aide du parser XERCES �tend la classe
- * DefaultHandler penser � inclure xerces.jar � vos path pour compiler
+ * de parser un fichier XML avec l'aide du parser XERCES atend la classe
+ * DefaultHandler penser a inclure xerces.jar a vos path pour compiler
  *
  * @author Jeremy FRECHARD
- * @author C�cile GIRARD
+ * @author Cecile GIRARD
  * @author Aysel GUNES
  * @author Pierre RAMOS
  * @version 1.0
  */
 
 public class EnregistrementHandler extends DefaultHandler {
-    // r�sultats de notre parsing
+    // resultats de notre parsing
 
     private Enregistrement enregistrement;
 
@@ -54,14 +54,14 @@ public class EnregistrementHandler extends DefaultHandler {
     private boolean inDesc;
 
     /**
-     * Constructeur h�rit�
+     * Constructeur herite
      */
     public EnregistrementHandler() {
         super();
     }
 
     /**
-     * M�thode de d�tection de balise de d�part
+     * Methode de detection de balise de depart
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -97,7 +97,7 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * M�thode de d�tection de balise de fin
+     * Methode de detection de balise de fin
      */
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
@@ -122,7 +122,7 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * M�thode de d�tection de caract�res
+     * Methode de detection de caracteres
      */
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
@@ -130,7 +130,7 @@ public class EnregistrementHandler extends DefaultHandler {
         if (inKeywords) {
             enregistrement.setKeywords(lecture);
         } else if (inTitle) {
-            // on concat�ne les caract�res trouv�s
+            // on concatene les caracteres trouves
             lien.setTitre(lien.getTitre() + lecture);
         } else if (inUrl) {
             lien.setUrl(lien.getUrl() + lecture);
@@ -140,15 +140,15 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * M�thode qui d�bute le parsing
+     * Methode qui debute le parsing
      */
     @Override
     public void startDocument() throws SAXException {
-        GestionMessage.message(0, "EnregistrementHandler", "D�but du parsing XML R�sultat");
+        GestionMessage.message(0, "EnregistrementHandler", "Debut du parsing XML Resultat");
     }
 
     /**
-     * M�thode d�clench�e � la fin du parsing
+     * Methode declenchee a la fin du parsing
      */
     @Override
     public void endDocument() throws SAXException {
@@ -184,12 +184,11 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * M�thode d'acc�s � l'enregistrement apres un parsing
+     * Methode d'acces a l'enregistrement apres un parsing
      *
      * @return Enregistrement
      */
     public Enregistrement getEnregistrement() {
         return enregistrement;
     }
-
 }

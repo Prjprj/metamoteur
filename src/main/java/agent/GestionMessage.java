@@ -48,7 +48,7 @@ import java.util.Date;
  * + MES
  *
  * @author Jeremy FRECHARD
- * @author C�cile GIRARD
+ * @author Cecile GIRARD
  * @author Aysel GUNES
  * @author Pierre RAMOS
  * @version 0.9
@@ -57,11 +57,11 @@ import java.util.Date;
 public class GestionMessage {
 
     /**
-     * M�thode d'envoie de message
+     * Methode d'envoie de message
      *
      * @param typeErreur     int le type d'erreur
-     * @param classeEmetrice String la classe qui appelle la m�thode
-     * @param message        String le message � traiter
+     * @param classeEmetrice String la classe qui appelle la methode
+     * @param message        String le message a traiter
      */
     public static void message(int typeErreur, String classeEmetrice, String message) {
 
@@ -123,12 +123,12 @@ public class GestionMessage {
     }
 
     /**
-     * M�thode priv�e de formatage de message
+     * Methode privee de formatage de message
      *
      * @param typeErreur     int le type d'erreur
-     * @param classeEmetrice String la classe qui appelle la m�thode
-     * @param message        String le message � traiter
-     * @return String le message bien format�e
+     * @param classeEmetrice String la classe qui appelle la methode
+     * @param message        String le message a traiter
+     * @return String le message bien formatee
      */
     private static String formatageMessage(int typeErreur, String classeEmetrice, String message) {
         String messageFormate = "";
@@ -139,7 +139,7 @@ public class GestionMessage {
             case 1: // les erreurs non-bloquantes
                 messageFormate = "[WAR]";
                 break;
-            default: // les erreurs du syst�me
+            default: // les erreurs du systeme
                 messageFormate = "[ERR]";
         }
 
@@ -148,19 +148,19 @@ public class GestionMessage {
     }
 
     /**
-     * M�thode priv�e d'�criture sur la sortie standard
+     * Methode privee d'ecriture sur la sortie standard
      *
-     * @param message String le message � traiter
+     * @param message String le message a traiter
      */
     private static void ecrireSortieStandard(String message) {
         System.out.println(message);
     }
 
     /**
-     * M�thode de formatage de la date du jour Attention c'est classe de g�re pas
-     * l'�ph�m�ride ;)
+     * Methode de formatage de la date du jour Attention c'est classe de gere pas
+     * l'ephemeride ;)
      *
-     * @return une date en string pr�-format�e
+     * @return une date en string pre-formatee
      */
     private static String dateFormat() {
         Date maDateAvecFormat = new Date();
@@ -169,9 +169,9 @@ public class GestionMessage {
     }
 
     /**
-     * M�thode d'�crirture dans un fichier
+     * Methode d'ecrirture dans un fichier
      *
-     * @param message String le message � traiter
+     * @param message String le message a traiter
      */
     private static void ecrireDansFichier(String message) {
         FileWriter fw = null;
