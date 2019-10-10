@@ -1,118 +1,137 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
-	<head>
+<head>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<meta http-equiv="Content-Script-Type" content="text/javascript" />
-	<meta http-equiv="Content-Style-Type" content="text/css" />
-	<meta http-equiv="Content-Language" content="fr" />
-	
-	<link rel="stylesheet" href="style/default.css" type="text/css" />
-		
-		<title>
-			Network Search
-		</title>
-		
-	</head>
-	<body>
-		<div id="topOfPage">
-			<a name="Haut">&nbsp;</a>
-		</div>
-		<div id="conteiner">
-			<div id="header">
-				<div id="logo">
-					<a href="index.html"><img src="images/logo.png" alt="Network search logo" /></a>
-				</div>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+    <meta http-equiv="Content-Style-Type" content="text/css"/>
+    <meta http-equiv="Content-Language" content="fr"/>
 
-			</div>
-			<div id="bar">
-				<ul>
-					<li>
-						<a href="index.html" accesskey="r"><span class="underline">R</span>echerche</a>
-					</li>
-					<li>
-						<a href="aide.html" accesskey="a"><span class="underline">A</span>ide</a>
-					</li>
-					<li class="active">
-						A Propos
-					</li>
-				</ul>
-			</div>
-			<div id="top">
-				<h1>
-					Méta-moteur de <span class="highlight">recherche</span><br />orienté communauté</h1>
-			</div>
-			<div id="body">
-				<h1>
-					 Informations complémentaires
-				</h1>
-				
-				<div class="block">
-				<h2>Le Projet</h2>
-		<p>Ce projet a été réalisé dans le cadre de l'enseignement universitaire de conduite et gestion de projet pour l'année 2005 / 2006 de Master Informatique 1ère année à l'Institut Galilée de l'Université Paris 13.<br /><br /><br />
-	       Ce projet a été effectué sous la direction de M. Rushed Kanawati, Maître de conférence et chercheur à l'Université Paris 13 que nous remercions pour sa disponibilité et son aide apportée à la réalisation du Méta-Moteur.
-			Ainsi que l'équipe de comité de pilotage (Mme Sophie Toulouse, Mme Jacqueline Castaing, M. Christian Codognet).<br /><br /><br />
+    <link rel="stylesheet" href="style/default.css" type="text/css"/>
 
-			Nous remercions également l'association <a href="http://tuxfamily.org">tuxfamily.org</a> de nous avoir fourni un serveur CVS.<br /><br /><br />
-		
-		Ce projet ainsi que tous les fichiers affiliés ou générés par celui-ci sont sous licence <a href="licence.html" title="Licence GPLv2">GPLv2</a>.
-					</p>
+    <title>
+        Network Search
+    </title>
 
-					<p class="right">
-						<a href="#Haut" title="Haut de page">Haut de page<img src="images/arrow.up.png" width="7" height="8" alt="" /></a>
-					</p>
-					</div>
-				
-				<div class="blockDistinct">
-						<h2>Les auteurs :</h2>
-							
-		<ul>
-		<li> - Jérémy Fréchard : jfrechard (at) alterarea.org</li>
-		<li> - Cécile Girard : cecilegirard (at) noos.fr</li>
-		<li> - Aysel Gunes : gunes_aysel (at) yahoo.fr</li>
-		<li> - Pierre Ramos : prj1 (at) free.fr</li>
-		<li> La liste de diffusion : MetaMoteurMI1 (at) yahoogroupes.fr
-		</ul><br /><br />
-						<h2>Le client :</h2>
-		<ul>
-		<li> - <a href="http://www-lipn.univ-paris13.fr/~kanawati/index_fr.html"> Rushed Kanawati</a></li>
-		<li> LIPN B309, Tél. : 0149403609</li>
-		<li> rushed.kanawati (at) lipn.univ-paris13.fr</li>
-		</ul><br /><br />
+</head>
+<body>
+<div id="topOfPage">
+    <a name="Haut">&nbsp;</a>
+</div>
+<div id="conteiner">
+    <div id="header">
+        <div id="logo">
+            <a href="index.html"><img src="images/logo.png" alt="Network search logo"/></a>
+        </div>
 
-						<h2>Contacts des encadrants :</h2>
-		<ul>
-		<li> - <a href="http://www-lipn.univ-paris13.fr/~bianquis"> Bianquis Jean-Baptiste</a> Jean-baptiste.Bianquis (at) lipn.univ-paris13.fr </li>
-		<li> - Codognet Christian </li>
-		<li> - <a href="http://www-lipn.univ-paris13.fr/~hamon"> Hamon Thierry </a> thierry.hamon (at) lipn.univ-paris13.fr</li>
-		<li> - <a href="http://www-lipn.univ-paris13.fr/~recanati"> Recanati Catherine</a> catherine.recanati (at) lipn.univ-paris13.fr</li>
-		<li> - <a href="http://www-lipn.univ-paris13.fr/~toulouse"> Toulouse Sophie</a> sophie.toulouse (at) lipn.univ-paris13.fr</li>
-		</ul>						
-					<p class="right">
-						<a href="#Haut" title="Haut de page">Haut de page<img src="images/arrow.up.png" width="7" height="8" alt="" /></a>
-					</p>
-				</div>
+    </div>
+    <div id="bar">
+        <ul>
+            <li>
+                <a href="index.html" accesskey="r"><span class="underline">R</span>echerche</a>
+            </li>
+            <li>
+                <a href="aide.html" accesskey="a"><span class="underline">A</span>ide</a>
+            </li>
+            <li class="active">
+                A Propos
+            </li>
+        </ul>
+    </div>
+    <div id="top">
+        <h1>
+            Méta-moteur de <span class="highlight">recherche</span><br/>orienté communauté</h1>
+    </div>
+    <div id="body">
+        <h1>
+            Informations complémentaires
+        </h1>
 
-			</div>
-			<div id="footer" title="Menu">
-				<ul>
-					<li>
-						<a href="index.html">Recherche</a>
-					</li>
-					<li>
-						<a href="apropos.html">A Propos</a>
-					</li>
-					<li>
-						<a href="aide.html">Aide</a>
-					</li>
-					<li>
-						<a href="stoppeAgent.html">Arrêt du serveur</a>
-					</li>
-				</ul>
-				<p>
-					<a href="licence.html">CopyLeft</a> &copy; Méta-moteur Staff 2006
-				</p>
-			</div>
-		</div>
-	</body>
+        <div class="block">
+            <h2>Le Projet</h2>
+            <p>Ce projet a été réalisé dans le cadre de l'enseignement universitaire de conduite et gestion de projet
+                pour l'année 2005 / 2006 de Master Informatique 1ère année à l'Institut Galilée de l'Université Paris
+                13.<br/><br/><br/>
+                Ce projet a été effectué sous la direction de M. Rushed Kanawati, Maître de conférence et chercheur à
+                l'Université Paris 13 que nous remercions pour sa disponibilité et son aide apportée à la réalisation du
+                Méta-Moteur.
+                Ainsi que l'équipe de comité de pilotage (Mme Sophie Toulouse, Mme Jacqueline Castaing, M. Christian
+                Codognet).<br/><br/><br/>
+
+                Nous remercions également l'association <a href="http://tuxfamily.org">tuxfamily.org</a> de nous avoir
+                fourni un serveur CVS.<br/><br/><br/>
+
+                Ce projet ainsi que tous les fichiers affiliés ou générés par celui-ci sont sous licence <a
+                        href="licence.html" title="Licence GPLv2">GPLv2</a>.
+            </p>
+
+            <p class="right">
+                <a href="#Haut" title="Haut de page">Haut de page<img src="images/arrow.up.png" width="7" height="8"
+                                                                      alt=""/></a>
+            </p>
+        </div>
+
+        <div class="blockDistinct">
+            <h2>Les auteurs :</h2>
+
+            <ul>
+                <li> - Jérémy Fréchard : jfrechard (at) alterarea.org</li>
+                <li> - Cécile Girard : cecilegirard (at) noos.fr</li>
+                <li> - Aysel Gunes : gunes_aysel (at) yahoo.fr</li>
+                <li> - Pierre Ramos : prj1 (at) free.fr</li>
+                <li> La liste de diffusion : MetaMoteurMI1 (at) yahoogroupes.fr
+            </ul>
+            <br/><br/>
+            <h2>Le client :</h2>
+            <ul>
+                <li> - <a href="http://www-lipn.univ-paris13.fr/~kanawati/index_fr.html"> Rushed Kanawati</a></li>
+                <li> LIPN B309, Tél. : 0149403609</li>
+                <li> rushed.kanawati (at) lipn.univ-paris13.fr</li>
+            </ul>
+            <br/><br/>
+
+            <h2>Contacts des encadrants :</h2>
+            <ul>
+                <li> - <a href="http://www-lipn.univ-paris13.fr/~bianquis"> Bianquis Jean-Baptiste</a>
+                    Jean-baptiste.Bianquis (at) lipn.univ-paris13.fr
+                </li>
+                <li> - Codognet Christian</li>
+                <li> - <a href="http://www-lipn.univ-paris13.fr/~hamon"> Hamon Thierry </a> thierry.hamon (at)
+                    lipn.univ-paris13.fr
+                </li>
+                <li> - <a href="http://www-lipn.univ-paris13.fr/~recanati"> Recanati Catherine</a> catherine.recanati
+                    (at) lipn.univ-paris13.fr
+                </li>
+                <li> - <a href="http://www-lipn.univ-paris13.fr/~toulouse"> Toulouse Sophie</a> sophie.toulouse (at)
+                    lipn.univ-paris13.fr
+                </li>
+            </ul>
+            <p class="right">
+                <a href="#Haut" title="Haut de page">Haut de page<img src="images/arrow.up.png" width="7" height="8"
+                                                                      alt=""/></a>
+            </p>
+        </div>
+
+    </div>
+    <div id="footer" title="Menu">
+        <ul>
+            <li>
+                <a href="index.html">Recherche</a>
+            </li>
+            <li>
+                <a href="apropos.html">A Propos</a>
+            </li>
+            <li>
+                <a href="aide.html">Aide</a>
+            </li>
+            <li>
+                <a href="stoppeAgent.html">Arrêt du serveur</a>
+            </li>
+        </ul>
+        <p>
+            <a href="licence.html">CopyLeft</a> &copy; Méta-moteur Staff 2006
+        </p>
+    </div>
+</div>
+</body>
 </html>
