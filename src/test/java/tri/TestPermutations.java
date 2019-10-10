@@ -22,15 +22,13 @@ package tri;
  * --LICENSE NOTICE--
  */
 
-import java.util.Vector;
-
 import agent.Agent;
 import agent.Enregistrement;
 import agent.Lien;
 import bdd.GestionBDD;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import java.util.Vector;
 
 public class TestPermutations {
 

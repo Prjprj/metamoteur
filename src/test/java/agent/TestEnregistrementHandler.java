@@ -23,11 +23,14 @@ package agent;
  */
 
 import org.junit.Test;
-import org.xml.sax.*;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
-import javax.xml.parsers.*;
-
-import java.io.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.CharArrayReader;
+import java.io.IOException;
 
 import static org.junit.Assert.assertNotNull;
 
