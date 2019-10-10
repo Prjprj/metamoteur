@@ -36,13 +36,13 @@ package tri;
  * de la place d'un document.
  *
  * @author Jeremy FRECHARD
- * @author C�cile GIRARD
+ * @author Cecile GIRARD
  * @author Aysel GUNES
  * @author Pierre RAMOS
  * @version 1.0
  */
 
-import agent.*;
+import agent.Lien;
 
 public class Document extends Lien {
 
@@ -63,10 +63,8 @@ public class Document extends Lien {
      * Constructeur permettant d'initialiser un document a parir de: son
      * identifiant, ses mots cles, son url, son titre, sa description et son rang.
      *
-     * @param id
-     *            Un entier representant un identifiant de document.
-     * @param lien
-     *            Un Lien
+     * @param id   Un entier representant un identifiant de document.
+     * @param lien Un Lien
      */
     public Document(int id, Lien lien) {
         this.id = id;
