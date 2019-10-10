@@ -28,13 +28,16 @@ package tri;
  * retournes par les autres agents et l'agent local.
  *
  * @author Jeremy FRECHARD
- * @author C�cile GIRARD
+ * @author Cecile GIRARD
  * @author Aysel GUNES
  * @author Pierre RAMOS
  * @version 1.0
  */
 
-import agent.*;
+import agent.Agent;
+import agent.Enregistrement;
+import agent.GestionMessage;
+import agent.Lien;
 
 import java.util.Vector;
 
@@ -89,8 +92,7 @@ public class Tri {
      * celui resultant de la permutation des lien sretournes par le(s) moteurs(s) de
      * recherche), a partir d'un enregistrement passe en parametre.
      *
-     * @param enr
-     *            Enregistrement : Un enregistrement correspondant a
+     * @param enr Enregistrement : Un enregistrement correspondant a
      *            l'enregistrement
      */
     public static void initEnrLocal(Enregistrement enr) {
@@ -102,12 +104,10 @@ public class Tri {
      * parametre) du lien appartenant a l'enregistrement passe en parametre,
      * similaire a celui passe en premier argument.
      *
-     * @param lienDonne
-     *            Lien : Un Lien.
-     * @param enr
-     *            Enregistrement : Un Enregistrement.
+     * @param lienDonne Lien : Un Lien.
+     * @param enr       Enregistrement : Un Enregistrement.
      * @return int : Un entier correspondant a l'indice de ce lien dans
-     *         l'enregistrement.
+     * l'enregistrement.
      */
     public static int indexLienSimilaireAA(Lien lienDonne, Enregistrement enr) {
         int index = -1;
@@ -131,10 +131,9 @@ public class Tri {
      * l'enregistrement passe en parametre, similaire au lien "i" de
      * l'enregistrement local.
      *
-     * @param enrAA
-     *            Enregistrement : Un Enregistrement appartenant aux Autres Agents.
+     * @param enrAA Enregistrement : Un Enregistrement appartenant aux Autres Agents.
      * @return Vector : Un vecteur d'entiers contenant les indices des liens
-     *         similaires.
+     * similaires.
      */
     public static Vector indexTriesLiensSimilairesAA(Enregistrement enrAA) {
         Vector resultat = new Vector();
@@ -155,8 +154,7 @@ public class Tri {
      * le meme que celui de l'enregistrement local, mais avec un rang et score,
      * biensur, differents.
      *
-     * @param enrAA
-     *            Enregistrement : Un Enregistrement appartenant aux Autres Agents.
+     * @param enrAA Enregistrement : Un Enregistrement appartenant aux Autres Agents.
      * @return Enregistrement ! Un Enregistrement dont les liens sont reclasses.
      */
     public static Enregistrement enrTrieLiensSimilairesAA(Enregistrement enrAA) {
@@ -181,9 +179,8 @@ public class Tri {
      * enregistrements passes en parametre seront le meme que celui de
      * l'enregistrement local, mais avec un rang et score, biensur, differents.
      *
-     * @param ensEnrAA
-     *            Vector : vecteur contenant l'ensemble des enregistrements retourn�
-     *            par le client.
+     * @param ensEnrAA Vector : vecteur contenant l'ensemble des enregistrements retourne
+     *                 par le client.
      * @return Vector : Un vecteur d'Enregistrement.
      */
     public static Vector ensEnrTriesLiensSimilairesAA(Vector ensEnrAA) {
@@ -201,11 +198,9 @@ public class Tri {
      * d'indice "i", passe en parametre, de tous les enregistrements, passe en
      * parametre via un vecteur d'Enregistrements.
      *
-     * @param index
-     *            int : Un entier representant un indice.
-     * @param ensEnrAA
-     *            Vector : Un vecteur d'Enregistrements representant ceux retournes
-     *            par les Autres Agents.
+     * @param index    int : Un entier representant un indice.
+     * @param ensEnrAA Vector : Un vecteur d'Enregistrements representant ceux retournes
+     *                 par les Autres Agents.
      * @return int : Un entier.
      */
     public static int sommeRangLien(int index, Vector ensEnrAA) {
@@ -225,11 +220,10 @@ public class Tri {
      * des liens d'indice "i" des enregistrements passes en parametre via un vecteur
      * d'Enregistrements.
      *
-     * @param ensEnrAA
-     *            Vector : Un vecteur d'Enregistrements representant ceux retournes
-     *            par les Autres Agents.
+     * @param ensEnrAA Vector : Un vecteur d'Enregistrements representant ceux retournes
+     *                 par les Autres Agents.
      * @return Vector : Un vecteur d'entiers contenant des sommes de rang de liens
-     *         retournes par les Autres Agents.
+     * retournes par les Autres Agents.
      */
     public static Vector moyenneRangsLiensAA(Vector ensEnrAA) {
         int nbEnr = ensEnrAA.size();
@@ -266,9 +260,8 @@ public class Tri {
      * appartenant a l'enregistrement local sont promus par rapport a ceux des
      * Autres Agents.
      *
-     * @param ensEnrAA
-     *            Vector : Un vecteur d'Enregistrements representant ceux retournes
-     *            par les Autres Agents.
+     * @param ensEnrAA Vector : Un vecteur d'Enregistrements representant ceux retournes
+     *                 par les Autres Agents.
      * @return Vector : Un vecteur d'entiers contenant des sommes de rang de liens.
      */
     public static Vector moyenneRangsLiensTousAgents(Vector ensEnrAA) {
@@ -290,8 +283,7 @@ public class Tri {
      * trouve l'indice du lien ayant pour rang celui a l'indice "i" du vecteur
      * d'entiers passe en parametre.
      *
-     * @param vecteurEntiers
-     *            int : Un vecteur d'entiers.
+     * @param vecteurEntiers int : Un vecteur d'entiers.
      * @return Vector : Un vecteur d'entiers contenant des indices.
      */
     public static Vector indexMoyenneRangsLiensTousAgentsTries(Vector vecteurEntiers) {
@@ -311,9 +303,8 @@ public class Tri {
      * base sur la theorie de la confiance plus en soi qu'aux autres. Les Autres
      * Agents sont, la, pour nous donner leur experience a titre de conseil.
      *
-     * @param moyenneTotaleRangs
-     *            Vector : Un vecteur d'entiers contenant les rangs moyen de chaque
-     *            lien.
+     * @param moyenneTotaleRangs Vector : Un vecteur d'entiers contenant les rangs moyen de chaque
+     *                           lien.
      * @return Enregistrement
      */
     public static Enregistrement tri(Vector moyenneTotaleRangs) {
@@ -337,11 +328,9 @@ public class Tri {
      * recherche par l'agent local) et un vecteur d'enregistrements correspondant
      * aux enregistrements (permutes) par les Autres Agents.
      *
-     * @param enrLocal
-     *            Enregistrement. L'Enregistrement permute par l'agent local.
-     * @param ensEnrAA
-     *            Vector : Un vecteur d'enregistrements correspondant aux
-     *            enregistrements retournes par les Autres Agents.
+     * @param enrLocal Enregistrement. L'Enregistrement permute par l'agent local.
+     * @param ensEnrAA Vector : Un vecteur d'enregistrements correspondant aux
+     *                 enregistrements retournes par les Autres Agents.
      */
     public static void lancementTri(Enregistrement enrLocal, Vector ensEnrAA) {
         GestionMessage.message(0, "Tri", "Lancement du tri.");
@@ -353,5 +342,4 @@ public class Tri {
             enrMR_TriFinal = enrLocal;
         }
     }
-
 }
