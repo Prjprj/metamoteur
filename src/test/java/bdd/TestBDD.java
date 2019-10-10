@@ -22,13 +22,12 @@ package bdd;
  * --LICENSE NOTICE--
  */
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Vector;
-
-import agent.*;
+import agent.Agent;
+import agent.Enregistrement;
+import agent.Lien;
 import org.junit.Test;
+
+import java.util.Vector;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

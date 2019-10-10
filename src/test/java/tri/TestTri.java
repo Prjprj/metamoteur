@@ -22,15 +22,15 @@ package tri;
  * --LICENSE NOTICE--
  */
 
-import java.util.Vector;
-
-import agent.*;
+import agent.Enregistrement;
+import agent.Lien;
 import org.junit.Test;
+
+import java.util.Vector;
 
 public class TestTri {
     @Test
     public void runTestTri() {
-
         Vector liensAL = new Vector();
         liensAL.addElement(new Lien("url1", "titre1", "desc1", 1, 10));
         liensAL.addElement(new Lien("url2", "titre2", "desc2", 2, 9));
@@ -135,6 +135,5 @@ public class TestTri {
             System.out.println("     (Nouveau Rang): " + j);
 
         }
-
     }
 }
