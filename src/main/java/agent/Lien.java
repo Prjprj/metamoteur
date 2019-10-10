@@ -1,15 +1,9 @@
 package agent;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
-/* ---------
- * Lien.java
- * ---------
+/*
+ * This file is part of "Méta-moteur".
  *
- * This file is part of "M�ta-moteur".
- *
- * (c) M�ta-moteur 2005-2006. All Rights Reserved.
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
@@ -27,6 +21,9 @@ import java.net.URLDecoder;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * Titre : classe publique Lien Description : classe permettant de representer

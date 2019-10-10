@@ -1,15 +1,9 @@
 package agent;
 
-import bdd.GestionBDD;
-import serveur.Serveur;
-
-/* ---------
- * Agent.java
- * ---------
+/*
+ * This file is part of "Méta-moteur".
  *
- * This file is part of "M�ta-moteur".
- *
- * (c) M�ta-moteur 2005-2006. All Rights Reserved.
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
@@ -27,6 +21,9 @@ import serveur.Serveur;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
+import bdd.GestionBDD;
+import serveur.Serveur;
 
 /**
  * Titre : classe publique Agent Description : classe principale du projet

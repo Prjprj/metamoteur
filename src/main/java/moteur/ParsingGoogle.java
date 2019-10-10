@@ -1,17 +1,9 @@
 package moteur;
 
-//utilisation des regex en Java
-
-import java.util.regex.*;
-
-import agent.Enregistrement;
-import agent.GestionMessage;
-import agent.Lien;
-
 /*
- * This file is part of "M�ta-moteur".
+ * This file is part of "Méta-moteur".
  *
- * (c) M�ta-moteur 2005-2006. All Rights Reserved.
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
@@ -29,6 +21,14 @@ import agent.Lien;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
+//utilisation des regex en Java
+
+import java.util.regex.*;
+
+import agent.Enregistrement;
+import agent.GestionMessage;
+import agent.Lien;
 
 /**
  * Classe traitant la liste de r�sultats de Google

@@ -1,25 +1,9 @@
 package client;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.Socket;
-import java.net.URL;
-
-import agent.GestionMessage;
-
 /*
- *------------
- *Client.java
- *------------
+ * This file is part of "Méta-moteur".
  *
- * This file is part of "M�ta-moteur".
- *
- * (c) M�ta-moteur 2005-2006. All Rights Reserved.
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
@@ -37,6 +21,19 @@ import agent.GestionMessage;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.Socket;
+import java.net.URL;
+
+import agent.GestionMessage;
+
 /**
  * @author Jeremy Frechard
  * @author Cecile Girard

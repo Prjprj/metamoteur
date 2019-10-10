@@ -1,18 +1,9 @@
 package agent;
 
-import org.junit.Test;
-import org.xml.sax.*;
-
-import javax.xml.parsers.*;
-
-import java.io.*;
-
-import static org.junit.Assert.assertNotNull;
-
 /*
- * This file is part of "M�ta-moteur".
+ * This file is part of "Méta-moteur".
  *
- * (c) M�ta-moteur 2005-2006. All Rights Reserved.
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
@@ -30,6 +21,15 @@ import static org.junit.Assert.assertNotNull;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
+import org.junit.Test;
+import org.xml.sax.*;
+
+import javax.xml.parsers.*;
+
+import java.io.*;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Classe de tests du parsing de fichiers Xml

@@ -1,14 +1,9 @@
 package bdd;
 
-import java.util.Vector;
-import java.sql.*;
-
-import agent.*;
-
 /*
- * This file is part of "M�ta-moteur".
+ * This file is part of "Méta-moteur".
  *
- * (c) M�ta-moteur 2005-2006. All Rights Reserved.
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
@@ -26,6 +21,11 @@ import agent.*;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
+import java.util.Vector;
+import java.sql.*;
+
+import agent.*;
 
 /**
  * Classe contenant toutes les methodes de gestion de base de donnees Mysql
