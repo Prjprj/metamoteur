@@ -22,17 +22,12 @@ package client;
  * --LICENSE NOTICE--
  */
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import agent.GestionMessage;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
-
-import agent.GestionMessage;
 
 /**
  * @author Jeremy Frechard
@@ -44,16 +39,15 @@ import agent.GestionMessage;
 
 /**
  * Cette classe permet de contacter d'autres agents ou des moteurs de recherches
- * par des requ�tes HTTP
+ * par des requetes HTTP
  */
 
 public class Client {
     /**
      * Methode permettant d'envoyer une requete HTTP de type GET a l'url demandee
      *
-     * @param adresse
-     *            adresse complete a envoyer (contenant la partie apres le ? si
-     *            necessaire=
+     * @param adresse adresse complete a envoyer (contenant la partie apres le ? si
+     *                necessaire=
      * @return retourne la reponse du serveur contacte
      */
     public static String envoiRequeteGET(String adresse) {
@@ -92,14 +86,10 @@ public class Client {
     /**
      * Methode permettant d'envoyer une requete HTTP de type post a un serveur web
      *
-     * @param url
-     *            url du serveur (http://www.google.fr)
-     * @param adresse
-     *            adresse relative (suite de la requete)(search.html...)
-     * @param corps
-     *            corps de la requete a envoyer
-     * @param port
-     * 			  port pour la requete
+     * @param url     url du serveur (http://www.google.fr)
+     * @param adresse adresse relative (suite de la requete)(search.html...)
+     * @param corps   corps de la requete a envoyer
+     * @param port    port pour la requete
      * @return retourne la reponse du serveur contacte
      */
     public static String envoiRequetePOST(String url, String adresse, String corps, int port) {
