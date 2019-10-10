@@ -25,9 +25,10 @@ import org.junit.Test;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
 /**
  * Classe de tests pour la gestion de parsing Google
- * 
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
@@ -35,41 +36,41 @@ import org.junit.Test;
  * @version 0.9
  */
 public class TestParsingGoogle {
-	@Test
-	public void runTestParsingGoogle() {
-		String url; // The URL to read
-		// url avec r�sultats + pub + desc vide
-		// url = new
-		// URL("http://www.google.fr/search?num=20&hl=fr&q=business+intelligence&btnG=Rechercher&meta=");
-		// url avec des r�sulats en japonais
-		// url = new
-		// URL("http://www.google.fr/search?num=20hl=fr&q=regex+java&btnG=Recherche+Google&meta=");
-		// url avec des fichiers ppt
-		// url = new
-		// URL("http://www.google.fr/search?num=20&hl=fr&q=filetype%3Appt+lol&btnG=Rechercher&meta=");
-		// url avec des r�sulats pdf
-		// url = new
-		// URL("http://www.google.fr/search?num=20&hl=fr&q=pdf&btnG=Rechercher&meta=");
-		// url avec des r�sulats doc
-		// url = new
-		// URL("http://www.google.fr/search?q=document+word+*.doc&btnG=Rechercher&num=20&hl=fr");
-		// url sans r�sultats
-		// url = new
-		// URL("http://www.google.fr/search?num=20&hl=fr&q=hdghgfghghfgh&btnG=Rechercher&meta=");
-		// url pas de description pour certain liens
-		url = "http://www.google.fr/search?num=20&hl=fr&q=google&btnG=Recherche+Google";
-		// url fichier extention inconnue !!! 15 / 16
+    @Test
+    public void runTestParsingGoogle() {
+        String url; // The URL to read
+        // url avec r�sultats + pub + desc vide
+        // url = new
+        // URL("http://www.google.fr/search?num=20&hl=fr&q=business+intelligence&btnG=Rechercher&meta=");
+        // url avec des r�sulats en japonais
+        // url = new
+        // URL("http://www.google.fr/search?num=20hl=fr&q=regex+java&btnG=Recherche+Google&meta=");
+        // url avec des fichiers ppt
+        // url = new
+        // URL("http://www.google.fr/search?num=20&hl=fr&q=filetype%3Appt+lol&btnG=Rechercher&meta=");
+        // url avec des r�sulats pdf
+        // url = new
+        // URL("http://www.google.fr/search?num=20&hl=fr&q=pdf&btnG=Rechercher&meta=");
+        // url avec des r�sulats doc
+        // url = new
+        // URL("http://www.google.fr/search?q=document+word+*.doc&btnG=Rechercher&num=20&hl=fr");
+        // url sans r�sultats
+        // url = new
+        // URL("http://www.google.fr/search?num=20&hl=fr&q=hdghgfghghfgh&btnG=Rechercher&meta=");
+        // url pas de description pour certain liens
+        url = "http://www.google.fr/search?num=20&hl=fr&q=google&btnG=Recherche+Google";
+        // url fichier extention inconnue !!! 15 / 16
 
-		Enregistrement enr = new Enregistrement(ParsingGoogle.htmlParsing(Client.envoiRequeteGET(url)));
-		enr.setKeywords("google"); // on initialise les mots-Cl�s dans enr
-		// appel de la m�thode !!!
-		// Agent.BaseBDD
+        Enregistrement enr = new Enregistrement(ParsingGoogle.htmlParsing(Client.envoiRequeteGET(url)));
+        enr.setKeywords("google"); // on initialise les mots-Cl�s dans enr
+        // appel de la m�thode !!!
+        // Agent.BaseBDD
 
-		// pour ins�rer un enr dans la Bdd
-		// GestionBDD.envoiRequete(enr.toSql());
+        // pour ins�rer un enr dans la Bdd
+        // GestionBDD.envoiRequete(enr.toSql());
 
-		// pour affichage
-		enr.toString();
+        // pour affichage
+        enr.toString();
 
-	}
+    }
 }

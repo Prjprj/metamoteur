@@ -23,97 +23,96 @@ import java.util.Vector;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
 /**
  * Classe modelisant les differentes options que peut contenir une requete HTTP
- * 
- * @see RequeteHTTP
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
  * @author Pierre Ramos
  * @version 1.0
+ * @see RequeteHTTP
  */
 public class OptionRequeteHTTP {
-	private String nom;
-	private String valeur;
+    private String nom;
+    private String valeur;
 
-	/**
-	 * Constructeur d'une OptionRequete HTTP
-	 * 
-	 * @param nom
-	 *            nom de l'option
-	 * @param valeur
-	 *            valeur de l'option
-	 */
-	public OptionRequeteHTTP(String nom, String valeur) {
-		this.nom = nom;
-		this.valeur = valeur;
-	}
+    /**
+     * Constructeur d'une OptionRequete HTTP
+     *
+     * @param nom    nom de l'option
+     * @param valeur valeur de l'option
+     */
+    public OptionRequeteHTTP(String nom, String valeur) {
+        this.nom = nom;
+        this.valeur = valeur;
+    }
 
-	/**
-	 * Constructeur d'une OptionRequete HTTP
-	 */
-	public OptionRequeteHTTP() {
-		this.nom = "";
-		this.valeur = "";
-	}
+    /**
+     * Constructeur d'une OptionRequete HTTP
+     */
+    public OptionRequeteHTTP() {
+        this.nom = "";
+        this.valeur = "";
+    }
 
-	/**
-	 * Methode permettant d'acceder a l'attribut prive nom de cette option
-	 * 
-	 * @return retourne le nom de l'option
-	 */
-	public String getNom() {
-		return (this.nom);
-	}
+    /**
+     * Methode permettant d'acceder a l'attribut prive nom de cette option
+     *
+     * @return retourne le nom de l'option
+     */
+    public String getNom() {
+        return (this.nom);
+    }
 
-	/**
-	 * Methode permettant d'acceder a l'attribut prive valeur de cette option
-	 * 
-	 * @return retourne la valeur de l'option
-	 */
-	public String getValeur() {
-		return (this.valeur);
-	}
+    /**
+     * Methode permettant d'acceder a l'attribut prive valeur de cette option
+     *
+     * @return retourne la valeur de l'option
+     */
+    public String getValeur() {
+        return (this.valeur);
+    }
 
-	/**
-	 * Methode renvoyant un vecteur contenant les differents options des requetes
-	 * HTTP
-	 * 
-	 * @return retourne un vecteur contenant les differents options des requetes
-	 *         HTTP
-	 */
-	public static Vector listeOptions() {
-		Vector vecteur = new Vector();
-		// construction d'un vecteur contenant les options reconnues par le serveur
-		vecteur.add("Accept");
-		vecteur.add("Accept-Charset");
-		vecteur.add("Accept-Encoding");
-		vecteur.add("Accept-Language");
-		vecteur.add("Authorization");
-		vecteur.add("Content-Encoding");
-		vecteur.add("Content-Language");
-		vecteur.add("Content-Length");
-		vecteur.add("Content-Type");
-		vecteur.add("Date");
-		vecteur.add("Fowarded");
-		vecteur.add("From");
-		vecteur.add("Link");
-		vecteur.add("Orig-URL");
-		vecteur.add("Referer");
-		vecteur.add("User-Agent");
-		vecteur.add("Keep-Alive");
-		vecteur.add("Connection");
-		vecteur.add("Host");
-		return vecteur;
-	}
+    /**
+     * Methode renvoyant un vecteur contenant les differents options des requetes
+     * HTTP
+     *
+     * @return retourne un vecteur contenant les differents options des requetes
+     * HTTP
+     */
+    public static Vector listeOptions() {
+        Vector vecteur = new Vector();
+        // construction d'un vecteur contenant les options reconnues par le serveur
+        vecteur.add("Accept");
+        vecteur.add("Accept-Charset");
+        vecteur.add("Accept-Encoding");
+        vecteur.add("Accept-Language");
+        vecteur.add("Authorization");
+        vecteur.add("Content-Encoding");
+        vecteur.add("Content-Language");
+        vecteur.add("Content-Length");
+        vecteur.add("Content-Type");
+        vecteur.add("Date");
+        vecteur.add("Fowarded");
+        vecteur.add("From");
+        vecteur.add("Link");
+        vecteur.add("Orig-URL");
+        vecteur.add("Referer");
+        vecteur.add("User-Agent");
+        vecteur.add("Keep-Alive");
+        vecteur.add("Connection");
+        vecteur.add("Host");
+        return vecteur;
+    }
 
-	/**
-	 * Methode toString de cette classe
-	 * 
-	 * @return retourne une chaine representant l'objet
-	 */
-	public String toString() {
-		return (this.nom + " " + this.valeur);
-	}
+    /**
+     * Methode toString de cette classe
+     *
+     * @return retourne une chaine representant l'objet
+     */
+    public String toString() {
+        return (this.nom + " " + this.valeur);
+    }
 }

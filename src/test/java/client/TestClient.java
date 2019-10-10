@@ -29,9 +29,10 @@ import static org.junit.Assert.assertNotNull;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
 /**
  * Classe de tests pour le client HTTP
- * 
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
@@ -40,26 +41,26 @@ import static org.junit.Assert.assertNotNull;
  */
 public class TestClient {
 
-	@Before
-	public void setUp() throws Exception {
-		//new Agent();
-		//Serveur.service();
-	}
+    @Before
+    public void setUp() throws Exception {
+        //new Agent();
+        //Serveur.service();
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		new Agent();
-		Client.envoiRequeteGET("http://localhost:"+Agent.PortServeur+"/stoppeAgent.html");
-	}
-	
-	@Test
-	@Ignore
-	public void runClientTests() {
-		new Agent();
-		// tentative de requetes sur le serveur HTTP installe sur la machine du testeur
-		String res=Client.envoiRequeteGET("http://localhost:"+Agent.PortServeur);
-		assertNotNull(res);
-		String res2=Client.envoiRequetePOST("localhost", "/", "essai", Agent.PortServeur);
-		assertNotNull(res2);
-	}
+    @After
+    public void tearDown() throws Exception {
+        new Agent();
+        Client.envoiRequeteGET("http://localhost:" + Agent.PortServeur + "/stoppeAgent.html");
+    }
+
+    @Test
+    @Ignore
+    public void runClientTests() {
+        new Agent();
+        // tentative de requetes sur le serveur HTTP installe sur la machine du testeur
+        String res = Client.envoiRequeteGET("http://localhost:" + Agent.PortServeur);
+        assertNotNull(res);
+        String res2 = Client.envoiRequetePOST("localhost", "/", "essai", Agent.PortServeur);
+        assertNotNull(res2);
+    }
 }

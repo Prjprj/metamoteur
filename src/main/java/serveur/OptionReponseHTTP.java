@@ -23,101 +23,100 @@ import java.util.Date;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
 /**
  * Classe modelisant les differentes options que peut contenir une requete HTTP
- * 
- * @see RequeteHTTP
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
  * @author Pierre Ramos
  * @version 1.0
+ * @see RequeteHTTP
  */
 public class OptionReponseHTTP {
-	private String nom;
-	private String valeur;
+    private String nom;
+    private String valeur;
 
-	/**
-	 * Constructeur d'une OptionReponse HTTP
-	 * 
-	 * @param nom
-	 *            nom de l'option
-	 * @param valeur
-	 *            valeur de l'option
-	 */
-	public OptionReponseHTTP(String nom, String valeur) {
-		this.nom = nom;
-		this.valeur = valeur;
-	}
+    /**
+     * Constructeur d'une OptionReponse HTTP
+     *
+     * @param nom    nom de l'option
+     * @param valeur valeur de l'option
+     */
+    public OptionReponseHTTP(String nom, String valeur) {
+        this.nom = nom;
+        this.valeur = valeur;
+    }
 
-	/*
-	 * autres options HTTP Content-Encoding Content-Language Expires Forwarded
-	 * Location
-	 */
-	/**
-	 * Constructeur d'une OptionReponse HTTP
-	 * 
-	 * @param nom
-	 *            nom de l'option
-	 */
-	public OptionReponseHTTP(String nom) {
-		if (nom.equals("Server"))
-			this.construcServ();
-		if (nom.equals("Date"))
-			this.construcDate();
-	}
+    /*
+     * autres options HTTP Content-Encoding Content-Language Expires Forwarded
+     * Location
+     */
 
-	/**
-	 * Constructeur d'une OptionReponse HTTP
-	 */
-	public OptionReponseHTTP() {
-		this.nom = "";
-		this.valeur = "";
-	}
+    /**
+     * Constructeur d'une OptionReponse HTTP
+     *
+     * @param nom nom de l'option
+     */
+    public OptionReponseHTTP(String nom) {
+        if (nom.equals("Server"))
+            this.construcServ();
+        if (nom.equals("Date"))
+            this.construcDate();
+    }
 
-	/**
-	 * Methode construisant un nouvel objet OptionRequeteHTTP de type Server
-	 */
-	public void construcServ() {
-		// construction d'une option "Server"
-		this.nom = "Server";
-		this.valeur = "MetaMoteur de recherche oriente communaute";
-	}
+    /**
+     * Constructeur d'une OptionReponse HTTP
+     */
+    public OptionReponseHTTP() {
+        this.nom = "";
+        this.valeur = "";
+    }
 
-	/**
-	 * Methode construisant un nouvel objet OptionRequeteHTTP de type Date
-	 */
-	public void construcDate() {
-		// construction d'une option "Date"
-		this.nom = "Date";
-		Date date = new Date();
-		this.valeur = date.toString();
-	}
+    /**
+     * Methode construisant un nouvel objet OptionRequeteHTTP de type Server
+     */
+    public void construcServ() {
+        // construction d'une option "Server"
+        this.nom = "Server";
+        this.valeur = "MetaMoteur de recherche oriente communaute";
+    }
 
-	/**
-	 * Methode permettant d'acceder a l'attribut prive nom de cette option
-	 * 
-	 * @return retourne le nom de l'option
-	 */
-	public String getNom() {
-		return (this.nom);
-	}
+    /**
+     * Methode construisant un nouvel objet OptionRequeteHTTP de type Date
+     */
+    public void construcDate() {
+        // construction d'une option "Date"
+        this.nom = "Date";
+        Date date = new Date();
+        this.valeur = date.toString();
+    }
 
-	/**
-	 * Methode permettant d'acceder a l'attribut prive valeur de cette option
-	 * 
-	 * @return retourne la valeur de l'option
-	 */
-	public String getValeur() {
-		return (this.valeur);
-	}
+    /**
+     * Methode permettant d'acceder a l'attribut prive nom de cette option
+     *
+     * @return retourne le nom de l'option
+     */
+    public String getNom() {
+        return (this.nom);
+    }
 
-	/**
-	 * Methode toString de cette classe
-	 * 
-	 * @return retourne une chaine representant l'objet
-	 */
-	public String toString() {
-		return (this.nom + " : " + this.valeur);
-	}
+    /**
+     * Methode permettant d'acceder a l'attribut prive valeur de cette option
+     *
+     * @return retourne la valeur de l'option
+     */
+    public String getValeur() {
+        return (this.valeur);
+    }
+
+    /**
+     * Methode toString de cette classe
+     *
+     * @return retourne une chaine representant l'objet
+     */
+    public String toString() {
+        return (this.nom + " : " + this.valeur);
+    }
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+
 import agent.*;
 import org.junit.Test;
 
@@ -31,9 +32,10 @@ import static org.junit.Assert.assertTrue;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
 /**
  * Classe de tests pour la gestion d'une base de donnees
- * 
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
@@ -41,10 +43,10 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  */
 public class TestBDD {
-	@Test
-	public void runTestBDD1() {
-		// variables d'un agent et leur configuration par d�faut
-		new Agent();
+    @Test
+    public void runTestBDD1() {
+        // variables d'un agent et leur configuration par d�faut
+        new Agent();
 		/*try {
 			// Test Connexion
 			Connection connection = GestionBDD.connectionBDD();
@@ -57,63 +59,63 @@ public class TestBDD {
 			System.out.println(e.getMessage());
 		}*/
 
-		// Test Select
-		Vector res = GestionBDD.envoiRequete(GestionBDD.construitSelect("*", "BDD", " "));
-		assertNotNull("Select * from BDD",res);
+        // Test Select
+        Vector res = GestionBDD.envoiRequete(GestionBDD.construitSelect("*", "BDD", " "));
+        assertNotNull("Select * from BDD", res);
 
-		/*
-		 * Vector
-		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
-		 * System.out.println(res);
-		 * GestionBDD.envoiRequete(GestionBDD.construitInsert("cles",
-		 * "\"AZERTY\",\"1\",\"2006-05-24\""));
-		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
-		 * System.out.println(res);
-		 * GestionBDD.envoiRequete(GestionBDD.construitUpdate("cles","validite=6",
-		 * "cle=\"AZERTY\""));
-		 * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
-		 * System.out.println(res);
-		 */
-	}
+        /*
+         * Vector
+         * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
+         * System.out.println(res);
+         * GestionBDD.envoiRequete(GestionBDD.construitInsert("cles",
+         * "\"AZERTY\",\"1\",\"2006-05-24\""));
+         * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
+         * System.out.println(res);
+         * GestionBDD.envoiRequete(GestionBDD.construitUpdate("cles","validite=6",
+         * "cle=\"AZERTY\""));
+         * res=GestionBDD.envoiRequete(GestionBDD.construitSelect("*","cles"," "));
+         * System.out.println(res);
+         */
+    }
 
-	@Test
-	public void runTestBDD2() {
-		// variables d'un agent et leur configuration par d�faut
-		new Agent();
-		// construction d'un lien pour test
-		Lien lien = new Lien("url&�\"����^�~", "titre", "desc", 1, 0);
-		// construction d'un vecteur de liens
-		Vector vecteur = new Vector();
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		lien = new Lien("http://www.ilocis.org/fr/help.html", "titre", "desc", 1, 0);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		vecteur.add(lien);
-		// insertion de l'enregistement
-		assertTrue("Insert",GestionBDD.insertEnregistrement(new Enregistrement(-1, "mot cle", vecteur)));
-	}
+    @Test
+    public void runTestBDD2() {
+        // variables d'un agent et leur configuration par d�faut
+        new Agent();
+        // construction d'un lien pour test
+        Lien lien = new Lien("url&�\"����^�~", "titre", "desc", 1, 0);
+        // construction d'un vecteur de liens
+        Vector vecteur = new Vector();
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        lien = new Lien("http://www.ilocis.org/fr/help.html", "titre", "desc", 1, 0);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        vecteur.add(lien);
+        // insertion de l'enregistement
+        assertTrue("Insert", GestionBDD.insertEnregistrement(new Enregistrement(-1, "mot cle", vecteur)));
+    }
 
-	@Test
-	public void runTestBDD3() {
-		// variables d'un agent et leur configuration par d�faut
-		new Agent();
-		// tentative d'update
-		assertTrue("Update",GestionBDD.updateURL("http://www.ilocis.org/fr/help.html"));
-	}
+    @Test
+    public void runTestBDD3() {
+        // variables d'un agent et leur configuration par d�faut
+        new Agent();
+        // tentative d'update
+        assertTrue("Update", GestionBDD.updateURL("http://www.ilocis.org/fr/help.html"));
+    }
 }
