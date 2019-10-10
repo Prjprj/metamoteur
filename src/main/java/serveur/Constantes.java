@@ -1,9 +1,9 @@
 package serveur;
 
 /*
- * This file is part of "M�ta-moteur".
+ * This file is part of "Méta-moteur".
  *
- * (c) M�ta-moteur 2005-2006. All Rights Reserved.
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
