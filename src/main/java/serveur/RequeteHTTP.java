@@ -22,9 +22,9 @@ package serveur;
  * --LICENSE NOTICE--
  */
 
-import java.util.Vector;
-
 import agent.Agent;
+
+import java.util.Vector;
 
 /**
  * Classe modelisant une requete HTTP geree par le serveur

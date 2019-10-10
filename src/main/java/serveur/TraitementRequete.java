@@ -22,24 +22,6 @@ package serveur;
  * --LICENSE NOTICE--
  */
 
-import java.io.BufferedReader;
-import java.io.CharArrayReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.URLDecoder;
-import java.util.Vector;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
 import agent.Agent;
 import agent.Enregistrement;
 import agent.EnregistrementHandler;
@@ -47,8 +29,18 @@ import agent.GestionMessage;
 import bdd.GestionBDD;
 import client.Client;
 import moteur.ParsingGoogle;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import tri.Permutations;
 import tri.Tri;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.*;
+import java.net.Socket;
+import java.net.URLDecoder;
+import java.util.Vector;
 
 /**
  * Classe representant un thread de traitement d'une requete HTTP cette classe
@@ -207,10 +199,10 @@ public class TraitementRequete extends Thread {
                     Enregistrement enr = new Enregistrement();
                     // parsage du fichier XML
                     try {
-                        // cr�ation d'une fabrique de parseurs SAX
+                        // creation d'une fabrique de parseurs SAX
                         SAXParserFactory fabrique = SAXParserFactory.newInstance();
 
-                        // cr�ation d'un parseur SAX
+                        // creation d'un parseur SAX
                         SAXParser parseur = fabrique.newSAXParser();
 
                         EnregistrementHandler enregistrementHandler = new EnregistrementHandler();
@@ -220,14 +212,14 @@ public class TraitementRequete extends Thread {
                         enr = enregistrementHandler.getEnregistrement();
                     } catch (ParserConfigurationException pce) {
                         GestionMessage.message(2, "TraitementRequete",
-                                "Erreur de configuration du parseur, Lors de l'appel � SAXParser.newSAXParser() : "
+                                "Erreur de configuration du parseur, Lors de l'appel a SAXParser.newSAXParser() : "
                                         + pce);
                     } catch (SAXException se) {
                         GestionMessage.message(2, "TraitementRequete",
-                                "Erreur de parsing, Lors de l'appel � parse() : " + se);
+                                "Erreur de parsing, Lors de l'appel a parse() : " + se);
                     } catch (IOException ioe) {
                         GestionMessage.message(2, "TraitementRequete",
-                                "Erreur d'entr�e/sortie, Lors de l'appel � parse() : " + ioe);
+                                "Erreur d'entree/sortie, Lors de l'appel a parse() : " + ioe);
                     }
                     // permutation de l'enregistrement parse
                     Permutations.lancementPermutations(enr);
@@ -344,10 +336,10 @@ public class TraitementRequete extends Thread {
                                     if (res != null) {
                                         Enregistrement enreg = new Enregistrement();
                                         try {
-                                            // cr�ation d'une fabrique de parseurs SAX
+                                            // creation d'une fabrique de parseurs SAX
                                             SAXParserFactory fabrique = SAXParserFactory.newInstance();
 
-                                            // cr�ation d'un parseur SAX
+                                            // creation d'un parseur SAX
                                             SAXParser parseur = fabrique.newSAXParser();
 
                                             // parsage et recuperation de l'enregistrement
@@ -359,14 +351,14 @@ public class TraitementRequete extends Thread {
                                             // gestion des erreurs
                                         } catch (ParserConfigurationException pce) {
                                             GestionMessage.message(2, "TraitementRequete",
-                                                    "Erreur de configuration du parseur, Lors de l'appel � SAXParser.newSAXParser() : "
+                                                    "Erreur de configuration du parseur, Lors de l'appel a SAXParser.newSAXParser() : "
                                                             + pce);
                                         } catch (SAXException se) {
                                             GestionMessage.message(2, "TraitementRequete",
-                                                    "Erreur de parsing, Lors de l'appel � parse() : " + se);
+                                                    "Erreur de parsing, Lors de l'appel a parse() : " + se);
                                         } catch (IOException ioe) {
                                             GestionMessage.message(2, "TraitementRequete",
-                                                    "Erreur d'entr�e/sortie, Lors de l'appel � parse() : " + ioe);
+                                                    "Erreur d'entree/sortie, Lors de l'appel a parse() : " + ioe);
                                         }
                                         // ajout de l'enregistrement dans le vecteur des reponses, si celui-ci est non
                                         // vide

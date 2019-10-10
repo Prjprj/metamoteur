@@ -22,12 +22,12 @@ package serveur;
  * --LICENSE NOTICE--
  */
 
+import agent.Agent;
+import agent.GestionMessage;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-import agent.Agent;
-import agent.GestionMessage;
 
 /**
  * Classe contenant la methode main permettant de lancer le serveur HTTP cette

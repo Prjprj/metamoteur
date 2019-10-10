@@ -22,9 +22,9 @@ package serveur;
  * --LICENSE NOTICE--
  */
 
-import java.io.File;
-
 import agent.Agent;
+
+import java.io.File;
 
 /**
  * Classe modelisant un fichier et permettant de le manipuler

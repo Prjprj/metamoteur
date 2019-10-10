@@ -22,19 +22,13 @@ package serveur;
  * --LICENSE NOTICE--
  */
 
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.Vector;
-
-import javax.imageio.ImageIO;
-
 import agent.Agent;
 import agent.GestionMessage;
+
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
+import java.io.*;
+import java.util.Vector;
 
 /**
  * Classe modelisant une reponse HTTP du serveur
@@ -518,5 +512,4 @@ public class ReponseHTTP {
         css += "</style>";
         return css;
     }
-
 }
