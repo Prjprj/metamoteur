@@ -28,15 +28,15 @@ package agent;
  * d'un enregistrement de la base de donnees.
  *
  * @author Jeremy FRECHARD
- * @author C�cile GIRARD
+ * @author Cecile GIRARD
  * @author Aysel GUNES
  * @author Pierre RAMOS
  * @version 1.0
  */
 
-import java.util.Vector;
-
 import bdd.GestionBDD;
+
+import java.util.Vector;
 
 public class Enregistrement {
 
@@ -79,14 +79,11 @@ public class Enregistrement {
      * identifiant, ses mots cles, ses liens (20). Un lien contient une url, un
      * titre, une description et un rang.
      *
-     * @param id
-     *            Un entier representant un identifiant d'enregistrement.
-     * @param motsCles
-     *            Une chaine de caracteres representant les mots cles associes a cet
-     *            enregistrement.
-     * @param liens
-     *            Un vecteur de Liens regroupant tous les titres, urls, descriptions
-     *            et rangs.
+     * @param id       Un entier representant un identifiant d'enregistrement.
+     * @param motsCles Une chaine de caracteres representant les mots cles associes a cet
+     *                 enregistrement.
+     * @param liens    Un vecteur de Liens regroupant tous les titres, urls, descriptions
+     *                 et rangs.
      */
     public Enregistrement(int id, String motsCles, Vector liens) {
         this.id = id;
@@ -101,9 +98,8 @@ public class Enregistrement {
      * les liens dont les scores sont superieur a 0. Le lien ayant le score le plus
      * eleve prend la premiere place et a donc la valeur du rang egale a 1.
      *
-     * @param vecteur
-     *            Un vecteur contenant des informations recuperees de la base de
-     *            donnees.
+     * @param vecteur Un vecteur contenant des informations recuperees de la base de
+     *                donnees.
      */
     public Enregistrement(Vector vecteur) {
         this.id = ((Integer) (vecteur.get(0))).intValue();
@@ -125,8 +121,7 @@ public class Enregistrement {
      * Constructeur initialisant l'enregistrement courant a partir d'un
      * enregistrement passe en parametre.
      *
-     * @param enr
-     *            Enregistrement
+     * @param enr Enregistrement
      */
     public Enregistrement(Enregistrement enr) {
         this.id = enr.getId();
@@ -138,8 +133,7 @@ public class Enregistrement {
      * Retourne l'entier de valeur maximum parmi les entiers contenus dans un
      * vecteur d'entiers.
      *
-     * @param vecteurEntiers
-     *            Vector : un vecteur d'entiers
+     * @param vecteurEntiers Vector : un vecteur d'entiers
      * @return int
      */
     public static int entierMaximum(Vector vecteurEntiers) {
@@ -158,10 +152,8 @@ public class Enregistrement {
      * vecteur d'entiers. En effet, l'entier a retourner doit etre le maximum,
      * inferieur a celui passe en parametre.
      *
-     * @param limite
-     *            int
-     * @param vecteurEntiers
-     *            Vector : un vecteur d'entiers
+     * @param limite         int
+     * @param vecteurEntiers Vector : un vecteur d'entiers
      * @return int
      */
     public static int entierMaximumLocal(int limite, Vector vecteurEntiers) {
@@ -179,10 +171,8 @@ public class Enregistrement {
      * Retourne un vecteur d'entiers contenant les identifiants, c'est-a-dire les
      * index, des entiers egaux a celui passe en parametre.
      *
-     * @param entier
-     *            int
-     * @param vecteurEntiers
-     *            Vector : un vecteur d'entiers
+     * @param entier         int
+     * @param vecteurEntiers Vector : un vecteur d'entiers
      * @return Vector : un vecteur d'entiers
      */
     public static Vector idEntiersEgaux(int entier, Vector vecteurEntiers) {
@@ -204,8 +194,7 @@ public class Enregistrement {
      * s'averent etre egaux, alors celui qui aura le plus petit index sera choisi en
      * premier et ainsi de suite.
      *
-     * @param scores
-     *            Vector : un vecteur d'entiers
+     * @param scores Vector : un vecteur d'entiers
      * @return Vector : un vecteur d'entiers
      */
     public static Vector triOrdreDecroissant(Vector scores) {
@@ -232,10 +221,9 @@ public class Enregistrement {
      * possede comme valeur de rang la valeur de l'index ou il se trouve dans la
      * tete de liste.
      *
-     * @param liens
-     *            Vector : un vecteur de liens
+     * @param liens Vector : un vecteur de liens
      * @return Vector : un vecteur de liens dont les liens ont ete promus selon la
-     *         valeur de leur score
+     * valeur de leur score
      */
     public static Vector promotionLiensCliques(Vector liens) {
         int id;
@@ -258,7 +246,7 @@ public class Enregistrement {
      * Retourne l'identifiant de l'enregistrement courant.
      *
      * @return int : un entier representant l'identifiant de l'enregistrement
-     *         courant
+     * courant
      */
     public int getId() {
         return id;
@@ -268,7 +256,7 @@ public class Enregistrement {
      * Retourne l'ensemble des mots cles associe a l'enregistrement courant.
      *
      * @return String : une chaine de caracteres correspondant aux mots cles
-     *         associes a l'enregistrement courant
+     * associes a l'enregistrement courant
      */
     public String getKeywords() {
         return motsCles;
@@ -288,8 +276,7 @@ public class Enregistrement {
      * Methode permettant de modifier le contenu de la variable "motsCles" par la
      * chaine de caracteres passee en parametre.
      *
-     * @param motsCles
-     *            String : une chaine de caracteres
+     * @param motsCles String : une chaine de caracteres
      */
     public void setKeywords(String motsCles) {
         this.motsCles = motsCles;
@@ -299,8 +286,7 @@ public class Enregistrement {
      * Methode permettant de modifier le contenu de la variable "id" par l'entier
      * passe en parametre.
      *
-     * @param id
-     *            int
+     * @param id int
      */
     public void setId(int id) {
         this.id = id;
@@ -310,8 +296,7 @@ public class Enregistrement {
      * Methode permettant de modifier la variable "liens" par un vecteur de Liens
      * passe en parametre.
      *
-     * @param liens
-     *            Vector : un vecteur de liens
+     * @param liens Vector : un vecteur de liens
      */
     public void setLiens(Vector liens) {
         this.liens = liens;
@@ -321,8 +306,7 @@ public class Enregistrement {
      * Methode permettant d'ajouter un Lien dans l'enregistrement courant, contenant
      * les informations: url, titre, desc et rang.
      *
-     * @param lien
-     *            Lien
+     * @param lien Lien
      */
     public void add(Lien lien) {
         this.liens.add(lien);
@@ -332,7 +316,7 @@ public class Enregistrement {
      * Retourne l'ensemble des url associe a l'enregistrement courant.
      *
      * @return Vector : un vecteur de chaine de caracteres contenant les urls de
-     *         l'enregistrement courant
+     * l'enregistrement courant
      */
     public Vector getUrls() {
         Lien lien;
@@ -348,7 +332,7 @@ public class Enregistrement {
      * Retourne l'ensemble des titres associe a l'enregistrement courant.
      *
      * @return Vector : Un vecteur de chaine de caracteres contenant les titres de
-     *         l'enregistrement courant
+     * l'enregistrement courant
      */
     public Vector getTitres() {
         Lien lien;
@@ -364,7 +348,7 @@ public class Enregistrement {
      * Retourne l'ensemble des descriptions associe a l'enregistrement courant.
      *
      * @return vector : un vecteur de chaine decaracteres contenant les descriptions
-     *         de l'enregistrement courant
+     * de l'enregistrement courant
      */
     public Vector getDescs() {
         Lien lien;
@@ -381,7 +365,7 @@ public class Enregistrement {
      * ensemble d'url sur un total de 20 url.
      *
      * @return Vector : un vecteur d'entiers contenant les rangs de l'enregistrement
-     *         courant
+     * courant
      */
     public Vector getRangs() {
         Lien lien;
@@ -397,9 +381,8 @@ public class Enregistrement {
      * Retourne un entier contenant l'identifiant d'un enregistrement (dont
      * l'identifiant dans la base de donnees est passe en parametre).
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
+     * @param id int : un entier representant l'identifiant d'un enregistrement de
+     *           la base de donnees
      * @return int : un entier contenant un identifiant
      */
     public static int recuperationId(int id) {
@@ -414,11 +397,10 @@ public class Enregistrement {
      * enregistrement d'identifiant "id" dans la base de donnees, passe en
      * parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
+     * @param id int : un entier representant l'identifiant d'un enregistrement de
+     *           la base de donnees
      * @return String : une chaine de caracteres contenant les mots cles du lien de
-     *         numero passe en parametre associe a l'enregistrement courant
+     * numero passe en parametre associe a l'enregistrement courant
      */
     public static String recuperationMotsCles(int id) {
         Vector vecteurMotsCles = GestionBDD
@@ -432,13 +414,11 @@ public class Enregistrement {
      * en parametre, contenu dans un enregistrement d'identifiant "id" dans la base
      * de donnees, passe en parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
-     * @param numero
-     *            int : un entier representant le numero du lien
+     * @param id     int : un entier representant l'identifiant d'un enregistrement de
+     *               la base de donnees
+     * @param numero int : un entier representant le numero du lien
      * @return String : une chaine de caracteres contenant l'url du lien de numero
-     *         passe en parametre associe a l'enregistrement courant
+     * passe en parametre associe a l'enregistrement courant
      */
     public static String recuperationUrlNumero(int id, int numero) {
         Vector vecteurUrl = GestionBDD
@@ -452,13 +432,11 @@ public class Enregistrement {
      * passe en parametre, contenu dans un enregistrement d'identifiant "id" dans la
      * base de donnees, passe en parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
-     * @param numero
-     *            int : un entier representant le numero du lien
+     * @param id     int : un entier representant l'identifiant d'un enregistrement de
+     *               la base de donnees
+     * @param numero int : un entier representant le numero du lien
      * @return String : une chaine de caracteres contenant le titre du lien de
-     *         numero passe en parametre associe a l'enregistrement courant
+     * numero passe en parametre associe a l'enregistrement courant
      */
     public static String recuperationTitreNumero(int id, int numero) {
         Vector vecteurTitre = GestionBDD
@@ -472,13 +450,11 @@ public class Enregistrement {
      * "numero" passe en parametre, contenu dans un enregistrement d'identifiant
      * "id" dans la base de donnees, passe en parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
-     * @param numero
-     *            int : un entier representant le numero du lien
+     * @param id     int : un entier representant l'identifiant d'un enregistrement de
+     *               la base de donnees
+     * @param numero int : un entier representant le numero du lien
      * @return String : une chaine de caracteres contenant la description du lien de
-     *         numero passe en parametre associe a l'enregistrement courant
+     * numero passe en parametre associe a l'enregistrement courant
      */
     public static String recuperationDescNumero(int id, int numero) {
         Vector vecteurDesc = GestionBDD
@@ -492,13 +468,11 @@ public class Enregistrement {
      * contenu dans un enregistrement d'identifiant "id" dans la base de donnees,
      * passe en parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
-     * @param numero
-     *            int : un entier representant le numero du lien.
+     * @param id     int : un entier representant l'identifiant d'un enregistrement de
+     *               la base de donnees
+     * @param numero int : un entier representant le numero du lien.
      * @return int : un entier contenant le rang du lien de numero passe en
-     *         parametre associe a l'enregistrement courant
+     * parametre associe a l'enregistrement courant
      */
     public static int recuperationRangNumero(int id, int numero) {
         Vector vecteurRang = GestionBDD
@@ -512,13 +486,11 @@ public class Enregistrement {
      * contenu dans un enregistrement d'identifiant "id" dans la base de donnees,
      * passe en parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
-     * @param numero
-     *            int : un entier representant le score du lien
+     * @param id     int : un entier representant l'identifiant d'un enregistrement de
+     *               la base de donnees
+     * @param numero int : un entier representant le score du lien
      * @return int : un entier contenant le rang du lien de numero passe en
-     *         parametre associe a l'enregistrement courant
+     * parametre associe a l'enregistrement courant
      */
     public static int recuperationScoreNumero(int id, int numero) {
         Vector vecteurRang = GestionBDD
@@ -532,13 +504,11 @@ public class Enregistrement {
      * contenu dans un enregistrement d'identifiant "id" dans la base de donnees,
      * passe en parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
-     * @param numero
-     *            int : un entier representant le numero du lien
+     * @param id     int : un entier representant l'identifiant d'un enregistrement de
+     *               la base de donnees
+     * @param numero int : un entier representant le numero du lien
      * @return int : un entier contenant le score du lien de numero passe en
-     *         parametre associe a l'enregistrement courant
+     * parametre associe a l'enregistrement courant
      */
     public static Lien recuperationLienNumero(int id, int numero) {
         String url = recuperationUrlNumero(id, numero);
@@ -555,11 +525,10 @@ public class Enregistrement {
      * enregistrement d'identifiant "id" dans la base de donnees, passe en
      * parametre.
      *
-     * @param id
-     *            int : un entier representant l'identifiant d'un enregistrement de
-     *            la base de donnees
+     * @param id int : un entier representant l'identifiant d'un enregistrement de
+     *           la base de donnees
      * @return Vector : un vecteur de Liens contenant les liens associe a
-     *         l'enregistrement courant
+     * l'enregistrement courant
      */
     public static Vector recuperationLiens(int id) {
         Vector liens = new Vector();
@@ -574,8 +543,7 @@ public class Enregistrement {
     /**
      * Retourne l'enregistrement d'identifiant "id", passe en parametre.
      *
-     * @param id
-     *            int
+     * @param id int
      * @return Enregistrement
      */
     public static Enregistrement recuperationEnregistrement(int id) {
@@ -592,7 +560,7 @@ public class Enregistrement {
      * donnees.
      *
      * @return Vector : un vecteur d'Enregistrement contenant les enregistrements de
-     *         la base de donnees.
+     * la base de donnees.
      */
     public static Vector recuperationEnregistrements() {
         Vector ensEnregistrements;
@@ -616,7 +584,7 @@ public class Enregistrement {
      * @return String : une chaine de caracteres
      */
     public String toXhtml(boolean reponsesClient) {
-        String xHtml = "		<div id=\"body\">\n" + "<h1> R�sultats de la recherche : "
+        String xHtml = "		<div id=\"body\">\n" + "<h1> Resultats de la recherche : "
                 + this.motsCles.replace("&", "&amp;") + "</h1>\n";
         if (reponsesClient == false)
             xHtml += "<br/><h3>Les autres agents n'ayant pas repondu, les reponses affichees sont celles du tri local</h3>";
@@ -624,9 +592,9 @@ public class Enregistrement {
                 + "				<li><a href=\"index.html\">Recherche</a></li>\n"
                 + "				<li><a href=\"apropos.html\">A Propos</a></li>\n"
                 + "				<li><a href=\"aide.html\">Aide</a></li>\n"
-                + " 				<li><a href=\"stoppeAgent.html\">Arr�t du serveur</a></li>" + "			</ul>\n"
+                + " 				<li><a href=\"stoppeAgent.html\">Arret du serveur</a></li>" + "			</ul>\n"
                 + "			<p>\n"
-                + "				<a href=\"licence.html\">CopyLeft</a> &copy; M�ta-moteur Staff 2006\n"
+                + "				<a href=\"licence.html\">CopyLeft</a> &copy; Meta-moteur Staff 2006\n"
                 + "			</p>\n" + "	</div>\n" + "	</div>\n" + "</body>\n" + "</html>\n";
         String liensXhtml = "";
         for (int i = 0; i < this.liens.size(); i++) {
@@ -660,7 +628,7 @@ public class Enregistrement {
                 + "Url20,   Title20   ,   Desc20   ,   Rank20   ,   Select20   ," + "TimeQuery) VALUES (" + "'0', " + // Id
                 // =
                 // 0
-                // auto-incr�ment
+                // auto-increment
                 // automatique
                 "'" + this.motsCles + "', ";
         String patternLiens = "";
@@ -693,7 +661,7 @@ public class Enregistrement {
         String xmlStop = "</list></search>";
 
         String xmlLiens = "";
-        // le rang ici est trait� selon la variable rang
+        // le rang ici est traite selon la variable rang
         for (int i = 0; i < this.liens.size(); i++) {
             Lien enr = (Lien) this.liens.elementAt(i);
             String xmlLien = enr.toXml();
@@ -711,5 +679,4 @@ public class Enregistrement {
         String affichage = this.id + this.motsCles.toString() + this.liens;
         return affichage;
     }
-
 }

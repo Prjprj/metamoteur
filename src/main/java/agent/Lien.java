@@ -31,7 +31,7 @@ import java.net.URLDecoder;
  * description, - d'un rang.
  *
  * @author Jeremy FRECHARD
- * @author C�cile GIRARD
+ * @author Cecile GIRARD
  * @author Aysel GUNES
  * @author Pierre RAMOS
  * @version 1.0
@@ -200,9 +200,9 @@ public class Lien {
         // affichage du lien en xhtml !!!
         xHtml = xHtml + "<h2><a href=\"" + "redirect.html?" + this.url.replace("&", "&amp;") + "\" title=\""
                 + this.titre + "\">" + this.titre + "</a>";
-        // affichage du score en �toile
+        // affichage du score en etoile
         if (this.score > 0) {
-            xHtml = xHtml + " <img src=\"images/etoile.png\" alt=\"�toile\" />";
+            xHtml = xHtml + " <img src=\"images/etoile.png\" alt=\"etoile\" />";
         }
         xHtml = xHtml + "</h2>\n<p>\n";
         // affichage du descriptif
