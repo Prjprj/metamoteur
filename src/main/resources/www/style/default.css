@@ -1,11 +1,7 @@
 /*
- *--------------
- * style.css
- *--------------
- 
- * This file is part of "Méta-moteur".
+ * This file is part of "MÃ©ta-moteur".
  *
- * (c) Méta-moteur 2005-2006. All Rights Reserved.
+ * (c) MÃ©ta-moteur 2005-2006. All Rights Reserved.
  *
  * --LICENSE NOTICE--
  * This program is free software; you can redistribute it and/or
@@ -23,6 +19,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * --LICENSE NOTICE--
  */
+
 /**
  *
  * @author Jeremy Frechard
@@ -33,7 +30,7 @@
 
 
 /**
- * Ce fichier décrit la mise en place des éléments XHTML
+ * Ce fichier dÃ©crit la mise en place des Ã©lÃ©ments XHTML
  */
 
 body { 
@@ -205,7 +202,7 @@ a:visited { color: #800080; }
 a img { border: 0; }
 a img:active { border: 0; }
 
-/* Spécial */
+/* SpÃ©cial */
 span.highlight { color: #abd6f1; }
 span.hide { display: none; }
 span.underline { text-decoration: underline; }
