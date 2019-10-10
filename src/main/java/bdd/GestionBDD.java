@@ -22,10 +22,13 @@ package bdd;
  * --LICENSE NOTICE--
  */
 
-import java.util.Vector;
-import java.sql.*;
+import agent.Agent;
+import agent.Enregistrement;
+import agent.GestionMessage;
+import agent.Lien;
 
-import agent.*;
+import java.sql.*;
+import java.util.Vector;
 
 /**
  * Classe contenant toutes les methodes de gestion de base de donnees Mysql
@@ -373,7 +376,7 @@ public class GestionBDD {
     }
 
     /**
-     * Methode permettant d'arr�ter la base HSQL
+     * Methode permettant d'arreter la base HSQL
      *
      * @param connection Connection : La connection
      */
