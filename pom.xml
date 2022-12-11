@@ -5,6 +5,7 @@
     <artifactId>MetaMoteur</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <!-- Documentation -->
     <name>Méta-Moteur</name>
     <description>Méta-Moteur de recherche orienté communauté</description>
     <developers>
@@ -41,6 +42,28 @@
             </roles>
         </developer>
     </developers>
+
+    <!-- Dépendances -->
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Build -->
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
@@ -101,6 +124,8 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Reporting -->
     <reporting>
         <plugins>
             <plugin>
@@ -117,22 +142,4 @@
             </plugin>
         </plugins>
     </reporting>
-    <dependencies>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>3.1.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>
