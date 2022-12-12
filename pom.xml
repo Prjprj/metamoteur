@@ -42,10 +42,6 @@
             </roles>
         </developer>
     </developers>
-         
-    <properties>
-        <maven.compiler.release>11</maven.compiler.release>
-    </properties>
 
     <!-- Dépendances -->
     <dependencies>
@@ -79,9 +75,6 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
