@@ -5,6 +5,7 @@
 
 trigger:
 - reorg-code
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
