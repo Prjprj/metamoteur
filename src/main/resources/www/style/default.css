@@ -1,0 +1,208 @@
+/*
+ * This file is part of "Méta-moteur".
+ *
+ * (c) Méta-moteur 2005-2006. All Rights Reserved.
+ *
+ * --LICENSE NOTICE--
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * --LICENSE NOTICE--
+ */
+
+/**
+ *
+ * @author Jeremy Frechard
+ * @author Cecile Girard
+ * @author Aysel Gunes
+ * @author Pierre Ramos
+ */
+
+
+/**
+ * Ce fichier décrit la mise en place des éléments XHTML
+ */
+
+body { 
+		padding: 0; 
+		margin: 0; 
+		font-size: 12px; 
+		font-family: tahoma, sans-serif; 
+		letter-spacing: 1px; 
+		line-height: 160%; 
+		background: #cdcdcd; 
+		color: #454545; 
+		}
+
+div { 
+		text-align: left; 
+		}
+
+#conteiner { 
+		width: 730px; 
+		padding: 25px; 
+		background: #fff; 
+		margin-left: auto; 
+		margin-right: auto; 
+		}
+
+#header { 
+		height: 45px; 
+		}
+		
+#logo {	
+		width: 186px; 
+		float: left; 
+		}
+		
+#search {
+		padding-top: 50px;
+		padding-left: 8px;
+		width: 400px;
+		float: left;
+		color: #fff;
+		}
+		
+fieldset { 
+		padding: 0; 
+		border: 0; 
+		}
+		
+#bar { 
+		clear: both; 
+		background: #cdcdcd; 
+		height: 25px; 
+		}
+		
+#top { 
+		background: url("../images/top.png") 100% 0 no-repeat #505050; 
+		height: 200px; 
+		clear: both; 
+		}
+		
+#body { 
+		clear: both; 
+		margin-bottom: 15px; 
+		margin-top: 15px; 
+		}
+		
+#footer { 
+		clear: both; 
+		padding-top: 5px; 
+		}
+		
+div.block, div.blockDistinct { 
+		padding: 10px; 
+		padding-bottom: 3px; 
+		padding-top: 8px; 
+		}
+		
+div.blockDistinct { 
+		background: url("../images/corner.png") no-repeat 100% 100% #f5f5f5; 
+		}
+		
+h1, h2 { 
+		margin: 0; 
+		margin-bottom: 10px; 
+		padding: 0; 
+		font-weight: normal; 
+		font-size: 25px; 
+		}
+		
+#top h1 { 
+		color: #fff; 
+		padding-left: 25px; 
+		padding-top: 65px; 
+		line-height: 110%;
+		}
+		
+h2 { 	
+		font-size: 16px; 
+		margin-bottom: 5px; 
+		color: #000; 
+		}
+		
+p {		margin: 0; 
+		margin-bottom: 5px; 
+		}
+		
+p.right { 
+		text-align: right; 
+		}
+		
+#footer p {	
+		clear: both; 
+		color: #c0c0c0; 
+		font-size: 11px; 
+		}
+		
+form { 
+		margin: 0; 
+		}
+		
+legend { 
+		display: none; 
+		}
+	
+	
+input {
+	color : #000;
+	font-family : Verdana,Arial,Helvetica,sans-serif;
+	font-size : 1em;
+	border-width : 1px;
+}
+
+#recherche{
+		position: relative;
+		top: 0px;
+		width: 16em;
+		background: #eef3f5 url("../images/search.png") no-repeat 2% 50%;
+		padding: 2px 44px;
+}
+
+input.submit {
+	padding: 2px 0px;
+	border-style : outset;
+	background : #d2e0e6;
+	font-weight : bold;
+}
+
+input.submit:hover, input.submit:focus {
+	background : #fc3;
+}
+
+input.submit:active {
+	border-style : inset;
+}
+
+	
+	
+ul { margin: 0; padding : 0; list-style : none; }
+#bar li { margin: 0; padding: 0; padding-top: 3px; padding-bottom: 4px;	padding-left: 10px;	padding-right: 10px; border-right: 1px solid #fff; float: left; }
+#bar li.active { background: #505050; color: #fff; padding-bottom: 4px; }
+#footer li { float: left; padding: 0; height: 15px;	vertical-align: middle;	padding-right: 25px;	font-size: 11px; }
+/* Liens */
+a:link, a:active, a:visited { text-decoration: none; }
+a:link, a:active { color: #0080c0; }
+a:visited { color: #800080; }
+
+#bar a:link, #bar a:active, #bar a:visited { color: #000; } 
+
+/* Images */
+a img { border: 0; }
+a img:active { border: 0; }
+
+/* Spécial */
+span.highlight { color: #abd6f1; }
+span.hide { display: none; }
+span.underline { text-decoration: underline; }
