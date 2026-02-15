@@ -1,0 +1,51 @@
+spring:
+  profiles:
+    active: test
+
+  # H2 in-memory pour les tests
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+  # Cache désactivé pour tests
+  cache:
+    type: none
+
+  # Flyway désactivé pour tests (utilise ddl-auto)
+  flyway:
+    enabled: false
+
+# Test configuration
+google:
+  search:
+    api-key: test-api-key
+    engine-id: test-engine-id
+    max-results: 10
+
+jsoup:
+  enabled: false
+
+metamoteur:
+  security:
+    rate-limit:
+      requests-per-minute: 100
+  search:
+    similarity-threshold: 0.7
+    history-retention-days: 1
+
+logging:
+  level:
+    root: INFO
+    com.metamoteur: DEBUG
+    org.springframework.test: DEBUG

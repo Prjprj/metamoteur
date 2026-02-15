@@ -1,0 +1,39 @@
+📝 FICHIERS JAVA INCLUS:
+
+src/main/java/com/metamoteur/MetaMoteurApplication.java
+src/main/java/com/metamoteur/client/GoogleSearchClient.java
+src/main/java/com/metamoteur/client/SearchProvider.java
+src/main/java/com/metamoteur/config/SecurityConfig.java
+src/main/java/com/metamoteur/controller/AgentController.java
+src/main/java/com/metamoteur/controller/SearchController.java
+src/main/java/com/metamoteur/dto/ErrorResponse.java
+src/main/java/com/metamoteur/dto/PagedSearchResponse.java
+src/main/java/com/metamoteur/dto/SearchRequest.java
+src/main/java/com/metamoteur/dto/SearchResponse.java
+src/main/java/com/metamoteur/dto/SearchResultDTO.java
+src/main/java/com/metamoteur/entity/Search.java
+src/main/java/com/metamoteur/entity/SearchResult.java
+src/main/java/com/metamoteur/exception/GlobalExceptionHandler.java
+src/main/java/com/metamoteur/exception/InvalidSearchQueryException.java
+src/main/java/com/metamoteur/exception/MetaMoteurException.java
+src/main/java/com/metamoteur/repository/SearchRepository.java
+src/main/java/com/metamoteur/repository/SearchResultRepository.java
+src/main/java/com/metamoteur/service/PermutationService.java
+src/main/java/com/metamoteur/service/SearchOrchestrator.java
+src/main/java/com/metamoteur/service/SearchService.java
+src/test/java/com/metamoteur/service/SearchServiceTest.java
+
+📦 FICHIERS DE CONFIGURATION:
+.env.example
+.gitignore
+Dockerfile
+LISEZMOI.txt
+README.md
+docker-compose.yml
+pom.xml
+
+🗄️ MIGRATIONS SQL:
+src/main/resources/db/migration/V1__initial_schema.sql
+
+⚙️ CONFIGURATION SPRING:
+src/main/resources/application.yml

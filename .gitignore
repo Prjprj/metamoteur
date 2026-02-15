@@ -1,6 +1,26 @@
-/target/
-/bin/
-/MetaMoteur.log
-/db/
-/.idea/
-/settings/
+# Compiled
+*.class
+target/
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# Log files
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Application
+.env
+.env.local
+application-local.yml
+logs/
