@@ -35,7 +35,11 @@ import java.util.Vector;
  * @see RequeteHTTP
  */
 public class OptionRequeteHTTP {
+
+    /** Nom de l'en-tete HTTP de la requete (ex. {@code User-Agent}, {@code Host}). */
     private String nom;
+
+    /** Valeur associee a l'en-tete HTTP (ex. {@code MetaBot/1.0}). */
     private String valeur;
 
     /**
