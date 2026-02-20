@@ -51,35 +51,27 @@ public class Client {
      * @return retourne la reponse du serveur contacte
      */
     public static String envoiRequeteGET(String adresse) {
-        URL url;
-        HttpURLConnection conn;
-        BufferedReader rd;
-        String line;
         String result = "";
         try {
-            // recuperation de l'url sur laquelle adresser la requete
-            url = new URL(adresse);
-            // ouverture de la connection HTTP
-            conn = (HttpURLConnection) url.openConnection();
+            URL url = new URL(adresse);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             // mise en place du timeout sur la requete
             //conn.setConnectTimeout(Agent.TimeOutMoteurRecherche);
             // ajout d'un user-agent pour eviter une erreur 403 sur google
             conn.setRequestProperty("User-Agent", "MetaBot/1.0");
-            // choix du type de la methode
             conn.setRequestMethod("GET");
-            // ouverture des flux de recuperation de la reponse
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            // recuperation de la reponse du serveur contacte
-            while ((line = rd.readLine()) != null) {
-                result += line;
+            // lecture de la reponse en try-with-resources pour garantir la fermeture
+            try (BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                String line;
+                while ((line = rd.readLine()) != null) {
+                    result += line;
+                }
+            } finally {
+                conn.disconnect();
             }
-            // fermeture du flux
-            rd.close();
         } catch (Exception e) {
-            // affichage d'un message en cas d'erreur
             GestionMessage.message(1, "Client", "Erreur pour la requete GET : " + adresse + ", " + e);
         }
-        // renvoi du resultat de la requete
         return result;
     }
 

@@ -174,42 +174,12 @@ public class GestionMessage {
      * @param message String le message a traiter
      */
     private static void ecrireDansFichier(String message) {
-        FileWriter fw = null;
-        BufferedWriter output = null;
-        try {
-            // BufferedWriter a besoin d un FileWriter,
-            // les 2 vont ensemble, on donne comme argument le nom du fichier
-            // true signifie qu on ajoute dans le fichier (append), on ne marque pas par
-            // dessus
-            fw = new FileWriter(Agent.CONFIG.getFichierLog(), true);
-
-            // le BufferedWriter output auquel on donne comme argument le FileWriter fw cree
-            // juste au dessus
-            output = new BufferedWriter(fw);
-
-            // on marque dans le BufferedWriter qui sert
-            // comme un tampon(stream)
-
+        // true = mode append, on ne marque pas par dessus
+        try (BufferedWriter output = new BufferedWriter(new FileWriter(Agent.CONFIG.getFichierLog(), true))) {
             output.write(message);
             output.newLine();
-            output.flush();
-            // ensuite flush envoie dans le fichier
-            output.close();
-        }
-        // on "catch" l exception ici si il y en a une, et on l affiche sur la console
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println("[ERR] - " + dateFormat() + " - GestionMessage - " + ioe);
-        } finally {
-            try {
-                output.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                fw.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }

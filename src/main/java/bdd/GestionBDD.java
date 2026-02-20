@@ -130,55 +130,38 @@ public class GestionBDD {
      * de chaque champ de la base
      */
     public static Vector envoiRequete(String requete) {
-        // connection a la base de donnees
-        Connection connection = connectionBDD();
         // creation du vecteur qui sera retourne
         Vector retour = new Vector();
-        try {
-            // preparation de la requete
+        try (Connection connection = connectionBDD()) {
+            if (connection == null) {
+                GestionMessage.message(2, "GestionBDD", "Connexion indisponible pour la requete : " + requete);
+                return retour;
+            }
             try (Statement statement = connection.createStatement()) {
                 // en cas de requete SELECT il faut recuperer le resultat
                 if (requete.substring(0, requete.indexOf(' ')).equals("SELECT")) {
-                    // recuperation du resultat de la requete
                     try (ResultSet resultats = statement.executeQuery(requete)) {
-                        // recuperation des metadonnees sur les resultats
                         ResultSetMetaData meta = resultats.getMetaData();
-                        // recuperation du nombre de colonnes a traiter
                         int taille = meta.getColumnCount();
-                        // parcours de l'iterateur de resultats
                         while (resultats.next()) {
-                            // creation d'un sous vecteur representant une entree dans la base de donnees
                             Vector temp = new Vector();
-                            // parcours des champs de l'entree de la base
                             for (int i = 1; i <= taille; i++) {
-                                // ajout des champs au sous vecteur
                                 temp.add(resultats.getObject(i));
                             }
-                            // ajout du sous vecteur au vecteur a renvoyer
                             retour.add(temp);
                         }
-                        // fermeture de l'iterateur
-                        resultats.close();
                     }
                 } else {
-                    // execution de la requete
                     statement.execute(requete);
                 }
-                // liberation de la memoire utilisee pour la requete
-                statement.close();
             }
             if (Agent.CONFIG.getTypeBDD().equals("HSQL")) {
                 shutdownHSQL(connection);
             }
-            connection.close();
-            // affichage d'un message d'information
             GestionMessage.message(0, "GestionBDD", "requete " + requete + " envoyee");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            // affichage d'un message en cas d'erreur
-            GestionMessage.message(2, "GestionBDD", "Erreur d'envoi de la requete " + requete);
+            GestionMessage.message(2, "GestionBDD", "Erreur d'envoi de la requete " + requete + " : " + e.getMessage());
         }
-        // renvoi du vecteur resultat
         return retour;
     }
 
@@ -209,31 +192,21 @@ public class GestionBDD {
      * en entree
      */
     public static String construitInsert(String table, String valeurs) {
-        Connection connection = connectionBDD();
         Vector retour = new Vector();
-        int offset = 0;
-        try {
-            // recuperation d'un vecteur contenant le nom des colonnes de la table dans
-            // laquelle l'insertion doit etre operee
-            try (Statement statement = connection.createStatement()) {
-                // envoi d'une requete quelconque sur la table pour en recuperer les noms de
-                // colonnes
-                try (ResultSet resultats = statement.executeQuery("SELECT * FROM " + table)) {
-                    // recuperation des metadonnees sur la table
+        try (Connection connection = connectionBDD()) {
+            if (connection == null) {
+                GestionMessage.message(2, "GestionBDD", "Connexion indisponible pour construitInsert");
+            } else {
+                // Recuperation des noms de colonnes de la table cible
+                try (Statement statement = connection.createStatement();
+                     ResultSet resultats = statement.executeQuery("SELECT * FROM " + table)) {
                     ResultSetMetaData meta = resultats.getMetaData();
-                    // recuperation du nombre de colonnes
                     int taille = meta.getColumnCount();
-                    for (int i = 1 + offset; i <= taille; i++)
-                        // recuperation du nom des colonnes
+                    for (int i = 1; i <= taille; i++)
                         retour.add(meta.getColumnName(i));
-                    // liberation de la memoire necessaire a la requete
-                    resultats.close();
                 }
-                statement.close();
             }
-            connection.close();
         } catch (SQLException e) {
-            // affichage d'un message en cas d'erreur
             GestionMessage.message(2, "GestionBDD", "Erreur lors de l'acces a la base de donnees pour un insert");
         }
         // creation d'une String pour construire la requete
@@ -246,7 +219,6 @@ public class GestionBDD {
             if (i < taille - 1)
                 col += ",";
         }
-        System.out.println("INSERT INTO " + table + " (" + col + ") VALUES (" + valeurs + ")");
         return ("INSERT INTO " + table + " (" + col + ") VALUES (" + valeurs + ")");
     }
 
@@ -444,11 +416,11 @@ public class GestionBDD {
      * @return retourne true si le serveur MySQL repond, false sinon
      */
     public static boolean testBDD() {
-        // tentative de connection a la base
-        Connection res = GestionBDD.connectionBDD();
-        if (res == null)
-            return (false);
-        else
-            return (true);
+        try (Connection conn = GestionBDD.connectionBDD()) {
+            return conn != null;
+        } catch (SQLException e) {
+            GestionMessage.message(2, "GestionBDD", "Erreur lors du test de connexion : " + e.getMessage());
+            return false;
+        }
     }
 }
