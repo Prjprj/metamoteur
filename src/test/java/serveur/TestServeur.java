@@ -23,6 +23,7 @@ package serveur;
  */
 
 import agent.Agent;
+import agent.AppConfigLoader;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -40,7 +41,7 @@ public class TestServeur {
     @Test
     @Ignore
     public void runTestServeur() {
-        new Agent();
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
         Serveur.service();
     }
 }

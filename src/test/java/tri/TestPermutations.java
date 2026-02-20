@@ -23,6 +23,7 @@ package tri;
  */
 
 import agent.Agent;
+import agent.AppConfigLoader;
 import agent.Enregistrement;
 import agent.Lien;
 import bdd.GestionBDD;
@@ -43,7 +44,7 @@ public class TestPermutations {
 
     @Test
     public void runTestPermutations() {
-        new Agent();
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
 
 //		GestionBDD.envoiRequete("INSERT INTO `bdd` VALUES (1, 'dsds', 'dsds', 'sddsds', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', 0, 0, '0000-00-00');");
         Lien lien2 = new Lien("url&�\"����^�~", "titre", "desc", 1, 0);

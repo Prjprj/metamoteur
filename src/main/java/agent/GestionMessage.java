@@ -65,12 +65,12 @@ public class GestionMessage {
      */
     public static void message(int typeErreur, String classeEmetrice, String message) {
 
-        switch (Agent.Debug) {
+        switch (Agent.CONFIG.getDebug()) {
             case 0: // on fait rien ;)
                 break;
             case 1: // WAR
                 if (typeErreur >= 2) { // WAR
-                    switch (Agent.Sortie) {
+                    switch (Agent.CONFIG.getSortie()) {
                         case 0: // aucun message
                             break;
                         case 1: // fichierLog
@@ -88,7 +88,7 @@ public class GestionMessage {
                 break;
             case 2: // ERR + WAR
                 if (typeErreur >= 1) { // ERR + WAR
-                    switch (Agent.Sortie) {
+                    switch (Agent.CONFIG.getSortie()) {
                         case 0: // aucun message
                             break;
                         case 1: // fichierLog
@@ -105,7 +105,7 @@ public class GestionMessage {
                 }
                 break;
             default: // ERR + WAR + MES
-                switch (Agent.Sortie) {
+                switch (Agent.CONFIG.getSortie()) {
                     case 0: // aucun message
                         break;
                     case 1: // fichierLog
@@ -181,7 +181,7 @@ public class GestionMessage {
             // les 2 vont ensemble, on donne comme argument le nom du fichier
             // true signifie qu on ajoute dans le fichier (append), on ne marque pas par
             // dessus
-            fw = new FileWriter(Agent.FichierLog, true);
+            fw = new FileWriter(Agent.CONFIG.getFichierLog(), true);
 
             // le BufferedWriter output auquel on donne comme argument le FileWriter fw cree
             // juste au dessus

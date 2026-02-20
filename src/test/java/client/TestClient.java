@@ -23,6 +23,7 @@ package client;
  */
 
 import agent.Agent;
+import agent.AppConfigLoader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -49,18 +50,18 @@ public class TestClient {
 
     @After
     public void tearDown() throws Exception {
-        new Agent();
-        Client.envoiRequeteGET("http://localhost:" + Agent.PortServeur + "/stoppeAgent.html");
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
+        Client.envoiRequeteGET("http://localhost:" + Agent.CONFIG.getPortServeur() + "/stoppeAgent.html");
     }
 
     @Test
     @Ignore
     public void runClientTests() {
-        new Agent();
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
         // tentative de requetes sur le serveur HTTP installe sur la machine du testeur
-        String res = Client.envoiRequeteGET("http://localhost:" + Agent.PortServeur);
+        String res = Client.envoiRequeteGET("http://localhost:" + Agent.CONFIG.getPortServeur());
         assertNotNull(res);
-        String res2 = Client.envoiRequetePOST("localhost", "/", "essai", Agent.PortServeur);
+        String res2 = Client.envoiRequetePOST("localhost", "/", "essai", Agent.CONFIG.getPortServeur());
         assertNotNull(res2);
     }
 }

@@ -250,47 +250,50 @@ public class TraitementRequete extends Thread {
                         // verification si la case representant Google est cochee
                         if (this.requete.getSuiteRequete().contains(new String("moteur2"))) {
                             int rep = 0;
+                            String[] moteursConfig = Agent.CONFIG.getMoteurs();
                             // parcours du vecteur contenant les informations sur les moteurs de recherche
-                            for (int i = 0; i < Agent.Moteurs.length; i++) {
-                                if (Agent.Moteurs[i].equals("Google")) {
+                            for (int i = 0; i < moteursConfig.length; i++) {
+                                if (moteursConfig[i].equals("Google")) {
                                     rep = i + 1;
                                     // recuperation du nom du moteur de recherche
-                                    moteur.add(Agent.Moteurs[i]);
+                                    moteur.add(moteursConfig[i]);
                                     break;
                                 }
                             }
                             // recuperation de l'url de contact du moteur de recherche
-                            adresse.add(Agent.Moteurs[rep]);
+                            adresse.add(moteursConfig[rep]);
                         }
                         // verification si la case representant Yahoo est cochee
                         if (this.requete.getSuiteRequete().contains(new String("moteur3"))) {
                             int rep = 0;
+                            String[] moteursConfig = Agent.CONFIG.getMoteurs();
                             // parcours du vecteur contenant les informations sur les moteurs de recherche
-                            for (int i = 0; i < Agent.Moteurs.length; i++) {
-                                if (Agent.Moteurs[i].equals("Yahoo")) {
+                            for (int i = 0; i < moteursConfig.length; i++) {
+                                if (moteursConfig[i].equals("Yahoo")) {
                                     rep = i + 1;
                                     // recuperation du nom du moteur de recherche
-                                    moteur.add(Agent.Moteurs[i]);
+                                    moteur.add(moteursConfig[i]);
                                     break;
                                 }
                             }
                             // recuperation de l'url de contact du moteur de recherche
-                            adresse.add(Agent.Moteurs[rep]);
+                            adresse.add(moteursConfig[rep]);
                         }
                         // verification si la case representant Altavista est cochee
                         if (this.requete.getSuiteRequete().contains(new String("moteur4"))) {
                             int rep = 0;
+                            String[] moteursConfig = Agent.CONFIG.getMoteurs();
                             // parcours du vecteur contenant les informations sur les moteurs de recherche
-                            for (int i = 0; i < Agent.Moteurs.length; i++) {
-                                if (Agent.Moteurs[i].equals("AltaVista")) {
+                            for (int i = 0; i < moteursConfig.length; i++) {
+                                if (moteursConfig[i].equals("AltaVista")) {
                                     rep = i + 1;
                                     // recuperation du nom du moteur de recherche
-                                    moteur.add(Agent.Moteurs[i]);
+                                    moteur.add(moteursConfig[i]);
                                     break;
                                 }
                             }
                             // recuperation de l'url de contact du moteur de recherche
-                            adresse.add(Agent.Moteurs[rep]);
+                            adresse.add(moteursConfig[rep]);
                         }
                         String url = "";
                         Enregistrement enr = new Enregistrement();
@@ -319,10 +322,11 @@ public class TraitementRequete extends Thread {
                             enr.setKeywords(URLDecoder.decode(motsCle, "ISO-8859-1"));
                             Vector reponses = new Vector();
                             // verification que la liste des agents est non vide
-                            if (!Agent.Contacts[0].equals("")) {
+                            String[] contactsConfig = Agent.CONFIG.getContacts();
+                            if (!contactsConfig[0].equals("")) {
                                 // parcours de la liste des agents pour les contacter
-                                for (int i = 0; i < Agent.Contacts.length; i++) {
-                                    String adresseAgent = Agent.Contacts[i];
+                                for (int i = 0; i < contactsConfig.length; i++) {
+                                    String adresseAgent = contactsConfig[i];
                                     // construction des arguments pour la requete
                                     int port = Integer.parseInt(adresseAgent.substring(adresseAgent.indexOf(":") + 1));
                                     adresseAgent = adresseAgent.substring(0, adresseAgent.indexOf(":"));

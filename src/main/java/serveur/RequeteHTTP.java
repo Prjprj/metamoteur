@@ -109,7 +109,7 @@ public class RequeteHTTP {
         if (!this.fichierPointe.toString().endsWith("/"))
             return (this.fichierPointe.toString());
         else
-            return (this.fichierPointe.toString() + Agent.PageIndex);
+            return (this.fichierPointe.toString() + Agent.CONFIG.getPageIndex());
     }
 
     /**

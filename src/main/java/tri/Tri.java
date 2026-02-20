@@ -43,17 +43,21 @@ import java.util.Vector;
 
 public class Tri {
 
-    /*
-     * Constante entiere representant le coefficient permettant de promouvoir
-     * l'enregistrement permute de l'agent local.
+    /**
+     * Retourne le coefficient de promotion locale configuré.
+     * Lu depuis {@link agent.AppConfig} au moment de l'appel.
      */
-    final static int COEFF_PROMOTION_LOCALE = Agent.PromLocale;
+    private static int getCoeffPromotionLocale() {
+        return Agent.CONFIG.getPromLocale();
+    }
 
-    /*
-     * Constante entiere representant le coefficient de ponderation attribue pour
-     * l'enregistrement permute des autres agents.
+    /**
+     * Retourne le coefficient de pondération des autres agents configuré.
+     * Lu depuis {@link agent.AppConfig} au moment de l'appel.
      */
-    final static int COEFF_PONDERATION_AA = Agent.CoefPonderation;
+    private static int getCoeffPonderationAA() {
+        return Agent.CONFIG.getCoefPonderation();
+    }
 
     /*
      * Variable de type Enregistrement representant l'enregistrement permute de
@@ -269,10 +273,10 @@ public class Tri {
         Vector rangsAL = getRangsAL();
         Vector resultat = new Vector();
         for (int i = 0; i < getRangsAL().size(); i++) {
-            int promotionAL = COEFF_PROMOTION_LOCALE * ((Integer) rangsAL.elementAt(i)).intValue();
-            int ponderationAA = COEFF_PONDERATION_AA * ((Integer) moyenneRangsAA.elementAt(i)).intValue();
+            int promotionAL = getCoeffPromotionLocale() * ((Integer) rangsAL.elementAt(i)).intValue();
+            int ponderationAA = getCoeffPonderationAA() * ((Integer) moyenneRangsAA.elementAt(i)).intValue();
             int somme = promotionAL + ponderationAA;
-            int denominateur = COEFF_PROMOTION_LOCALE + COEFF_PONDERATION_AA;
+            int denominateur = getCoeffPromotionLocale() + getCoeffPonderationAA();
             resultat = Permutations.ajoutRangMoyen(somme, denominateur, resultat);
         }
         return resultat;

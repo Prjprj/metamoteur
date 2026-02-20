@@ -52,7 +52,7 @@ public class Serveur {
     public static void service() {
         ServerSocket serveur = null;
 
-        port = Agent.PortServeur;
+        port = Agent.CONFIG.getPortServeur();
         ouvertureService();
 
         try {
@@ -123,7 +123,7 @@ public class Serveur {
     public static synchronized void ouvertureService() {
         serveurON = true;
         clientsEnCours = 0;
-        maxClients = Agent.NbThread;
+        maxClients = Agent.CONFIG.getNbThread();
     }
 
     /**

@@ -44,10 +44,13 @@ import java.util.Vector;
 
 public class Permutations {
 
-    /*
-     * Constante reelle permettant de declarer le seuil de similarite.
+    /**
+     * Retourne le seuil de similarite configure.
+     * Lu depuis {@link agent.AppConfig} au moment de l'appel.
      */
-    final static double SEUIL_SIMILARITE = Agent.CoefSim;
+    private static double getSeuilSimilarite() {
+        return Agent.CONFIG.getCoefSim();
+    }
 
     /*
      * Constante entiere permettant de representer un nombre de valeur negative.
@@ -319,7 +322,7 @@ public class Permutations {
                  * Ajout dans la liste des Cas sources retenus a la seule condition que la
                  * variable "similarite" depasse ou soit egale au seuil de similarite.
                  */
-                if (similarite >= SEUIL_SIMILARITE) {
+                if (similarite >= getSeuilSimilarite()) {
                     resultat.addElement(casSrc);
                     test = true;
                 }
@@ -665,7 +668,7 @@ public class Permutations {
                         vecteurDescMR = convertStringToVector(descMR);
                         vecteurSousDesc = convertStringToVector(sousDesc);
                         similarite = calculSimilarite(vecteurSousDesc, vecteurDescMR);
-                        if (similarite >= SEUIL_SIMILARITE) {
+                        if (similarite >= getSeuilSimilarite()) {
                             sommeRangs = sommeRangs + sousRang;
                             compteur = compteur + 1;
 

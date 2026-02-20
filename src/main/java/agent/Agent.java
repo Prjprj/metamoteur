@@ -38,149 +38,58 @@ import serveur.Serveur;
 
 public class Agent {
 
-    // variables d'un agent et leur configuration par defaut
-    public static String FichierConf = "metaMoteur.conf";
+    /** Chemin vers le fichier de configuration. */
+    public static final String FichierConf = "metaMoteur.conf";
 
-    public static String HostBDD;
-
-    public static String UserBDD;
-
-    public static String PassBDD;
-
-    public static String BaseBDD;
-
-    public static String TableBDD;
-
-    public static String TypeBDD;
-
-    public static int Sortie = 3;
-
-    public static int Debug = 3;
-
-    public static int PromLocale = 2;
-
-    public static int CoefPonderation = 1;
-
-    public static double CoefSim = 0.7;
-
-    public static String FichierLog = "metaMoteur.log";
-
-    public static int PortServeur = 8080;
-
-    public static int NbThread = 5;
-
-    public static String PageIndex = "index.html";
-
-    public static String Path = "/www/";
-
-    public static String[] Moteurs;
-
-    public static String[] Contacts;
-
-    /*
-     * Constructeur de l'agent ( initialise les variables )
+    /**
+     * Configuration immuable de l'application.
+     * Initialisée au démarrage via {@link AppConfigLoader} dans {@link #main(String[])}.
+     * Remplace les anciens champs statiques mutables.
      */
-    public Agent() {
+    public static AppConfig CONFIG;
 
-        if (!ConfigParser.GetProperty("HostBDD").contentEquals("")) {
-            HostBDD = ConfigParser.GetProperty("HostBDD");
-        }
-        if (!ConfigParser.GetProperty("UserBDD").contentEquals("")) {
-            UserBDD = ConfigParser.GetProperty("UserBDD");
-        }
-        if (!ConfigParser.GetProperty("PassBDD").contentEquals("")) {
-            PassBDD = ConfigParser.GetProperty("PassBDD");
-        }
-        if (!ConfigParser.GetProperty("BaseBDD").contentEquals("")) {
-            BaseBDD = ConfigParser.GetProperty("BaseBDD");
-        }
-        if (!ConfigParser.GetProperty("TableBDD").contentEquals("")) {
-            TableBDD = ConfigParser.GetProperty("TableBDD");
-        }
-        if (!ConfigParser.GetProperty("TypeBDD").contentEquals("")) {
-            TypeBDD = ConfigParser.GetProperty("TypeBDD");
-        }
-        if (!ConfigParser.GetProperty("Sortie").contentEquals("")) {
-            Sortie = Integer.parseInt(ConfigParser.GetProperty("Sortie"));
-        }
-        if (!ConfigParser.GetProperty("Debug").contentEquals("")) {
-            Debug = Integer.parseInt(ConfigParser.GetProperty("Debug"));
-        }
-        if (!ConfigParser.GetProperty("FichierLog").contentEquals("")) {
-            FichierLog = ConfigParser.GetProperty("FichierLog");
-        }
-        if (!ConfigParser.GetProperty("PromLocale").contentEquals("")) {
-            PromLocale = Integer.parseInt(ConfigParser.GetProperty("PromLocale"));
-        }
-        if (!ConfigParser.GetProperty("CoefPonderation").contentEquals("")) {
-            CoefPonderation = Integer.parseInt(ConfigParser.GetProperty("CoefPonderation"));
-        }
-        if (!ConfigParser.GetProperty("CoefSim").contentEquals("")) {
-            CoefSim = Double.parseDouble(ConfigParser.GetProperty("CoefSim"));
-        }
-        if (!ConfigParser.GetProperty("PortServeur").contentEquals("")) {
-            PortServeur = Integer.parseInt(ConfigParser.GetProperty("PortServeur"));
-        }
-        if (!ConfigParser.GetProperty("NbThread").contentEquals("")) {
-            NbThread = Integer.parseInt(ConfigParser.GetProperty("NbThread"));
-        }
-        if (!ConfigParser.GetProperty("PageIndex").contentEquals("")) {
-            PageIndex = ConfigParser.GetProperty("PageIndex");
-        }
-        if (!ConfigParser.GetProperty("Path").contentEquals("")) {
-            Path = ConfigParser.GetProperty("Path");
-        }
-        if (!ConfigParser.GetProperty("Moteurs").contentEquals("")) {
-            Moteurs = ConfigParser.GetProperty("Moteurs").split(" ");
-        } else {
-            Moteurs = new String[1];
-            Moteurs[0] = "";
-        }
-        if (!ConfigParser.GetProperty("Contacts").contentEquals("")) {
-            Contacts = ConfigParser.GetProperty("Contacts").split(" ");
-        } else {
-            Contacts = new String[1];
-            Contacts[0] = "";
-        }
-    }
-
-    public static void main(String args[]) {
-        new Agent();
-        // if(GestionBDD.testBDD()){
+    /**
+     * Point d'entrée de l'application.
+     * Charge la configuration depuis {@link #FichierConf} puis lance le serveur HTTP.
+     *
+     * @param args arguments de la ligne de commande (non utilisés)
+     */
+    public static void main(String[] args) {
+        CONFIG = AppConfigLoader.load(FichierConf);
         Serveur.service();
-        // }
     }
 
     /**
-     * Cette classe permet l'affichage des variables de l'agent
+     * Retourne une représentation textuelle de la configuration courante.
      *
-     * @return String les variables de l'agent
+     * @return String les variables de la configuration
      */
+    @Override
     public String toString() {
-        String agentVariables = "FichierConf = " + FichierConf + "\n";
-        agentVariables += "HostBDD = " + HostBDD + "\n";
-        agentVariables += "UserBDD = " + UserBDD + "\n";
-        agentVariables += "PassBDD = " + PassBDD + "\n";
-        agentVariables += "BaseBDD = " + BaseBDD + "\n";
-        agentVariables += "TableBDD = " + TableBDD + "\n";
-        agentVariables += "TypeBDD = " + TypeBDD + "\n";
-        agentVariables += "Sortie = " + Sortie + "\n";
-        agentVariables += "Debug = " + Debug + "\n";
-        agentVariables += "FichierLog = " + FichierLog + "\n";
-        agentVariables += "PromLocale = " + PromLocale + "\n";
-        agentVariables += "CoefPonderation = " + CoefPonderation + "\n";
-        agentVariables += "CoefSim = " + CoefSim + "\n";
-        agentVariables += "PortServeur = " + PortServeur + "\n";
-        agentVariables += "NbThread = " + NbThread + "\n";
-        agentVariables += "PageIndex = " + PageIndex + "\n";
-        agentVariables += "Path = " + Path + "\n";
-        for (int i = 0; i < Moteurs.length; i++) {
-            agentVariables += "Moteurs = " + Moteurs[i] + "\n";
+        if (CONFIG == null) return "Configuration non chargee";
+        StringBuilder sb = new StringBuilder("FichierConf = ").append(FichierConf).append("\n");
+        sb.append("HostBDD = ").append(CONFIG.getHostBDD()).append("\n");
+        sb.append("UserBDD = ").append(CONFIG.getUserBDD()).append("\n");
+        sb.append("PassBDD = ***\n");
+        sb.append("BaseBDD = ").append(CONFIG.getBaseBDD()).append("\n");
+        sb.append("TableBDD = ").append(CONFIG.getTableBDD()).append("\n");
+        sb.append("TypeBDD = ").append(CONFIG.getTypeBDD()).append("\n");
+        sb.append("Sortie = ").append(CONFIG.getSortie()).append("\n");
+        sb.append("Debug = ").append(CONFIG.getDebug()).append("\n");
+        sb.append("FichierLog = ").append(CONFIG.getFichierLog()).append("\n");
+        sb.append("PromLocale = ").append(CONFIG.getPromLocale()).append("\n");
+        sb.append("CoefPonderation = ").append(CONFIG.getCoefPonderation()).append("\n");
+        sb.append("CoefSim = ").append(CONFIG.getCoefSim()).append("\n");
+        sb.append("PortServeur = ").append(CONFIG.getPortServeur()).append("\n");
+        sb.append("NbThread = ").append(CONFIG.getNbThread()).append("\n");
+        sb.append("PageIndex = ").append(CONFIG.getPageIndex()).append("\n");
+        sb.append("Path = ").append(CONFIG.getPath()).append("\n");
+        for (String m : CONFIG.getMoteurs()) {
+            sb.append("Moteurs = ").append(m).append("\n");
         }
-        for (int i = 0; i < Contacts.length; i++) {
-            agentVariables += "Contacts = " + Contacts[i] + "\n";
+        for (String c : CONFIG.getContacts()) {
+            sb.append("Contacts = ").append(c).append("\n");
         }
-
-        return agentVariables;
+        return sb.toString();
     }
 }

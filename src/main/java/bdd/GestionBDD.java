@@ -50,24 +50,24 @@ public class GestionBDD {
      */
     public static Connection connectionBDD() {
         Connection connection = null;
-        if (Agent.TypeBDD.equals("MySQL")) {
+        if (Agent.CONFIG.getTypeBDD().equals("MySQL")) {
             try {
                 // Le driver MySQL est auto-découvert via ServiceLoader depuis Java 6 :
                 // aucune instanciation manuelle nécessaire.
                 connection = DriverManager.getConnection(
-                        "jdbc:mysql://" + Agent.HostBDD + "/" + Agent.BaseBDD + "?useSSL=false&serverTimezone=UTC",
-                        Agent.UserBDD, Agent.PassBDD);
+                        "jdbc:mysql://" + Agent.CONFIG.getHostBDD() + "/" + Agent.CONFIG.getBaseBDD() + "?useSSL=false&serverTimezone=UTC",
+                        Agent.CONFIG.getUserBDD(), Agent.CONFIG.getPassBDD());
             } catch (SQLException e) {
                 GestionMessage.message(2, "GestionBDD", "Erreur de connexion a la base de donnees : " + e.getMessage());
             }
         }
-        if (Agent.TypeBDD.equals("HSQL")) {
+        if (Agent.CONFIG.getTypeBDD().equals("HSQL")) {
             try {
                 // ouverture du pilote de connection avec la base
                 Class.forName("org.hsqldb.jdbc.JDBCDriver");
                 // connection a la base de donnees
-                connection = DriverManager.getConnection("jdbc:hsqldb:file:db/" + Agent.BaseBDD + ";ifexists=false",
-                        Agent.UserBDD, Agent.PassBDD);
+                connection = DriverManager.getConnection("jdbc:hsqldb:file:db/" + Agent.CONFIG.getBaseBDD() + ";ifexists=false",
+                        Agent.CONFIG.getUserBDD(), Agent.CONFIG.getPassBDD());
 
                 String createStatement = "CREATE TABLE IF NOT EXISTS BDD (\n" + "  UID INT ,\n"
                         + "  KEYWORDS VARCHAR(255),\n" + "  URL1 VARCHAR(255),\n" + "  TITLE1 VARCHAR(255),\n"
@@ -167,7 +167,7 @@ public class GestionBDD {
                 // liberation de la memoire utilisee pour la requete
                 statement.close();
             }
-            if (Agent.TypeBDD.equals("HSQL")) {
+            if (Agent.CONFIG.getTypeBDD().equals("HSQL")) {
                 shutdownHSQL(connection);
             }
             connection.close();
@@ -279,7 +279,7 @@ public class GestionBDD {
     public static Boolean insertEnregistrement(Enregistrement enr) {
         // Construction du SQL avec placeholders pour 20 liens maximum
         StringBuilder sql = new StringBuilder("INSERT INTO ");
-        sql.append(Agent.TableBDD);
+        sql.append(Agent.CONFIG.getTableBDD());
         sql.append(" (KEYWORDS");
         for (int i = 1; i <= 20; i++) {
             sql.append(",URL").append(i)
@@ -323,7 +323,7 @@ public class GestionBDD {
             // Parametre 102 : timestamp pour la gestion de la duree de vie
             ps.setString(102, String.valueOf(System.currentTimeMillis()));
             ps.executeUpdate();
-            if (Agent.TypeBDD.equals("HSQL")) {
+            if (Agent.CONFIG.getTypeBDD().equals("HSQL")) {
                 shutdownHSQL(connection);
             }
             GestionMessage.message(0, "GestionBDD", "Enregistrement insere avec succes");
@@ -347,7 +347,7 @@ public class GestionBDD {
     public static Boolean updateURL(String url) {
         // Etape 1 : recherche des UIDs contenant cette URL via PreparedStatement
         StringBuilder findUidSql = new StringBuilder("SELECT UID FROM ");
-        findUidSql.append(Agent.TableBDD).append(" WHERE ");
+        findUidSql.append(Agent.CONFIG.getTableBDD()).append(" WHERE ");
         for (int i = 1; i < 20; i++) {
             findUidSql.append("URL").append(i).append("=? OR ");
         }
@@ -376,7 +376,7 @@ public class GestionBDD {
             StringBuilder selectDetailSql = new StringBuilder(
                     "SELECT UID,URL1,URL2,URL3,URL4,URL5,URL6,URL7,URL8,URL9,URL10,"
                   + "URL11,URL12,URL13,URL14,URL15,URL16,URL17,URL18,URL19,URL20,TIMEQUERY FROM ");
-            selectDetailSql.append(Agent.TableBDD).append(" WHERE ");
+            selectDetailSql.append(Agent.CONFIG.getTableBDD()).append(" WHERE ");
             for (int i = 0; i < uids.size(); i++) {
                 if (i > 0) selectDetailSql.append(" OR ");
                 selectDetailSql.append("UID=?");
@@ -397,7 +397,7 @@ public class GestionBDD {
                                 String urlInRecord = rs.getString("URL" + j);
                                 if (urlInRecord != null && urlInRecord.equals(url)) {
                                     // Etape 3 : increment du compteur de clics
-                                    String updateSql = "UPDATE " + Agent.TableBDD
+                                    String updateSql = "UPDATE " + Agent.CONFIG.getTableBDD()
                                             + " SET SELECT" + j + "=SELECT" + j + "+1 WHERE UID=?";
                                     try (PreparedStatement updatePs = connection.prepareStatement(updateSql)) {
                                         updatePs.setInt(1, uid);
@@ -410,7 +410,7 @@ public class GestionBDD {
                 }
             }
 
-            if (Agent.TypeBDD.equals("HSQL")) {
+            if (Agent.CONFIG.getTypeBDD().equals("HSQL")) {
                 shutdownHSQL(connection);
             }
             return true;

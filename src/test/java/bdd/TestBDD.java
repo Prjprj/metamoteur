@@ -23,6 +23,7 @@ package bdd;
  */
 
 import agent.Agent;
+import agent.AppConfigLoader;
 import agent.Enregistrement;
 import agent.Lien;
 import org.junit.Test;
@@ -44,8 +45,8 @@ import static org.junit.Assert.assertTrue;
 public class TestBDD {
     @Test
     public void runTestBDD1() {
-        // variables d'un agent et leur configuration par d�faut
-        new Agent();
+        // Initialisation de la configuration depuis le fichier .conf
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
 		/*try {
 			// Test Connexion
 			Connection connection = GestionBDD.connectionBDD();
@@ -79,8 +80,8 @@ public class TestBDD {
 
     @Test
     public void runTestBDD2() {
-        // variables d'un agent et leur configuration par d�faut
-        new Agent();
+        // Initialisation de la configuration depuis le fichier .conf
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
         // construction d'un lien pour test
         Lien lien = new Lien("url&�\"����^�~", "titre", "desc", 1, 0);
         // construction d'un vecteur de liens
@@ -112,8 +113,8 @@ public class TestBDD {
 
     @Test
     public void runTestBDD3() {
-        // variables d'un agent et leur configuration par d�faut
-        new Agent();
+        // Initialisation de la configuration depuis le fichier .conf
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
         // tentative d'update
         assertTrue("Update", GestionBDD.updateURL("http://www.ilocis.org/fr/help.html"));
     }
