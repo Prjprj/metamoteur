@@ -30,18 +30,18 @@ import java.net.Socket;
 import java.net.URL;
 
 /**
+ * Classe permettant de contacter d'autres agents ou des moteurs de recherche
+ * par des requetes HTTP GET et POST.
+ * <p>
+ * Toutes les methodes sont statiques et sans etat : cette classe joue le role
+ * d'un utilitaire de communication reseau bas niveau.
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
  * @author Pierre Ramos
  * @version 1.0
  */
-
-/**
- * Cette classe permet de contacter d'autres agents ou des moteurs de recherches
- * par des requetes HTTP
- */
-
 public class Client {
     /**
      * Methode permettant d'envoyer une requete HTTP de type GET a l'url demandee
