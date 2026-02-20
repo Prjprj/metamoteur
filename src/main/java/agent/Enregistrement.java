@@ -40,26 +40,29 @@ import java.util.Vector;
 
 public class Enregistrement {
 
-    /*
-     * Constante entiere pemettant d'indiquer le nombre de liens contenus dans un
-     * enregistrement.
+    /**
+     * Nombre maximal de liens stockes dans un enregistrement.
+     * Cette constante definit la taille fixe de la liste de liens
+     * telle qu'elle est modelisee en base de donnees.
      */
     private final static int NB_LIENS = 20;
 
-    /*
-     * Entier representant l'identifiant d'un enregistrement.
+    /**
+     * Identifiant unique de l'enregistrement, correspond a la cle primaire (UID)
+     * de la table de la base de donnees.
      */
     private int id;
 
-    /*
-     * Chaine de caracteres representant les mots cles associes a un enregistrement.
+    /**
+     * Mots cles associes a cet enregistrement : chaine saisie par l'utilisateur
+     * lors de sa requete de recherche.
      */
     private String motsCles;
 
-    /*
-     * Vecteur de Lien representant l'ensemble des liens associes a un
-     * enregistrement, en sachant qu'un lien correspond a une url, un titre et une
-     * description et un rang.
+    /**
+     * Vecteur des {@link Lien}s associes a cet enregistrement.
+     * Chaque lien regroupe une url, un titre, une description, un rang et un score.
+     * Ce vecteur contient au plus {@value #NB_LIENS} elements.
      */
     private Vector liens;
 
@@ -500,15 +503,14 @@ public class Enregistrement {
     }
 
     /**
-     * Retourne un entier contenant le score, de numero "numero" passe en parametre,
-     * contenu dans un enregistrement d'identifiant "id" dans la base de donnees,
-     * passe en parametre.
+     * Retourne le {@link Lien} complet de numero {@code numero}, contenu dans
+     * un enregistrement d'identifiant {@code id} de la base de donnees.
+     * Effectue quatre requetes pour recuperer url, titre, description, rang et
+     * score, puis construit et retourne un objet {@link Lien}.
      *
-     * @param id     int : un entier representant l'identifiant d'un enregistrement de
-     *               la base de donnees
-     * @param numero int : un entier representant le numero du lien
-     * @return int : un entier contenant le score du lien de numero passe en
-     * parametre associe a l'enregistrement courant
+     * @param id     int : identifiant de l'enregistrement dans la base de donnees
+     * @param numero int : numero du lien dans l'enregistrement (1 a {@value #NB_LIENS})
+     * @return Lien : le lien correspondant au numero demande
      */
     public static Lien recuperationLienNumero(int id, int numero) {
         String url = recuperationUrlNumero(id, numero);
@@ -606,8 +608,12 @@ public class Enregistrement {
         return xHtml + liensXhtml + finxHtml;
     }
 
-    /*
-     * Export en sql
+    /**
+     * Genere la requete SQL INSERT permettant de persister cet enregistrement
+     * dans la base de donnees. Les 20 emplacements de liens sont enumeres
+     * explicitement, avec leurs colonnes Url, Title, Desc, Rank et Select.
+     *
+     * @return String : la requete SQL INSERT complete sous forme de chaine
      */
     public String toSql() {
         String patternInsert = "INSERT INTO bdd ( " + "Uid,Keywords," + "Url1,Title1,Desc1,Rank1   ,   Select1   ,"
