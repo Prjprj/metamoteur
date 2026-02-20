@@ -104,7 +104,7 @@ public class Agent {
             Sortie = Integer.parseInt(ConfigParser.GetProperty("Sortie"));
         }
         if (!ConfigParser.GetProperty("Debug").contentEquals("")) {
-            Debug = Integer.parseInt(ConfigParser.GetProperty("Sortie"));
+            Debug = Integer.parseInt(ConfigParser.GetProperty("Debug"));
         }
         if (!ConfigParser.GetProperty("FichierLog").contentEquals("")) {
             FichierLog = ConfigParser.GetProperty("FichierLog");
