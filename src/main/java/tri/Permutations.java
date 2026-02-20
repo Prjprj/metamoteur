@@ -52,24 +52,28 @@ public class Permutations {
         return Agent.CONFIG.getCoefSim();
     }
 
-    /*
-     * Constante entiere permettant de representer un nombre de valeur negative.
+    /**
+     * Constante representant un resultat de vote negatif :
+     * le document d1 doit etre place avant d2.
      */
     final static int NEGATIF = -1;
 
-    /*
-     * Constante entiere permettant de representer un nombre de valeur nulle.
+    /**
+     * Constante representant un resultat de vote nul :
+     * d1 est place immediatement apres d2 (ordre inchange).
      */
     final static int NUL = 0;
 
-    /*
-     * Constante entiere permettant de representer un nombre de valeur positive.
+    /**
+     * Constante representant un resultat de vote positif :
+     * l'ordre des documents reste inchange.
      */
     final static int POSITIF = 1;
 
-    /*
-     * Un enregistrement representant l'enregsitrement retourne par le(s) moteur(s)
-     * de recherche, dont ses liens ont ete permutes.
+    /**
+     * Enregistrement retourne par le(s) moteur(s) de recherche
+     * dont les liens ont ete permutes par l'algorithme de placement.
+     * Accessible via {@link #getEnrMR_liensPermutes()}.
      */
     private static Enregistrement enrMR_liensPermutes;
 
