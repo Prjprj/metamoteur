@@ -28,6 +28,9 @@ import agent.GestionMessage;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Classe contenant la methode main permettant de lancer le serveur HTTP cette
@@ -41,118 +44,75 @@ import java.net.Socket;
  */
 
 public class Serveur {
-    private static int port;
-    private static int clientsEnCours;
-    private static int maxClients;
-    private static boolean serveurON;
+
+    /** Indique si le serveur est en cours d'execution. */
+    private static volatile boolean serveurON = false;
+
+    /** Pool de threads gérant les connexions clientes. */
+    private static ExecutorService pool;
 
     /**
-     * Methode permettant de lancer le service.
+     * Lance le service HTTP : ouvre le socket d'écoute et distribue
+     * chaque connexion cliente à un thread du pool.
      */
     public static void service() {
-        ServerSocket serveur = null;
+        int port    = Agent.CONFIG.getPortServeur();
+        int nbThread = Agent.CONFIG.getNbThread();
+        serveurON = true;
+        pool = Executors.newFixedThreadPool(nbThread);
 
-        port = Agent.CONFIG.getPortServeur();
-        ouvertureService();
-
-        try {
-            // ouverture du socket d'attente des clients
-            serveur = new ServerSocket(port);
+        try (ServerSocket serveur = new ServerSocket(port)) {
             GestionMessage.message(0, "Serveur", "Ouverture du service sur le port : " + port);
-            while (etatService()) { // boucle infinie permettant d'attendre
-                // la connexion d'un client
-                ajoutClient(serveur);
-            }
-        } catch (IOException e) {
-            GestionMessage.message(1, "Serveur", "Erreur lors de l'acceptation de la connexion : " + e);
-        } finally {
-            try {
-                // fermeture du socket
-                serveur.close();
-            } catch (Exception e) {
-                GestionMessage.message(1, "Serveur", "Erreur lors de la fermeture du socket d'ecoute : " + e);
-            }
-        }
-    }
-
-    /**
-     * Cette methode permet de lancer un thread client, elle verifie s'il est
-     * possible d'ajouter ce client avant de le faire
-     *
-     * @param serveur socket sur lequel le client communiquera
-     */
-    public static void ajoutClient(ServerSocket serveur) {
-        Socket socket;
-        try {
-            socket = serveur.accept();
-            if (!peutAjouterClient()) {// evite l'ajout de threads surnumeraires
+            while (etatService()) {
                 try {
-                    // mise en attente du thread si necessaire
-                    Thread.currentThread().join();
-                } catch (Exception e) {
-                    GestionMessage.message(1, "Serveur", "Probleme d'interruption du Thread : " + e);
+                    Socket socket = serveur.accept();
+                    pool.submit(new TraitementRequete(socket));
+                } catch (IOException e) {
+                    if (etatService()) {
+                        GestionMessage.message(1, "Serveur",
+                                "Erreur lors de l'acceptation d'une connexion : " + e);
+                    }
                 }
             }
-            // lancement du thread
-            new TraitementRequete(socket);
-            clientsEnCours++;
         } catch (IOException e) {
-            GestionMessage.message(1, "Serveur", "Erreur lors de la creation du socket de communication : " + e);
+            GestionMessage.message(1, "Serveur", "Erreur lors de l'ouverture du service : " + e);
+        } finally {
+            if (pool != null) {
+                pool.shutdown();
+                try {
+                    if (!pool.awaitTermination(5, TimeUnit.SECONDS)) {
+                        pool.shutdownNow();
+                    }
+                } catch (InterruptedException ie) {
+                    pool.shutdownNow();
+                    Thread.currentThread().interrupt();
+                }
+            }
         }
     }
 
     /**
-     * Cette methode permet de supprimer un thread client
-     */
-    public static synchronized void supprClient() {
-        clientsEnCours--;
-    }
-
-    /**
-     * Methode permettant de savoir si le service est en cours d'execution ou non
-     *
-     * @return retourne true si le service est en cours d'execution, false sinon
-     */
-    public static synchronized boolean etatService() {
-        return (serveurON);
-    }
-
-    /**
-     * Methode initialisant le service de la classe
-     */
-    public static synchronized void ouvertureService() {
-        serveurON = true;
-        clientsEnCours = 0;
-        maxClients = Agent.CONFIG.getNbThread();
-    }
-
-    /**
-     * Methode fermant le service lance par la classe
+     * Ferme le service : arrête la boucle d'attente et initie l'arrêt du pool.
+     * Appelée depuis {@link TraitementRequete} sur la requête stoppeAgent.html.
      */
     public static synchronized void fermetureService() {
         serveurON = false;
     }
 
     /**
-     * Methode d'acces a l'attribut prive contenant le nombre de threads
-     * actuellement lances
+     * Retourne l'état du service.
      *
-     * @return retourne le nombre de clients courant
+     * @return true si le service est actif
      */
-    public static synchronized int getNbClients() {
-        return (clientsEnCours);
+    public static synchronized boolean etatService() {
+        return serveurON;
     }
 
     /**
-     * Methode permettant de verifier si l'ajout d'un thread de traitement de
-     * requete est possible
-     *
-     * @return retourne true si l'on peut lancer un nouveau thread, false sinon
+     * Méthode de compatibilité conservée - la gestion du nombre de threads
+     * est désormais assurée par l'ExecutorService.
      */
-    private static synchronized boolean peutAjouterClient() {
-        if (getNbClients() < maxClients)
-            return (true);
-        else
-            return (false);
+    public static void supprClient() {
+        // Géré par l'ExecutorService - aucune action manuelle requise
     }
 }

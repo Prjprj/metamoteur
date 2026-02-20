@@ -70,13 +70,11 @@ public class TraitementRequete extends Thread {
     public TraitementRequete(Socket socket) {
         this.socket = socket;
         try {
-            // creation des flux d'entrees sorties
+            // creation des flux d'entrees-sorties
             entree = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             sortie2 = this.socket.getOutputStream();
             sortie = new PrintWriter(new OutputStreamWriter(sortie2), true);
-            // appel de la methode run du thread
-            Thread leThread = new Thread(this);
-            leThread.start();
+            // Le traitement est execute via run(), appele par l'ExecutorService
         } catch (IOException e) {
             GestionMessage.message(2, "TraitementRequete", "Erreur a l'ouverture des flux de communication " + e);
             try {
@@ -445,12 +443,6 @@ public class TraitementRequete extends Thread {
                 type = "POST";
             GestionMessage.message(0, "TraitementRequete",
                     "Requete traitee type : " + type + " sur le fichier " + this.requete.getFichierPointe());
-            try {
-                // notifocation de la fin d'un thread
-                Thread.currentThread().notify();
-            } catch (IllegalMonitorStateException e) {
-                // GestionMessage.message(1,"TraitementRequete","Erreur lors du notify");
-            }
             Serveur.supprClient();
         } catch (IOException e) {
             GestionMessage.message(1, "TraitementRequete", "Erreur entree/sortie : " + e);
