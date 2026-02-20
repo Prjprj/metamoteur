@@ -22,24 +22,34 @@ package agent;
  * --LICENSE NOTICE--
  */
 
+import java.io.*;
+import java.util.Properties;
+
 /**
+ * Gestionnaire du fichier de configuration {@code metaMoteur.conf}.
+ * <p>
+ * Fournit des methodes statiques pour lire ({@link #GetProperty(String)}),
+ * modifier ({@link #SetProperty(String, String)}) et verifier l'existence
+ * du fichier de configuration. La methode {@link #load()} permet de
+ * charger le fichier de maniere generique.
+ * <p>
+ * La classe {@link AppConfigLoader} offre une alternative plus robuste et
+ * immuable pour le chargement initial au demarrage.
+ *
  * @author Jeremy Frechard
  * @author Cecile Girard
  * @author Aysel Gunes
  * @author Pierre Ramos
  * @version 1.0
+ * @see AppConfig
+ * @see AppConfigLoader
  */
-
-import java.io.*;
-import java.util.Properties;
-
-/**
- * Cette classe permet la gestion du fichier de configuration
- */
-
 public class ConfigParser {
 
+    /** Properties chargees depuis le fichier de configuration lors de la derniere lecture. */
     static Properties P = null;
+
+    /** Chemin relatif vers le fichier de configuration lu et ecrit par cette classe. */
     static String nomFichier = new String("metaMoteur.conf");
 
     /**
@@ -130,11 +140,15 @@ public class ConfigParser {
     }
 
     /**
-     * Cette methode permet de lire le fichier.
+     * Tente d'ouvrir le fichier de configuration dont le nom est derive
+     * du nom de la classe ({@code .<NomClasse>.conf}).
+     * <p>
+     * <b>Note :</b> cette methode est une ebauche ; elle ouvre et ferme
+     * le fichier mais ne lit aucune propriete. Privilegier
+     * {@link #GetProperty(String)} pour la lecture effective.
      *
-     * @return un objet
+     * @return null (aucun objet charge dans l'implementation actuelle)
      */
-
     public Object load() {
         String NomFichier = "." + this.getClass().getName() + ".conf";
 
@@ -157,7 +171,12 @@ public class ConfigParser {
     }
 
     /**
-     * Cette methode permet de sauver les parametres dans le fichier.
+     * Tente de creer le fichier de configuration dont le nom est derive
+     * du nom de la classe ({@code .<NomClasse>.conf}).
+     * <p>
+     * <b>Note :</b> cette methode est une ebauche ; elle cree et ferme
+     * le fichier mais n'y ecrit aucune propriete. Privilegier
+     * {@link #SetProperty(String, String)} pour l'ecriture effective.
      */
     public void sauver() {
         String NomFichier = "." + this.getClass().getName() + ".conf";
