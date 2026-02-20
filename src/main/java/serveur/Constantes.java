@@ -32,14 +32,49 @@ package serveur;
  * @version 1.0
  */
 public class Constantes {
+
+    // -------------------------------------------------------------------------
+    // Types de methodes HTTP
+    // -------------------------------------------------------------------------
+
+    /** Code representant une requete HTTP de type GET. */
     public static final int GET = 1;
+
+    /** Code representant une requete HTTP de type POST. */
     public static final int POST = 2;
+
+    /** Code representant une requete HTTP de type inconnu ou non supporte. */
     public static final int INCONNU = 0;
+
+    // -------------------------------------------------------------------------
+    // Types MIME de contenu
+    // -------------------------------------------------------------------------
+
+    /** Code de type MIME pour les fichiers texte (HTML, CSS, JS, TXT). */
     public static final int TEXTE = 1;
+
+    /** Code de type MIME pour les images JPEG ({@code .jpg} / {@code .jpeg}). */
     public static final int IMAGE_JPG = 2;
+
+    /** Code de type MIME pour les images BMP ({@code .bmp}). */
     public static final int IMAGE_BMP = 3;
+
+    /** Code de type MIME pour les images GIF ({@code .gif}). */
     public static final int IMAGE_GIF = 4;
+
+    /** Code de type MIME pour les images PNG ({@code .png}). */
     public static final int IMAGE_PNG = 5;
+
+    // -------------------------------------------------------------------------
+    // Parametres de transfert
+    // -------------------------------------------------------------------------
+
+    /** Taille en octets du tampon de lecture lors de l'envoi de fichiers. */
     public static final int TAILLE_BLOC = 1024;
+
+    /**
+     * Sequence de retour a la ligne conforme au protocole HTTP (CR+LF).
+     * Utilisee pour separer les lignes de l'en-tete et le corps d'une reponse.
+     */
     public static final String RETOUR_CHARIOT = "\r\n";
 }
