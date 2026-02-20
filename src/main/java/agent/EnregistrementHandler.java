@@ -39,18 +39,22 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 
 public class EnregistrementHandler extends DefaultHandler {
-    // resultats de notre parsing
-
+    /** Enregistrement en cours de construction pendant le parsing XML. */
     private Enregistrement enregistrement;
 
+    /** Lien en cours de construction lors du traitement d'une balise {@code <link>}. */
     private Lien lien;
 
+    /** Indique que le parseur se trouve a l'interieur d'une balise {@code <keywords>}. */
     private boolean inKeywords;
 
+    /** Indique que le parseur se trouve a l'interieur d'une balise {@code <title>}. */
     private boolean inTitle;
 
+    /** Indique que le parseur se trouve a l'interieur d'une balise {@code <url>}. */
     private boolean inUrl;
 
+    /** Indique que le parseur se trouve a l'interieur d'une balise {@code <desc>}. */
     private boolean inDesc;
 
     /**
@@ -61,7 +65,17 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * Methode de detection de balise de depart
+     * Methode declenchee a l'ouverture de chaque balise XML.
+     * Cree et initialise les objets {@link Enregistrement} et {@link Lien}
+     * selon le nom de la balise rencontree. Positionne les drapeaux booleen
+     * pour les balises de contenu texte.
+     *
+     * @param uri       URI de l'espace de noms (peut etre vide)
+     * @param localName nom local de la balise (sans prefixe)
+     * @param qName     nom qualifie de la balise (avec prefixe si present)
+     * @param attributes ensemble des attributs de la balise
+     * @throws SAXException si le nom de la balise est inconnu ou si les
+     *                      attributs {@code rank} / {@code score} ne sont pas des entiers
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -97,7 +111,14 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * Methode de detection de balise de fin
+     * Methode declenchee a la fermeture de chaque balise XML.
+     * Reinitialise les drapeaux booleen et ajoute le {@link Lien} courant
+     * a l'enregistrement une fois la balise {@code <link>} fermee.
+     *
+     * @param uri       URI de l'espace de noms (peut etre vide)
+     * @param localName nom local de la balise (sans prefixe)
+     * @param qName     nom qualifie de la balise
+     * @throws SAXException si le nom de la balise est inconnu
      */
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
@@ -122,7 +143,15 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * Methode de detection de caracteres
+     * Methode declenchee a chaque fois que du contenu textuel est rencontre entre
+     * deux balises. Affecte le texte lu au champ correspondant de
+     * l'objet {@link Enregistrement} ou {@link Lien} en cours de construction,
+     * selon l'etat des drapeaux booleen.
+     *
+     * @param ch     tableau de caracteres contenant le texte source
+     * @param start  indice du premier caractere a lire dans {@code ch}
+     * @param length nombre de caracteres a lire
+     * @throws SAXException en cas d'erreur SAX interne
      */
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
@@ -140,7 +169,10 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * Methode qui debute le parsing
+     * Methode declenchee au debut du parsing du document XML.
+     * Enregistre un message de traitement dans le journal.
+     *
+     * @throws SAXException en cas d'erreur SAX interne
      */
     @Override
     public void startDocument() throws SAXException {
@@ -148,7 +180,10 @@ public class EnregistrementHandler extends DefaultHandler {
     }
 
     /**
-     * Methode declenchee a la fin du parsing
+     * Methode declenchee a la fin du parsing du document XML.
+     * Enregistre un message de traitement dans le journal.
+     *
+     * @throws SAXException en cas d'erreur SAX interne
      */
     @Override
     public void endDocument() throws SAXException {
