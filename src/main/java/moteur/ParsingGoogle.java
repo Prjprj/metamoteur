@@ -42,9 +42,17 @@ import java.util.regex.Pattern;
  */
 public class ParsingGoogle {
 
-    // resultats de notre parsing
+    /**
+     * Enregistrement en cours de construction lors du parsing d'une page
+     * de resultats Google. Valide uniquement pendant l'appel a
+     * {@link #htmlParsing(String)}.
+     */
     private static Enregistrement enregistrement;
 
+    /**
+     * Lien en cours de construction pour chaque bloc de resultat individuel.
+     * Valide le temps du traitement d'un seul bloc ({@code <p class=g>}).
+     */
     private static Lien lien;
 
     /**
