@@ -28,6 +28,8 @@ import agent.GestionMessage;
 import agent.Lien;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -268,107 +270,156 @@ public class GestionBDD {
 
     /**
      * Methode permettant d'inserer un enregistrement dans la base de donnees en
-     * suivant le schema de la base
+     * suivant le schema de la base.
+     * Utilise un PreparedStatement pour prevenir les injections SQL.
      *
      * @param enr enregistrement a ajouter a la base
+     * @return true si l'insertion a reussi, false sinon
      */
     public static Boolean insertEnregistrement(Enregistrement enr) {
-        String val = "";
-        // construction de la chaine a ajouter a la requete
-        if (Agent.TypeBDD.equals("MySQL")) {
-            // le 0 permet de gerer l'auto increment
-            val += "'0',";
-        } else {
-            val += enr.getId() + ",";
+        // Construction du SQL avec placeholders pour 20 liens maximum
+        StringBuilder sql = new StringBuilder("INSERT INTO ");
+        sql.append(Agent.TableBDD);
+        sql.append(" (KEYWORDS");
+        for (int i = 1; i <= 20; i++) {
+            sql.append(",URL").append(i)
+               .append(",TITLE").append(i)
+               .append(",DESC").append(i)
+               .append(",RANK").append(i)
+               .append(",SELECT").append(i);
         }
-        val += "'" + enr.getKeywords() + "'";
-        val += ",";
-        Vector liens = enr.getLiens();
-        // ajout des valeurs a inserer dans la table
-        for (int i = 0; i < liens.size(); i++) {
-            Lien temp = (Lien) liens.get(i);
-            val += "'" + temp.getUrl() + "','" + temp.getTitre() + "','" + temp.getDesc() + "','" + (i + 1) + "','" + 0
-                    + "',";
+        sql.append(",TIMEQUERY) VALUES (?");
+        for (int i = 0; i < 20; i++) {
+            sql.append(",?,?,?,?,?");
         }
-        // pour la gestion de la duree de vie d'un enregistrement
-        val += "'" + System.currentTimeMillis() + "'";
-        // creation de la requete
-        String requete = GestionBDD.construitInsert(Agent.TableBDD, val);
-        // envoi de la requete
-        GestionBDD.envoiRequete(requete);
+        sql.append(",?)");
 
-        return true;
+        Connection connection = connectionBDD();
+        if (connection == null) {
+            GestionMessage.message(2, "GestionBDD", "Impossible d'obtenir une connexion pour l'insertion");
+            return false;
+        }
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            ps.setString(1, enr.getKeywords());
+            Vector liens = enr.getLiens();
+            // Remplissage des 20 emplacements de liens (null si absent)
+            for (int i = 0; i < 20; i++) {
+                int base = 2 + i * 5;
+                if (i < liens.size()) {
+                    Lien lien = (Lien) liens.get(i);
+                    ps.setString(base,     lien.getUrl());
+                    ps.setString(base + 1, lien.getTitre());
+                    ps.setString(base + 2, lien.getDesc());
+                    ps.setInt   (base + 3, i + 1);
+                    ps.setInt   (base + 4, 0);
+                } else {
+                    ps.setNull(base,     Types.VARCHAR);
+                    ps.setNull(base + 1, Types.VARCHAR);
+                    ps.setNull(base + 2, Types.VARCHAR);
+                    ps.setNull(base + 3, Types.INTEGER);
+                    ps.setNull(base + 4, Types.INTEGER);
+                }
+            }
+            // Parametre 102 : timestamp pour la gestion de la duree de vie
+            ps.setString(102, String.valueOf(System.currentTimeMillis()));
+            ps.executeUpdate();
+            if (Agent.TypeBDD.equals("HSQL")) {
+                shutdownHSQL(connection);
+            }
+            GestionMessage.message(0, "GestionBDD", "Enregistrement insere avec succes");
+            return true;
+        } catch (SQLException e) {
+            GestionMessage.message(2, "GestionBDD", "Erreur lors de l'insertion : " + e.getMessage());
+            return false;
+        } finally {
+            try { connection.close(); } catch (SQLException ignored) {}
+        }
     }
 
     /**
      * Methode permettant d'updater le nombre de clics d'une url dans les
-     * enregistrements non encore ferme (ajoute un clic si l'url est reconnue a
-     * l'url correspondante de tous les enregistrements ouverts de la base)
+     * enregistrements non encore fermes.
+     * Utilise des PreparedStatement pour prevenir les injections SQL.
      *
      * @param url url cliquee a mettre a jour
+     * @return true si la mise a jour a reussi, false sinon
      */
     public static Boolean updateURL(String url) {
-        String condition = "";
-        String quote = "";
-        if (Agent.TypeBDD.equals("MySQL")) {
-            quote = "`";
-        }
-
-        // creation de la condition pour rechercher les url identiques
+        // Etape 1 : recherche des UIDs contenant cette URL via PreparedStatement
+        StringBuilder findUidSql = new StringBuilder("SELECT UID FROM ");
+        findUidSql.append(Agent.TableBDD).append(" WHERE ");
         for (int i = 1; i < 20; i++) {
-            condition += quote + "URL" + i + quote + "='" + url + "' OR ";
+            findUidSql.append("URL").append(i).append("=? OR ");
         }
-        condition += quote + "URL" + 20 + quote + "='" + url + "'";
-        // construction de la requete pour selectionner les enregistrement contenant une
-        // url identique
-        String requete = GestionBDD.construitSelect("UID", Agent.TableBDD, condition);
-        // envoi de la requete
-        Vector vect = GestionBDD.envoiRequete(requete);
-        if (vect.size() != 0) {
-            // construction de la requete qui permettra de n'avoir que les entrees non
-            // fermees
-            condition = "";
-            for (int i = 0; i < vect.size() - 1; i++) {
-                condition += quote + "UID" + quote + "='" + ((Integer) ((Vector) (vect.get(i))).get(0)).intValue()
-                        + "' OR ";
+        findUidSql.append("URL20=?");
+
+        Connection connection = connectionBDD();
+        if (connection == null) return false;
+
+        try {
+            // Collecte des UIDs correspondants
+            List<Integer> uids = new ArrayList<>();
+            try (PreparedStatement ps = connection.prepareStatement(findUidSql.toString())) {
+                for (int i = 1; i <= 20; i++) {
+                    ps.setString(i, url);
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        uids.add(rs.getInt("UID"));
+                    }
+                }
             }
-            condition += quote + "UID" + quote + "='"
-                    + ((Integer) ((Vector) (vect.get(vect.size() - 1))).get(0)).intValue() + "'";
-            // construction de la requete
-            requete = GestionBDD.construitSelect(
-                    "UID,URL1,URL2,URL3,URL4,URL5,URL6,URL7,URL8,URL9,URL10,URL11,URL12,URL13,URL14,URL15,URL16,URL17,URL18,URL19,URL20,TIMEQUERY",
-                    Agent.TableBDD, condition);
-            // envoi de la requete
-            vect = GestionBDD.envoiRequete(requete);
-            if (vect.size() != 0) {
-                for (int i = 0; i < vect.size(); i++) {
-                    // parcours des resultats
-                    Vector sousVect = (Vector) vect.get(i);
-                    String date = (String) sousVect.get(sousVect.size() - 1);
-                    // recuperation de la date (parsage)
-                    Double nombre = Double.valueOf(date);
-                    long date2 = nombre.longValue();
-                    // les enregistrements ouverts contenant l'url
-                    if (System.currentTimeMillis() - (date2 + 1800000) < 0) {
-                        // parcours des url des enregistrements
-                        for (int j = 0; j < 20; j++) {
-                            String url2 = (String) sousVect.get(j + 1);
-                            if (url2.equals(url)) {
-                                // construction de la requete d'update
-                                int id = ((Integer) (sousVect.get(0))).intValue();
-                                requete = GestionBDD.construitUpdate(Agent.TableBDD,
-                                        "Select" + (j + 1) + "=Select" + (j + 1) + "+1",
-                                        "" + quote + "UID" + quote + "='" + id + "'");
-                                // envoi de la requete
-                                GestionBDD.envoiRequete(requete);
+
+            if (uids.isEmpty()) return true;
+
+            // Etape 2 : recuperation des details des enregistrements trouves
+            StringBuilder selectDetailSql = new StringBuilder(
+                    "SELECT UID,URL1,URL2,URL3,URL4,URL5,URL6,URL7,URL8,URL9,URL10,"
+                  + "URL11,URL12,URL13,URL14,URL15,URL16,URL17,URL18,URL19,URL20,TIMEQUERY FROM ");
+            selectDetailSql.append(Agent.TableBDD).append(" WHERE ");
+            for (int i = 0; i < uids.size(); i++) {
+                if (i > 0) selectDetailSql.append(" OR ");
+                selectDetailSql.append("UID=?");
+            }
+
+            try (PreparedStatement ps2 = connection.prepareStatement(selectDetailSql.toString())) {
+                for (int i = 0; i < uids.size(); i++) {
+                    ps2.setInt(i + 1, uids.get(i));
+                }
+                try (ResultSet rs = ps2.executeQuery()) {
+                    while (rs.next()) {
+                        String dateStr = rs.getString("TIMEQUERY");
+                        long date2 = Double.valueOf(dateStr).longValue();
+                        // Mise a jour uniquement des enregistrements ouverts (< 30 minutes)
+                        if (System.currentTimeMillis() - (date2 + 1800000) < 0) {
+                            int uid = rs.getInt("UID");
+                            for (int j = 1; j <= 20; j++) {
+                                String urlInRecord = rs.getString("URL" + j);
+                                if (urlInRecord != null && urlInRecord.equals(url)) {
+                                    // Etape 3 : increment du compteur de clics
+                                    String updateSql = "UPDATE " + Agent.TableBDD
+                                            + " SET SELECT" + j + "=SELECT" + j + "+1 WHERE UID=?";
+                                    try (PreparedStatement updatePs = connection.prepareStatement(updateSql)) {
+                                        updatePs.setInt(1, uid);
+                                        updatePs.executeUpdate();
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        return true;
+            if (Agent.TypeBDD.equals("HSQL")) {
+                shutdownHSQL(connection);
+            }
+            return true;
+        } catch (SQLException e) {
+            GestionMessage.message(2, "GestionBDD", "Erreur lors de la mise a jour de l'URL : " + e.getMessage());
+            return false;
+        } finally {
+            try { connection.close(); } catch (SQLException ignored) {}
+        }
     }
 
     /**
