@@ -55,11 +55,23 @@ import java.util.Vector;
  */
 
 public class TraitementRequete extends Thread {
+
+    /** Requete HTTP parsee recue du client. */
     private RequeteHTTP requete;
+
+    /** Reponse HTTP a renvoyer au client. */
     private ReponseHTTP reponse;
+
+    /** Socket de communication avec le client. */
     private Socket socket;
+
+    /** Flux de lecture de la requete cliente (entree). */
     private BufferedReader entree;
+
+    /** Flux d'ecriture binaire vers le client, utilise pour l'envoi de fichiers et d'images. */
     private OutputStream sortie2;
+
+    /** Flux d'ecriture texte vers le client, utilise pour l'envoi de reponses HTML. */
     private PrintWriter sortie;
 
     /**
