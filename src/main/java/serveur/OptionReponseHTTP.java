@@ -35,7 +35,11 @@ import java.util.Date;
  * @see RequeteHTTP
  */
 public class OptionReponseHTTP {
+
+    /** Nom de l'en-tete HTTP de la reponse (ex. {@code Server}, {@code Date}, {@code Content-Type}). */
     private String nom;
+
+    /** Valeur associee a l'en-tete HTTP de la reponse. */
     private String valeur;
 
     /**
@@ -50,8 +54,8 @@ public class OptionReponseHTTP {
     }
 
     /*
-     * autres options HTTP Content-Encoding Content-Language Expires Forwarded
-     * Location
+     * Autres en-tetes HTTP pouvant etre geres dans une reponse :
+     * Content-Encoding, Content-Language, Expires, Forwarded, Location.
      */
 
     /**
