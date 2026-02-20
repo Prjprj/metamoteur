@@ -59,15 +59,15 @@ public class Tri {
         return Agent.CONFIG.getCoefPonderation();
     }
 
-    /*
-     * Variable de type Enregistrement representant l'enregistrement permute de
-     * l'agent local.
+    /**
+     * Enregistrement permute produit par l'agent local, utilise comme reference
+     * de base lors du tri final avec les autres agents.
      */
     private static Enregistrement enrLocal;
 
-    /*
-     * Variable de type Enregistrement representant l'enregistrement trie selon les
-     * enregistrements permutes de l'agent local et des autres agents.
+    /**
+     * Enregistrement trie resultant de la combinaison ponderee des rangs
+     * de l'agent local et des autres agents. Retourne par {@link #getEnrMR_TriFinal()}.
      */
     private static Enregistrement enrMR_TriFinal;
 
