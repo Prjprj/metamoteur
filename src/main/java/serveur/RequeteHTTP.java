@@ -37,11 +37,29 @@ import java.util.Vector;
  * @see Serveur
  */
 public class RequeteHTTP {
+
+    /** Texte brut de la requete HTTP recue depuis le socket client. */
     private String corps;
+
+    /** Fichier identifie par l'URL de la requete ({@code GET /chemin HTTP/1.x}). */
     private Fichier fichierPointe;
+
+    /**
+     * Partie de la requete situee apres le {@code ?} (GET) ou apres le double
+     * retour chariot (POST). {@code null} si aucune suite n'est presente.
+     */
     private String suiteRequete;
+
+    /** {@code true} si la requete contient une suite apres le fichier pointe. */
     private boolean suiteRequetePresente;
+
+    /**
+     * Type de la methode HTTP : {@link Constantes#GET}, {@link Constantes#POST}
+     * ou {@link Constantes#INCONNU}.
+     */
     private int type;
+
+    /** Liste des en-tetes HTTP ({@link OptionRequeteHTTP}) trouves dans la requete. */
     private Vector options;
 
     /**
