@@ -41,8 +41,14 @@ import java.util.Vector;
  * @see Serveur
  */
 public class ReponseHTTP {
+
+    /** Corps textuel de la reponse en cours de construction (en-tete HTTP + eventuel contenu). */
     private String corps;
+
+    /** Fichier sur lequel pointe la reponse a envoyer au client. */
     private Fichier fichierPointe;
+
+    /** Liste des en-tetes HTTP ({@link OptionReponseHTTP}) inclus dans cette reponse. */
     private Vector options;
 
     /**
@@ -467,6 +473,17 @@ public class ReponseHTTP {
         return chaine;
     }
 
+    /**
+     * Genere une balise {@code <style>} HTML contenant l'integralite des regles
+     * CSS inline de l'interface de recherche.
+     * <p>
+     * Cette methode est utilisee par {@link #debutReponseHTML()} et
+     * {@link #pasDeReponse(String)} pour eviter la dependance a un fichier CSS
+     * externe, ce qui rend les pages servies autonomes.
+     *
+     * @return String la balise {@code <style>} complete prete a etre inseree
+     *         dans la section {@code <head>} d'une page HTML
+     */
     public static String includeCSSinHTML() {
         String css = "";
         css = "<style type=\"text/css\">";
