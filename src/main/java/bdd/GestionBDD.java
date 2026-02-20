@@ -50,17 +50,13 @@ public class GestionBDD {
         Connection connection = null;
         if (Agent.TypeBDD.equals("MySQL")) {
             try {
-                // ouverture du pilote de connection avec la base
-                Driver driver = new com.mysql.jdbc.Driver();
-                // enregistrement du pilote
-                DriverManager.registerDriver(driver);
-                // connection a la base de donnees
-                connection = DriverManager.getConnection("jdbc:mysql://" + Agent.HostBDD + "/" + Agent.BaseBDD,
+                // Le driver MySQL est auto-découvert via ServiceLoader depuis Java 6 :
+                // aucune instanciation manuelle nécessaire.
+                connection = DriverManager.getConnection(
+                        "jdbc:mysql://" + Agent.HostBDD + "/" + Agent.BaseBDD + "?useSSL=false&serverTimezone=UTC",
                         Agent.UserBDD, Agent.PassBDD);
             } catch (SQLException e) {
-                // Affichage d'un message d'erreur en cas de non possibilite de la connection a
-                // la base
-                GestionMessage.message(2, "GestionBDD", "Erreur de connexion a la base de donnees");
+                GestionMessage.message(2, "GestionBDD", "Erreur de connexion a la base de donnees : " + e.getMessage());
             }
         }
         if (Agent.TypeBDD.equals("HSQL")) {
