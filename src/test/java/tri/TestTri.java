@@ -128,8 +128,7 @@ public class TestTri {
          * lien.getDesc()); System.out.println("   " + lien.getRang()); }
          */
 
-        Tri.lancementTri(enrAL, ensEnrAA);
-        Enregistrement enr_trie = Tri.getEnrMR_TriFinal();
+        Enregistrement enr_trie = Tri.lancerTri(enrAL, ensEnrAA);
         System.out.println("\nID de l enregistrement trie: " + enr_trie.getId());
         System.out.println("Mots cles de l'enregistrement trie: " + enr_trie.getKeywords());
         System.out.println("Liens permutes : ");

@@ -232,8 +232,7 @@ public class TraitementRequete extends Thread {
                                 "Erreur d'entree/sortie, Lors de l'appel a parse() : " + ioe);
                     }
                     // permutation de l'enregistrement parse
-                    Permutations.lancementPermutations(enr);
-                    Enregistrement enre = Permutations.getEnrMR_liensPermutes();
+                    Enregistrement enre = Permutations.lancerPermutations(enr);
                     // preparation et envoi de la reponse au serveur client
                     String renvoi = "HTTP/1.0 200 OK" + Constantes.RETOUR_CHARIOT + Constantes.RETOUR_CHARIOT;
                     renvoi += enre.toXml();
@@ -382,14 +381,11 @@ public class TraitementRequete extends Thread {
                                 }
                             }
                             // permutation locale
-
-                            Permutations.lancementPermutations(enr);
-                            Enregistrement enre = Permutations.getEnrMR_liensPermutes();
+                            Enregistrement enre = Permutations.lancerPermutations(enr);
                             // mise a jour de la base de donnees
                             GestionBDD.insertEnregistrement(enre);
                             // tri des enregistrements
-                            Tri.lancementTri(enre, reponses);
-                            Enregistrement enr_trie = Tri.getEnrMR_TriFinal();
+                            Enregistrement enr_trie = Tri.lancerTri(enre, reponses);
                             // generation d'une page de reponse
                             String page = ReponseHTTP.debutReponseHTML();
                             boolean reponsesClients;

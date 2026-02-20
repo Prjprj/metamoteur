@@ -71,22 +71,6 @@ public class Permutations {
     final static int POSITIF = 1;
 
     /**
-     * Enregistrement retourne par le(s) moteur(s) de recherche
-     * dont les liens ont ete permutes par l'algorithme de placement.
-     * Accessible via {@link #getEnrMR_liensPermutes()}.
-     */
-    private static Enregistrement enrMR_liensPermutes;
-
-    /**
-     * Retourne l'Enregistrement ensMR_liensPermutes.
-     *
-     * @return Enregistrement
-     */
-    public static Enregistrement getEnrMR_liensPermutes() {
-        return enrMR_liensPermutes;
-    }
-
-    /**
      * Retourne un vecteur d'enregistrements, contenant les enregistrements de la
      * base de donnees. Appel a la methode "recuperationEnregistrements()" de la
      * classe src.agent.Enregistrement.
@@ -994,19 +978,23 @@ public class Permutations {
     }
 
     /**
-     * Methode permettant de lancer la permutation des liens de l'enregistrement
-     * retourne par le(s) moteur(s) de recherche.
+     * Lance la permutation des liens de l'enregistrement retourne par le(s) moteur(s)
+     * de recherche et retourne directement le resultat sans etat statique.
+     * <p>
+     * Remplace l'ancienne methode {@code lancementPermutations} (void) qui stockait
+     * le resultat dans un champ statique mutable, source de race conditions.
      *
      * @param enrMR Enregistrement : Un enregistrement retourne par le(s) moteur(s) de
      *              recherche.
+     * @return Enregistrement : L'enregistrement avec ses liens permutes.
      */
-    public static void lancementPermutations(Enregistrement enrMR) {
+    public static Enregistrement lancerPermutations(Enregistrement enrMR) {
         GestionMessage.message(0, "Permutations", "Lancement des permutations des liens par l'agent local.");
         Vector motsClesSimilaires = simMotsCles(enrMR.getKeywords());
         Vector casSrcRetenus = simCasSources(enrMR, motsClesSimilaires);
         Vector rangsAssocies = associationRangCasSrc_MR(enrMR, casSrcRetenus);
         Vector docsPermutes = permutationDocuments(enrMR, rangsAssocies);
-        enrMR_liensPermutes = permutations(enrMR, docsPermutes);
+        return permutations(enrMR, docsPermutes);
     }
 
 }

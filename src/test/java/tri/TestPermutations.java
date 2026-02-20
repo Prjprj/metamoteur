@@ -95,8 +95,7 @@ public class TestPermutations {
          * System.out.println(enre.getId()); System.out.println(enre.getKeywords());
          */
 
-        Permutations.lancementPermutations(enrMR);
-        Enregistrement enre = Permutations.getEnrMR_liensPermutes();
+        Enregistrement enre = Permutations.lancerPermutations(enrMR);
         System.out.println("ID de l enregistrement: " + enre.getId());
         System.out.println("Mots cles : " + enre.getKeywords());
         System.out.println("Liens permutes : \n");

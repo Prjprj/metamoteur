@@ -110,11 +110,7 @@ public class GestionBDD {
                     statement.execute(createStatement);
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
-                System.out.println(e.getStackTrace());
-                // Affichage d'un message d'erreur en cas de non possibilite de la connection a
-                // la base
-                GestionMessage.message(2, "GestionBDD", "Erreur de connexion a la base de donnees");
+                GestionMessage.message(1, "GestionBDD", "Erreur de connexion a la base de donnees : " + e.getMessage());
             }
         }
         // renvoi de l'objet de connection a la base

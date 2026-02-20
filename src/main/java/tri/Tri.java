@@ -60,50 +60,6 @@ public class Tri {
     }
 
     /**
-     * Enregistrement permute produit par l'agent local, utilise comme reference
-     * de base lors du tri final avec les autres agents.
-     */
-    private static Enregistrement enrLocal;
-
-    /**
-     * Enregistrement trie resultant de la combinaison ponderee des rangs
-     * de l'agent local et des autres agents. Retourne par {@link #getEnrMR_TriFinal()}.
-     */
-    private static Enregistrement enrMR_TriFinal;
-
-    /**
-     * Retourne le contenu de la variable "enrLocal", enregistrement permute
-     * retourne par l'agent local.
-     *
-     * @return Enregistrement
-     */
-    public static Enregistrement getEnrLocal() {
-        return enrLocal;
-    }
-
-    /**
-     * Retourne le contenu de la variable "enrMR_TriFinal", enregistrement trie en
-     * fonction des experiences de l'agent local et des autres agents.
-     *
-     * @return Enregistrement : trie (celui retourne par le moteur de recherche).
-     */
-    public static Enregistrement getEnrMR_TriFinal() {
-        return enrMR_TriFinal;
-    }
-
-    /**
-     * Initialise la variable correspondant a l'enregistrement local (c'est-a-dire a
-     * celui resultant de la permutation des lien sretournes par le(s) moteurs(s) de
-     * recherche), a partir d'un enregistrement passe en parametre.
-     *
-     * @param enr Enregistrement : Un enregistrement correspondant a
-     *            l'enregistrement
-     */
-    public static void initEnrLocal(Enregistrement enr) {
-        enrLocal = enr;
-    }
-
-    /**
      * Retourne un entier correspondant a l'index (l'indice dans le vecteur passe en
      * parametre) du lien appartenant a l'enregistrement passe en parametre,
      * similaire a celui passe en premier argument.
@@ -139,9 +95,9 @@ public class Tri {
      * @return Vector : Un vecteur d'entiers contenant les indices des liens
      * similaires.
      */
-    public static Vector indexTriesLiensSimilairesAA(Enregistrement enrAA) {
+    static Vector indexTriesLiensSimilairesAA(Enregistrement enrAA, Enregistrement enrLocal) {
         Vector resultat = new Vector();
-        Vector liensAL = getEnrLocal().getLiens();
+        Vector liensAL = enrLocal.getLiens();
         for (int i = 0; i < liensAL.size(); i++) {
             Lien lienAL = (Lien) liensAL.elementAt(i);
             int index = indexLienSimilaireAA(lienAL, enrAA);
@@ -161,10 +117,10 @@ public class Tri {
      * @param enrAA Enregistrement : Un Enregistrement appartenant aux Autres Agents.
      * @return Enregistrement ! Un Enregistrement dont les liens sont reclasses.
      */
-    public static Enregistrement enrTrieLiensSimilairesAA(Enregistrement enrAA) {
+    static Enregistrement enrTrieLiensSimilairesAA(Enregistrement enrAA, Enregistrement enrLocal) {
         Vector liensTries = new Vector();
         Vector liensAA = enrAA.getLiens();
-        Vector indexTries = indexTriesLiensSimilairesAA(enrAA);
+        Vector indexTries = indexTriesLiensSimilairesAA(enrAA, enrLocal);
         for (int i = 0; i < indexTries.size(); i++) {
             int index = ((Integer) indexTries.elementAt(i)).intValue();
             Lien lien = (Lien) liensAA.elementAt(index);
@@ -187,11 +143,11 @@ public class Tri {
      *                 par le client.
      * @return Vector : Un vecteur d'Enregistrement.
      */
-    public static Vector ensEnrTriesLiensSimilairesAA(Vector ensEnrAA) {
+    static Vector ensEnrTriesLiensSimilairesAA(Vector ensEnrAA, Enregistrement enrLocal) {
         Vector ensEnrAATries = new Vector();
         for (int i = 0; i < ensEnrAA.size(); i++) {
             Enregistrement enrAA = (Enregistrement) ensEnrAA.elementAt(i);
-            Enregistrement enrAATrie = enrTrieLiensSimilairesAA(enrAA);
+            Enregistrement enrAATrie = enrTrieLiensSimilairesAA(enrAA, enrLocal);
             ensEnrAATries.addElement(enrAATrie);
         }
         return ensEnrAATries;
@@ -247,9 +203,9 @@ public class Tri {
      *
      * @return Vector : Un vecteur d'entiers.
      */
-    public static Vector getRangsAL() {
+    static Vector getRangsAL(Enregistrement enrLocal) {
         Vector resultat = new Vector();
-        Vector liensAL = getEnrLocal().getLiens();
+        Vector liensAL = enrLocal.getLiens();
         for (int i = 0; i < liensAL.size(); i++) {
             Lien lien = (Lien) liensAL.elementAt(i);
             resultat.addElement(new Integer(lien.getRang()));
@@ -268,11 +224,11 @@ public class Tri {
      *                 par les Autres Agents.
      * @return Vector : Un vecteur d'entiers contenant des sommes de rang de liens.
      */
-    public static Vector moyenneRangsLiensTousAgents(Vector ensEnrAA) {
+    static Vector moyenneRangsLiensTousAgents(Vector ensEnrAA, Enregistrement enrLocal) {
         Vector moyenneRangsAA = moyenneRangsLiensAA(ensEnrAA);
-        Vector rangsAL = getRangsAL();
+        Vector rangsAL = getRangsAL(enrLocal);
         Vector resultat = new Vector();
-        for (int i = 0; i < getRangsAL().size(); i++) {
+        for (int i = 0; i < getRangsAL(enrLocal).size(); i++) {
             int promotionAL = getCoeffPromotionLocale() * ((Integer) rangsAL.elementAt(i)).intValue();
             int ponderationAA = getCoeffPonderationAA() * ((Integer) moyenneRangsAA.elementAt(i)).intValue();
             int somme = promotionAL + ponderationAA;
@@ -311,17 +267,17 @@ public class Tri {
      *                           lien.
      * @return Enregistrement
      */
-    public static Enregistrement tri(Vector moyenneTotaleRangs) {
+    static Enregistrement tri(Vector moyenneTotaleRangs, Enregistrement enrLocal) {
         Vector indexMoyenneRangsTries = indexMoyenneRangsLiensTousAgentsTries(moyenneTotaleRangs);
-        Vector liensAL = getEnrLocal().getLiens();
+        Vector liensAL = enrLocal.getLiens();
         Vector liensTries = new Vector();
         for (int i = 0; i < liensAL.size(); i++) {
             int index = ((Integer) indexMoyenneRangsTries.elementAt(i)).intValue();
             Lien lien = (Lien) liensAL.elementAt(index);
             liensTries.addElement(lien);
         }
-        int id = getEnrLocal().getId();
-        String motsCles = getEnrLocal().getKeywords();
+        int id = enrLocal.getId();
+        String motsCles = enrLocal.getKeywords();
         Enregistrement enr_trie = new Enregistrement(id, motsCles, liensTries);
         return enr_trie;
     }
@@ -336,14 +292,24 @@ public class Tri {
      * @param ensEnrAA Vector : Un vecteur d'enregistrements correspondant aux
      *                 enregistrements retournes par les Autres Agents.
      */
-    public static void lancementTri(Enregistrement enrLocal, Vector ensEnrAA) {
+    /**
+     * Lance le tri final en combinant l'enregistrement local et les reponses des
+     * autres agents, et retourne directement le resultat sans etat statique.
+     * <p>
+     * Remplace l'ancienne methode {@code lancementTri} (void) qui stockait le resultat
+     * dans un champ statique mutable, source de race conditions.
+     *
+     * @param enrLocal Enregistrement permute par l'agent local.
+     * @param ensEnrAA Vector d'enregistrements retournes par les autres agents.
+     * @return Enregistrement : le resultat du tri final.
+     */
+    public static Enregistrement lancerTri(Enregistrement enrLocal, Vector ensEnrAA) {
         GestionMessage.message(0, "Tri", "Lancement du tri.");
-        initEnrLocal(enrLocal);
         if (ensEnrAA.size() > 0) {
-            Vector moyenneTotaleRangs = moyenneRangsLiensTousAgents(ensEnrAA);
-            enrMR_TriFinal = tri(moyenneTotaleRangs);
+            Vector moyenneTotaleRangs = moyenneRangsLiensTousAgents(ensEnrAA, enrLocal);
+            return tri(moyenneTotaleRangs, enrLocal);
         } else {
-            enrMR_TriFinal = enrLocal;
+            return enrLocal;
         }
     }
 }
