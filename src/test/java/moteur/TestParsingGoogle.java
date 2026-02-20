@@ -24,6 +24,7 @@ package moteur;
 
 import agent.Enregistrement;
 import client.Client;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -37,6 +38,7 @@ import org.junit.Test;
  */
 public class TestParsingGoogle {
     @Test
+    @Ignore("Test d'integration : requete HTTP reelle vers Google (403 en CI, structure HTML instable)")
     public void runTestParsingGoogle() {
         String url; // The URL to read
         // url avec r�sultats + pub + desc vide

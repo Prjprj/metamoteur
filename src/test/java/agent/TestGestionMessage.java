@@ -22,6 +22,7 @@ package agent;
  * --LICENSE NOTICE--
  */
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -35,6 +36,12 @@ import org.junit.Test;
  */
 public class TestGestionMessage {
     private String classToShow = "Ma_Classe";
+
+    @BeforeClass
+    public static void setUp() {
+        // GestionMessage.message() accède à Agent.CONFIG.getDebug() / getSortie()
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
+    }
 
     @Test
     public void runMessageTests1() {

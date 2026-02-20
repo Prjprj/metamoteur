@@ -22,13 +22,22 @@ package tri;
  * --LICENSE NOTICE--
  */
 
+import agent.Agent;
+import agent.AppConfigLoader;
 import agent.Enregistrement;
 import agent.Lien;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Vector;
 
 public class TestTri {
+
+    @BeforeClass
+    public static void setUp() {
+        // Tri.lancementTri() accède à Agent.CONFIG.getPromLocale() et getCoefPonderation()
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
+    }
     @Test
     public void runTestTri() {
         Vector liensAL = new Vector();

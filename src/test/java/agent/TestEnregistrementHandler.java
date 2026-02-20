@@ -22,6 +22,7 @@ package agent;
  * --LICENSE NOTICE--
  */
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -44,6 +45,12 @@ import static org.junit.Assert.assertNotNull;
  * @version 0.9
  */
 public class TestEnregistrementHandler {
+
+    @BeforeClass
+    public static void setUp() {
+        // Les blocs catch appellent GestionMessage.message() qui accède à Agent.CONFIG
+        Agent.CONFIG = AppConfigLoader.load(Agent.FichierConf);
+    }
 
     final static String xmlReponse = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\" ?>"
             + "<!DOCTYPE search [" + "  <!ELEMENT search (keywords,list)>" + "  <!ELEMENT keywords (#PCDATA)>"
