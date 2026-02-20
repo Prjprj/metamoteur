@@ -134,7 +134,7 @@ public class ReponseHTTP {
             else
                 sortie.write(this.corps.getBytes());
             // ouverture du fichier
-            File fich = new File(Agent.Path, fichier.toString().substring(1));
+            File fich = new File(Agent.CONFIG.getPath(), fichier.toString().substring(1));
             try {
                 try (FileInputStream fluxFichier = new FileInputStream(fich)) {
                     int buffer;
@@ -222,7 +222,7 @@ public class ReponseHTTP {
             // ecriture du debut de la requete sur le flux
             sortie2.write(this.corps);
             // ouverture du fichier
-            File fich = new File(Agent.Path, fichier.toString().substring(1));
+            File fich = new File(Agent.CONFIG.getPath(), fichier.toString().substring(1));
             RenderedImage image = ImageIO.read(fich);
             String type = null;
             // recuperation du type du fichier
@@ -262,7 +262,7 @@ public class ReponseHTTP {
      */
     public static String erreur404(RequeteHTTP requete) {
         String chaine = "";
-        System.out.println(Agent.Path);
+        System.out.println(Agent.CONFIG.getPath());
         chaine += "HTTP/1.0 404 ERROR" + Constantes.RETOUR_CHARIOT;
         chaine += Constantes.RETOUR_CHARIOT;
         chaine += "<HTML><H1>Erreur 404</H1><p>" + Constantes.RETOUR_CHARIOT;
