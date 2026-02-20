@@ -46,7 +46,10 @@ import agent.Lien;
 
 public class Document extends Lien {
 
-    private int id; // Identifiant d'un document
+    /** Identifiant unique du document dans le vecteur de resultats du moteur de recherche. */
+    private int id;
+
+    /** Lien (url, titre, description, rang, score) associe a ce document. */
     private Lien lien;
 
     /**
